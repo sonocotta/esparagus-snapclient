@@ -1,0 +1,36 @@
+{
+    "name": "hifi-esparagus",
+    "version": "2.1672",
+    "home_assistant_domain": "slim_player",
+    "funding_url": "https://esphome.io/guides/supporters.html",
+    "new_install_prompt_erase": true,
+    "new_install_improv_wait_time": 20,
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "parts": [
+                {
+                    "path": "snapclient-20240422-bootloader.bin",
+                    "offset": "0x1000"
+                },
+                {
+                    "path": "snapclient-20240422-partition-table.bin",
+                    "offset": "0x8000"
+                },
+                {
+                    "path": "snapclient-20240422-ota-data-initial.bin",
+                    "offset": "0xd000"
+                },
+                {
+                    "path": "snapclient-20240422-snapclient.bin",
+                    "offset": "0x10000"
+                },
+                {
+                    "path": "snapclient-20240422-storage.bin",
+                    "offset": "0x370000"
+                }
+            ]
+        }
+    ],
+    "manifest_name": "manifest-hifi-esparagus-2.1672-16.json"
+}
