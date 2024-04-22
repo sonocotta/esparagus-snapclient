@@ -1,0 +1,36 @@
+{
+    "name": "loud-esparagus",
+    "version": "20240422",
+    "home_assistant_domain": "media_player",
+    "funding_url": "https://esphome.io/guides/supporters.html",
+    "new_install_prompt_erase": true,
+    "new_install_improv_wait_time": 20,
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "parts": [
+                {
+                    "path": "snapclient-20240422-bootloader.bin",
+                    "offset": "0x1000"
+                },
+                {
+                    "path": "snapclient-20240422-partition-table.bin",
+                    "offset": "0x8000"
+                },
+                {
+                    "path": "snapclient-20240422-ota-data-initial.bin",
+                    "offset": "0xd000"
+                },
+                {
+                    "path": "snapclient-20240422-snapclient.bin",
+                    "offset": "0x10000"
+                },
+                {
+                    "path": "snapclient-20240422-storage.bin",
+                    "offset": "0x370000"
+                }
+            ]
+        }
+    ],
+    "manifest_name": "manifest-loud-esparagus-20240422.json"
+}
