@@ -62,3 +62,4 @@ jobs:
         author_email: github-actions@github.com
         message: 'Latest binaries by github-actions'
         add: './docs/artifacts'
+        fetch: false
