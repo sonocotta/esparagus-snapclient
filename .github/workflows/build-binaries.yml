@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
         image: espressif/idf:v5.1.1
-        # volumes:
-        #   - .:/project
-        #   - /dev:/dev
+        volumes:
+          - $GITHUB_WORKSPACE:/project
+          - /dev:/dev
         # options: --workdir /project
     
     steps:
     - run: echo $PWD && ls -al
-    - run: cd .. && echo $PWD && ls -al
+    - run: cd /project && echo $PWD && ls -al
     - run: cp sdkconfig.hifi-esparagus sdkconfig
     - run: build
     - run: ls -al build 
