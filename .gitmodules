@@ -7,3 +7,6 @@
 [submodule "components/opus/opus"]
 	path = components/opus/opus
 	url = https://github.com/xiph/opus
+[submodule "components/improv_wifi/Improv-WiFi-Library"]
+	path = components/improv_wifi/Improv-WiFi-Library
+	url = https://github.com/jnthas/Improv-WiFi-Library.git

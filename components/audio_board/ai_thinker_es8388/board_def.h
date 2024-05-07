@@ -42,57 +42,62 @@
 #define AUXIN_DETECT_GPIO GPIO_NUM_12
 #define HEADPHONE_DETECT GPIO_NUM_19
 #define PA_ENABLE_GPIO GPIO_NUM_21
+#define BOARD_PA_GAIN (10) /* Power amplifier gain defined by board (dB) */
 
 #define GREEN_LED_GPIO GPIO_NUM_22
 
 extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
 
-#define AUDIO_CODEC_DEFAULT_CONFIG()                                          \
-  {                   \
-        .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
-        .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,         \
-        .codec_mode = AUDIO_HAL_CODEC_MODE_BOTH,        \
-        .i2s_iface = {                                  \
-            .mode = AUDIO_HAL_MODE_SLAVE,               \
-            .fmt = AUDIO_HAL_I2S_NORMAL,                \
-            .samples = AUDIO_HAL_48K_SAMPLES,           \
-            .bits = AUDIO_HAL_BIT_LENGTH_16BITS,        \
-        },                                              \
-};
+#define AUDIO_CODEC_DEFAULT_CONFIG()               \
+  {                                                \
+      .adc_input = AUDIO_HAL_ADC_INPUT_LINE1,      \
+      .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,      \
+      .codec_mode = AUDIO_HAL_CODEC_MODE_BOTH,     \
+      .i2s_iface =                                 \
+          {                                        \
+              .mode = AUDIO_HAL_MODE_SLAVE,        \
+              .fmt = AUDIO_HAL_I2S_NORMAL,         \
+              .samples = AUDIO_HAL_48K_SAMPLES,    \
+              .bits = AUDIO_HAL_BIT_LENGTH_16BITS, \
+          },                                       \
+  };
 
+/**
+ * @brief Button Function Definition
+ */
 #define INPUT_KEY_NUM 6
 
-#define INPUT_KEY_DEFAULT_INFO()                                              \
-  {                                                                           \
-    {                                                                         \
-      .type = PERIPH_ID_BUTTON,                                               \
-      .user_id = INPUT_KEY_USER_ID_REC,                                       \
-      .act_id = BUTTON_REC_ID,                                                \
-    },                                                                        \
-        {                                                                     \
-          .type = PERIPH_ID_BUTTON,                                           \
-          .user_id = INPUT_KEY_USER_ID_MODE,                                  \
-          .act_id = BUTTON_MODE_ID,                                           \
-        },                                                                    \
-        {                                                                     \
-          .type = PERIPH_ID_TOUCH,                                            \
-          .user_id = INPUT_KEY_USER_ID_SET,                                   \
-          .act_id = BUTTON_SET_ID,                                            \
-        },                                                                    \
-        {                                                                     \
-          .type = PERIPH_ID_TOUCH,                                            \
-          .user_id = INPUT_KEY_USER_ID_PLAY,                                  \
-          .act_id = BUTTON_PLAY_ID,                                           \
-        },                                                                    \
-        {                                                                     \
-          .type = PERIPH_ID_TOUCH,                                            \
-          .user_id = INPUT_KEY_USER_ID_VOLUP,                                 \
-          .act_id = BUTTON_VOLUP_ID,                                          \
-        },                                                                    \
-    {                                                                         \
-      .type = PERIPH_ID_TOUCH, .user_id = INPUT_KEY_USER_ID_VOLDOWN,          \
-      .act_id = BUTTON_VOLDOWN_ID,                                            \
-    }                                                                         \
+#define INPUT_KEY_DEFAULT_INFO()                                     \
+  {                                                                  \
+    {                                                                \
+        .type = PERIPH_ID_BUTTON,                                    \
+        .user_id = INPUT_KEY_USER_ID_REC,                            \
+        .act_id = BUTTON_REC_ID,                                     \
+    },                                                               \
+        {                                                            \
+            .type = PERIPH_ID_BUTTON,                                \
+            .user_id = INPUT_KEY_USER_ID_MODE,                       \
+            .act_id = BUTTON_MODE_ID,                                \
+        },                                                           \
+        {                                                            \
+            .type = PERIPH_ID_TOUCH,                                 \
+            .user_id = INPUT_KEY_USER_ID_SET,                        \
+            .act_id = BUTTON_SET_ID,                                 \
+        },                                                           \
+        {                                                            \
+            .type = PERIPH_ID_TOUCH,                                 \
+            .user_id = INPUT_KEY_USER_ID_PLAY,                       \
+            .act_id = BUTTON_PLAY_ID,                                \
+        },                                                           \
+        {                                                            \
+            .type = PERIPH_ID_TOUCH,                                 \
+            .user_id = INPUT_KEY_USER_ID_VOLUP,                      \
+            .act_id = BUTTON_VOLUP_ID,                               \
+        },                                                           \
+    {                                                                \
+      .type = PERIPH_ID_TOUCH, .user_id = INPUT_KEY_USER_ID_VOLDOWN, \
+      .act_id = BUTTON_VOLDOWN_ID,                                   \
+    }                                                                \
   }
 
 #endif

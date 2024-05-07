@@ -19,26 +19,23 @@ audio streams with sample rates up to 48Khz maybe more, I didn't test.
 
 Please check out the task list and feel free to fill in.
 
-I dropped the usage of ADF completely but copied stripped down, needed components to this project.
+I dropped the usage of ADF completely but copied stripped down, needed components to this project (using <b>ESP-ADF v2.6</b>).
 This was necessary because ADF was using flac in closed source precompiled library
-which made it impossible to get good results for multiroom syncing. IDF's I2S driver was also copied
-to project's components and adapted. Originally it wasn't possible to pre load DMA buffers with audio
-samples and therefore no precise sync could be achieved.
+which made it impossible to get good results for multiroom syncing.
 
 ### Codebase
 
-The codebase is split into components and build on <b>ESP-IDF v4.3.5</b>. I still
+The codebase is split into components and build on <b>ESP-IDF v5.1.1</b>. I still
 have some refactoring on the todo list as the concept has started to settle and
 allow for new features can be added in a structured manner. In the code you
 will find parts that are only partly related features and still not on the task
 list. Also there is a lot of code clean up needed.
 
 Components
- - audio-board : taken from ADF, stripped down to strictly necessary parts for usage with Lyrat v4.3
- - audio-hal : taken from ADF, stripped down to strictly necessary parts for usage with Lyrat v4.3
- - audio-sal : taken from ADF, stripped down to strictly necessary parts for usage with Lyrat v4.3
- - custom_board :
- - custom-driver : modified I2S driver from IDF v4.3.1 which supports preloading DMA buffers with valid data
+ - audio-board : taken from ADF, stripped down to strictly necessary parts for playback
+ - audio-hal : taken from ADF, stripped down to strictly necessary parts for playback
+ - audio-sal : taken from ADF, stripped down to strictly necessary parts for playback
+ - custom_board : generic board component to support easy integration of DACs
  - dsp_processor : Audio Processor, low pass filters, effects, etc.
  - esp-dsp : Submodule to the ESP-ADF done by David Douard
  - esp-peripherals : taken from ADF, stripped down to strictly necessary parts for usage with Lyrat v4.3
@@ -216,29 +213,13 @@ Then on every `git commit`, a few sanity/formatting checks will be performed.
 
 
 ## Task list
-- [ok] Fix to alinge with above
-- [ok] put kconfig to better locations in tree
- * add codec description
-- [ok] Integrate ESP wifi provision
-- [ok] Find and connect to Avahi broadcasted Snapcast server name
-- [ ] Add a client command interface layer like volume/mute control
+- [ ] put kconfig to better locations in tree
 - [ ] add missing codec's (ogg)
-- [ok] test esp-dsp functionality after ADF drop
-- [ok] Check compatibility with different HW than Lyrat v4.3
-- [ok] rework dsp_processor and test. At the moment only dspfStereo and dspfBassBoost will work. Also ensure/test we got enough RAM on WROVER modules
-- [ ] reduce dsp_processor memory footprint
 - [ ] dsp_processor: add equalizer
- * Control interface for equalizer
+- [ ] Control interface for equalizer (component: ui_http_server)
 - [ ] clean and polish code (remove all unused variables etc.)
-- [ok] Improve Documentation, e.g. Hardware guide (supported codecs)
-- [ ] upgrade to IDF v5
-- [ ] in IDF v5 use native i2s driver, as it supports preloading DMA buffer with valid data now
+- [ ] Improve Documentation
 - [ ] Throw out ADF copied components from project tree and use CmakeLists.txt to pull in necessary files from ADF
 
 ## Minor task
-  - [ok] soft mute - play sample in buffer with decreasing volume
-  - [ok] hard mute - using ADF's HAL
-  - [ok] Startup: do not start parsing on samples to codec before sample ring buffer hits requested buffer size.
-  - [ok] Start from empty buffer
-  - [ ] fill in missing component descriptions in Readme.md
-  - [ok] DAC latency setting from android app
+- [ ] fill in missing component descriptions in Readme.md

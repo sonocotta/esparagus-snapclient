@@ -4,41 +4,67 @@
 
     Must be taken over/merge with wifi provision
 */
-
-//#include "esp_event.h"
-#include "esp_log.h"
-#include "esp_wifi.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/event_groups.h"
-#include "freertos/task.h"
-
 #include "wifi_interface.h"
+
+// #include "esp_event.h"
+#include "esp_event.h"
+#include "esp_log.h"
+#include "esp_mac.h"
+#include "esp_timer.h"
+#include "esp_wifi.h"
+#include "nvs_flash.h"
 
 #if ENABLE_WIFI_PROVISIONING
 #include <string.h>  // for memcpy
-#include <wifi_provisioning/manager.h>
-#include <wifi_provisioning/scheme_softap.h>
-#endif
+// #include <wifi_provisioning/manager.h>
+// #include <wifi_provisioning/scheme_softap.h>
 
-#if ENABLE_WIFI_PROVISIONING
-static const char *provPwd = CONFIG_WIFI_PROVISIONING_PASSWORD;
-static const char *provSsid = CONFIG_WIFI_PROVISIONING_SSID;
+#include "wifi_provisioning.h"
 #endif
 
 static const char *TAG = "WIFI";
+
+static void reset_reason_timer_counter_cb(void *);
 
 static char mac_address[18];
 
 EventGroupHandle_t s_wifi_event_group;
 
 static int s_retry_num = 0;
-static wifi_config_t wifi_config;
 
 static esp_netif_t *esp_wifi_netif = NULL;
 
-/* FreeRTOS event group to signal when we are connected & ready to make a
- * request */
-// static EventGroupHandle_t wifi_event_group;
+#if ENABLE_WIFI_PROVISIONING
+static esp_timer_handle_t resetReasonTimerHandle = NULL;
+static const esp_timer_create_args_t resetReasonTimerArgs = {
+    .callback = &reset_reason_timer_counter_cb,
+    .dispatch_method = ESP_TIMER_TASK,
+    .name = "rstCnt",
+    .skip_unhandled_events = false};
+
+static uint8_t resetReasonCounter = 0;
+
+static void reset_reason_timer_counter_cb(void *args) {
+  nvs_handle_t nvs_handle;
+  esp_err_t err = nvs_open("storage", NVS_READWRITE, &nvs_handle);
+  if (err != ESP_OK) {
+    ESP_LOGE(TAG, "%s: Error (%s) opening NVS handle!", __func__,
+             esp_err_to_name(err));
+  } else {
+    ESP_LOGI(TAG, "resetting POR reset counter ...");
+
+    resetReasonCounter = 0;
+
+    err |= nvs_set_u8(nvs_handle, "restart_counter", resetReasonCounter);
+    err |= nvs_commit(nvs_handle);
+    ESP_LOGI(TAG, "%s", (err != ESP_OK) ? "Failed!" : "Done");
+
+    nvs_close(nvs_handle);
+  }
+
+  esp_timer_delete(resetReasonTimerHandle);
+}
+#endif
 
 /* The event group allows multiple bits for each event,
    but we only care about one event - are we connected
@@ -67,60 +93,8 @@ static void event_handler(void *arg, esp_event_base_t event_base, int event_id,
       xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
     }
     ESP_LOGI(TAG, "connect to the AP fail");
-  } else {
-#if ENABLE_WIFI_PROVISIONING
-    if (event_base == WIFI_PROV_EVENT) {
-      switch (event_id) {
-        case WIFI_PROV_START:
-          ESP_LOGI(TAG, "Provisioning started");
-          break;
-        case WIFI_PROV_CRED_RECV: {
-          wifi_sta_config_t *wifi_sta_cfg = (wifi_sta_config_t *)event_data;
-          ESP_LOGI(TAG,
-                   "Received Wi-Fi credentials"
-                   "\n\tSSID     : %s\n\tPassword : %s",
-                   (const char *)wifi_sta_cfg->ssid,
-                   (const char *)wifi_sta_cfg->password);
-          memcpy(&(wifi_config.sta), wifi_sta_cfg, sizeof(wifi_sta_config_t));
-          break;
-        }
-        case WIFI_PROV_CRED_FAIL: {
-          wifi_prov_sta_fail_reason_t *reason =
-              (wifi_prov_sta_fail_reason_t *)event_data;
-          ESP_LOGE(TAG,
-                   "Provisioning failed!\n\tReason : %s"
-                   "\n\tPlease reset to factory and retry provisioning",
-                   (*reason == WIFI_PROV_STA_AUTH_ERROR)
-                       ? "Wi-Fi station authentication failed"
-                       : "Wi-Fi access-point not found");
-          break;
-        }
-        case WIFI_PROV_CRED_SUCCESS:
-          ESP_LOGI(TAG, "Provisioning successful");
-          break;
-        case WIFI_PROV_END:
-          /* De-initialize manager once provisioning is finished */
-          ESP_LOGI(TAG, "Provisioning end");
-          break;
-        default:
-          break;
-      }
-    }
-#endif
   }
 }
-
-#if ENABLE_WIFI_PROVISIONING
-static void get_device_service_name(char *service_name, size_t max) {
-  uint8_t eth_mac[6];
-  const char *ssid_prefix = provSsid;
-
-  esp_wifi_get_mac(WIFI_IF_STA, eth_mac);
-
-  snprintf(service_name, max, "%s_%02X%02X%02X", ssid_prefix, eth_mac[3],
-           eth_mac[4], eth_mac[5]);
-}
-#endif
 
 void wifi_init(void) {
   s_wifi_event_group = xEventGroupCreate();
@@ -129,125 +103,88 @@ void wifi_init(void) {
 
   ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-  ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID,
-                                             &event_handler, NULL));
-  ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP,
-                                             &event_handler, NULL));
-#if ENABLE_WIFI_PROVISIONING
-  ESP_ERROR_CHECK(esp_event_handler_register(WIFI_PROV_EVENT, ESP_EVENT_ANY_ID,
-                                             &event_handler, NULL));
-#endif
+  ESP_ERROR_CHECK(esp_event_handler_register(
+      WIFI_EVENT, ESP_EVENT_ANY_ID, (esp_event_handler_t)&event_handler, NULL));
+  ESP_ERROR_CHECK(
+      esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP,
+                                 (esp_event_handler_t)&event_handler, NULL));
 
   esp_wifi_netif = esp_netif_create_default_wifi_sta();
-#if ENABLE_WIFI_PROVISIONING
-  esp_netif_create_default_wifi_ap();
-#endif
 
   wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
   ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
   // esp_wifi_set_bandwidth (WIFI_IF_STA, WIFI_BW_HT20);
   esp_wifi_set_bandwidth(WIFI_IF_STA, WIFI_BW_HT40);
-
   esp_wifi_set_protocol(
       WIFI_IF_STA, WIFI_PROTOCOL_11B | WIFI_PROTOCOL_11G | WIFI_PROTOCOL_11N);
-  // esp_wifi_set_protocol(WIFI_IF_STA, WIFI_PROTOCOL_11B | WIFI_PROTOCOL_11G);
-  // esp_wifi_set_protocol(WIFI_IF_STA, WIFI_PROTOCOL_11B);
 
   // esp_wifi_set_ps(WIFI_PS_MIN_MODEM);
   //   esp_wifi_set_ps(WIFI_PS_NONE);
 
 #if ENABLE_WIFI_PROVISIONING
-  // Configuration for the provisioning manager
-  wifi_prov_mgr_config_t config = {
-      .scheme = wifi_prov_scheme_softap,
-      .scheme_event_handler = WIFI_PROV_EVENT_HANDLER_NONE};
+  esp_reset_reason_t resetReason = esp_reset_reason();
+  ESP_LOGI(TAG, "reset reason was: %d", resetReason);
+  esp_timer_create(&resetReasonTimerArgs, &resetReasonTimerHandle);
+  esp_timer_start_once(resetReasonTimerHandle, 5000000);
+  if (resetReason == ESP_RST_POWERON) {
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open("storage", NVS_READWRITE, &nvs_handle);
+    if (err != ESP_OK) {
+      ESP_LOGE(TAG, "%s: Error (%s) opening NVS handle!", __func__,
+               esp_err_to_name(err));
+    } else {
+      ESP_LOGI(TAG, "get POR reset counter ...");
+      err |= nvs_get_u8(nvs_handle, "restart_counter", &resetReasonCounter);
 
-  // Initialize provisioning manager with the
-  // configuration parameters set above
-  ESP_ERROR_CHECK(wifi_prov_mgr_init(config));
+      ESP_LOGI(TAG, "reset counter %d", resetReasonCounter);
 
-  bool provisioned = false;
-  /* Let's find out if the device is provisioned */
-  ESP_ERROR_CHECK(wifi_prov_mgr_is_provisioned(&provisioned));
+      resetReasonCounter++;
 
-  /* If device is not yet provisioned start provisioning service */
-  if (!provisioned) {
-    ESP_LOGI(TAG, "Starting provisioning");
+      if (resetReasonCounter > 3) {
+        ESP_LOGW(TAG, "resetting WIFI credentials!");
 
-    // Wi-Fi SSID when scheme is wifi_prov_scheme_softap
-    char service_name[27];
-    get_device_service_name(service_name, sizeof(service_name));
+        resetReasonCounter = 0;
 
-    /* What is the security level that we want (0 or 1):
-     *      - WIFI_PROV_SECURITY_0 is simply plain text communication.
-     *      - WIFI_PROV_SECURITY_1 is secure communication which consists of
-     * secure handshake using X25519 key exchange and proof of possession
-     * (pop) and AES-CTR for encryption/decryption of messages.
-     */
-    wifi_prov_security_t security = WIFI_PROV_SECURITY_1;
+        esp_wifi_restore();
+        // esp_wifi_set_bandwidth (WIFI_IF_STA, WIFI_BW_HT20);
+        esp_wifi_set_bandwidth(WIFI_IF_STA, WIFI_BW_HT40);
+        esp_wifi_set_protocol(WIFI_IF_STA, WIFI_PROTOCOL_11B |
+                                               WIFI_PROTOCOL_11G |
+                                               WIFI_PROTOCOL_11N);
 
-    /* Do we want a proof-of-possession (ignored if Security 0 is selected):
-     *      - this should be a string with length > 0
-     *      - NULL if not used
-     */
-    const char *pop = NULL;  //"abcd1234";
+        esp_timer_stop(resetReasonTimerHandle);
+        esp_timer_delete(resetReasonTimerHandle);
+      }
 
-    /* What is the service key (could be NULL)
-     * This translates to :
-     *     - Wi-Fi password when scheme is wifi_prov_scheme_softap
-     *     - simply ignored when scheme is wifi_prov_scheme_ble
-     */
-    const char *service_key = provPwd;
+      err |= nvs_set_u8(nvs_handle, "restart_counter", resetReasonCounter);
+      err |= nvs_commit(nvs_handle);
+      ESP_LOGI(TAG, "%s", (err != ESP_OK) ? "Failed!" : "Done");
 
-    /* An optional endpoint that applications can create if they expect to
-     * get some additional custom data during provisioning workflow.
-     * The endpoint name can be anything of your choice.
-     * This call must be made before starting the provisioning.
-     */
-    // wifi_prov_mgr_endpoint_create("custom-data");
-    /* Start provisioning service */
-    ESP_ERROR_CHECK(wifi_prov_mgr_start_provisioning(
-        security, pop, service_name, service_key));
-
-    /* The handler for the optional endpoint created above.
-     * This call must be made after starting the provisioning, and only if
-     * the endpoint has already been created above.
-     */
-    // wifi_prov_mgr_endpoint_register("custom-data",
-    // custom_prov_data_handler, NULL);
-
-    /* Uncomment the following to wait for the provisioning to finish and
-     * then release the resources of the manager. Since in this case
-     * de-initialization is triggered by the default event loop handler, we
-     * don't need to call the following */
-    wifi_prov_mgr_wait();
-    wifi_prov_mgr_deinit();
-  } else {
-    ESP_LOGI(TAG, "Already provisioned, starting Wi-Fi STA");
-
-    /* We don't need the manager as device is already provisioned,
-     * so let's release it's resources */
-    wifi_prov_mgr_deinit();
-
-    /* Start Wi-Fi station */
-    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
-
-    wifi_config_t wifi_config;
-    ESP_ERROR_CHECK(esp_wifi_get_config(WIFI_IF_STA, &wifi_config));
-    wifi_config.sta.sort_method = WIFI_CONNECT_AP_BY_SIGNAL;
-    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
-
-    ESP_ERROR_CHECK(esp_wifi_start());
-
-    ESP_LOGI(TAG, "wifi_init_sta finished.");
+      nvs_close(nvs_handle);
+    }
   }
+
+  /* Start Wi-Fi station */
+  ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+
+  wifi_config_t wifi_config;
+  ESP_ERROR_CHECK(esp_wifi_get_config(WIFI_IF_STA, &wifi_config));
+  wifi_config.sta.sort_method = WIFI_CONNECT_AP_BY_SIGNAL;
+  ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
+
+  ESP_ERROR_CHECK(esp_wifi_start());
+
+  ESP_LOGI(TAG, "Starting provisioning");
+
+  improv_init();
 #else
   wifi_config_t wifi_config = {
       .sta =
           {
               .ssid = WIFI_SSID,
               .password = WIFI_PASSWORD,
+              .sort_method = WIFI_CONNECT_AP_BY_SIGNAL,
               .threshold.authmode = WIFI_AUTH_WPA2_PSK,
               .pmf_cfg = {.capable = true, .required = false},
           },

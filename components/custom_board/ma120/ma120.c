@@ -9,14 +9,14 @@
 //
 //
 
+#include "ma120.h"
+
 #include <stdint.h>
 #include <stdio.h>
 
-#include "ma120.h"
 #include "board.h"
 #include "driver/i2c.h"
 #include "esp_log.h"
-
 
 static const char *TAG = "MA120";
 
@@ -66,12 +66,12 @@ esp_err_t ma120_deinit(void) {
 }
 
 esp_err_t ma120_ctrl(audio_hal_codec_mode_t mode, audio_hal_ctrl_t ctrl_state) {
-   ESP_LOGI("MA120 Driver", "ctrl w. mode and ctrl_state"); 
+  ESP_LOGI("MA120 Driver", "ctrl w. mode and ctrl_state");
   return ESP_OK;
 }
 
 esp_err_t ma120_config_iface(audio_hal_codec_mode_t mode,
-                               audio_hal_codec_i2s_iface_t *iface) {
+                             audio_hal_codec_i2s_iface_t *iface) {
   ESP_LOGI("MA120 Driver", "config_iface w. mode and interface");
   return ESP_OK;
 }
@@ -111,13 +111,13 @@ esp_err_t ma120_get_mute(bool *enabled) {
 esp_err_t ma120_init(audio_hal_codec_config_t *codec_cfg) {
   esp_err_t ret = ESP_OK;
   setup_ma120();
-  return ret; 
-}  
+  return ret;
+}
 
-void setup_ma120(void){
+void setup_ma120(void) {
   gpio_config_t io_conf;
 
-  io_conf.intr_type = GPIO_PIN_INTR_DISABLE;
+  io_conf.intr_type = GPIO_INTR_DISABLE;
   io_conf.mode = GPIO_MODE_OUTPUT;
   io_conf.pin_bit_mask = (1ULL << MA_ENABLE_IO | 1ULL << MA_NMUTE_IO);
   io_conf.pull_down_en = 0;
@@ -126,7 +126,7 @@ void setup_ma120(void){
   printf("setup output %d %d \n", MA_ENABLE_IO, MA_NMUTE_IO);
   gpio_config(&io_conf);
 
-  io_conf.intr_type = GPIO_PIN_INTR_DISABLE;
+  io_conf.intr_type = GPIO_INTR_DISABLE;
   io_conf.mode = GPIO_MODE_INPUT;
   io_conf.pin_bit_mask = (1ULL << MA_NCLIP_IO | 1ULL << MA_NERR_IO);
   io_conf.pull_down_en = 0;
@@ -136,8 +136,7 @@ void setup_ma120(void){
 
   gpio_set_level(MA_NMUTE_IO, 0);
   gpio_set_level(MA_ENABLE_IO, 0);
-  
-  
+
   i2c_master_init();
 
   gpio_set_level(MA_ENABLE_IO, 1);
@@ -145,7 +144,7 @@ void setup_ma120(void){
   uint8_t res = ma_write_byte(MA120_ADDR, 2, 0x060c, 0);
   res = ma_read_byte(MA120_ADDR, 2, 0x060c);
   printf("Hardware version: 0x%02x\n", res);
-  
+
   printf("Scan I2C bus: ");
   for (uint8_t addr = 0x20; addr <= 0x23; addr++) {
     res = ma_read_byte(addr, 2, 0);
@@ -153,7 +152,7 @@ void setup_ma120(void){
     // printf("Scan i2c address 0x%02x read address 0 : 0x%02x \n", addr ,res);
   }
   printf("\n");
-  
+
   uint8_t rxbuf[32];
   uint8_t otp[1024];
   for (uint8_t i = 0; i < 16; i++) {
@@ -234,7 +233,7 @@ void ma120_read_error(uint8_t i2c_addr) {  // 0x0118 error now ch0 [clip_stuck
   // printf("\n");
 }
 
-static i2c_config_t i2c_cfg = { 
+static i2c_config_t i2c_cfg = {
     .mode = I2C_MODE_MASTER,
     .sda_pullup_en = GPIO_PULLUP_ENABLE,
     .scl_pullup_en = GPIO_PULLUP_ENABLE,

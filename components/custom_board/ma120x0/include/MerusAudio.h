@@ -1,6 +1,10 @@
 #ifndef _MERUSAUDIO_H_
 #define _MERUSAUDIO_H_
 
+#include <stdint.h>
+
+#include "esp_err.h"
+
 void setup_ma120x0(void);
 void setup_ma120(void);
 void ma120_read_error(uint8_t i2c_addr);

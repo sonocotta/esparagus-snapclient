@@ -3,21 +3,7 @@ menu "Wifi Configuration"
         bool "enable WiFi provisioning"
         default n
         help
-            Enable WiFi provisioning so espressif APP can be used to provison WiFi credentials
-
-    config WIFI_PROVISIONING_SSID
-        string "WiFi provisioning SSID"
-        default "prov_snapclient"
-        depends on ENABLE_WIFI_PROVISIONING
-        help
-            SSID (network name) to use for provisioning access point. Shouldn't be longer than 20 characters.
-
-    config WIFI_PROVISIONING_PASSWORD
-        string "WiFi provisioning password"
-        default "12345678"
-        depends on ENABLE_WIFI_PROVISIONING
-        help
-            WiFi password (WPA or WPA2) to use for provisioning access point
+            Enable WiFi provisioning through improv WiFi (https://github.com/improv-wifi), try it using https://web.esphome.io/
 
     config WIFI_SSID
         string "WiFi SSID"
@@ -34,7 +20,7 @@ menu "Wifi Configuration"
             WiFi password (WPA or WPA2) for the example to use.
 
     config WIFI_MAXIMUM_RETRY
-        int "Maximum retry"
+        int "Maximum connection retry"
         default 5
         help
             Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.

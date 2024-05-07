@@ -1,9 +1,9 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
+#include "driver/i2s.h"
 #include "esp_types.h"
 #include "freertos/FreeRTOS.h"
-#include "i2s.h"
 #include "sdkconfig.h"
 #include "snapcast.h"
 
@@ -49,7 +49,7 @@ typedef struct snapcastSetting_s {
   codec_type_t codec;
   int32_t sr;
   uint8_t ch;
-  i2s_bits_per_sample_t bits;
+  i2s_data_bit_width_t bits;
 
   bool muted;
   uint32_t volume;

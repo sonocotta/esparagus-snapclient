@@ -6,10 +6,10 @@
  * Permission is hereby granted for use on all ESPRESSIF SYSTEMS products, in
  * which case, it is free of charge, to any person obtaining a copy of this
  * software and associated documentation files (the "Software"), to deal in the
- * Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -18,9 +18,9 @@
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE.
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  *
  */
 
@@ -31,33 +31,32 @@
 #include "esp_err.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-  /**
-   * @brief  Initialize the gpio's interrupt service routines.
-   *
-   * @param  gpio_num                The number of gpio to be initialized
-   * @param  type                    The type of interrupts
-   * @param  gpio_isr_handle_func    Interrupt handler
-   * @param  isr_param               The parameters of interrupt handler
-   *
-   * @return
-   */
-  esp_err_t gpio_isr_init (int gpio_num, gpio_int_type_t type,
-                           gpio_isr_t gpio_isr_handle_func, void *isr_param);
+/**
+ * @brief  Initialize the gpio's interrupt service routines.
+ *
+ * @param  gpio_num                The number of gpio to be initialized
+ * @param  type                    The type of interrupts
+ * @param  gpio_isr_handle_func    Interrupt handler
+ * @param  isr_param               The parameters of interrupt handler
+ *
+ * @return
+ */
+esp_err_t gpio_isr_init(int gpio_num, gpio_int_type_t type,
+                        gpio_isr_t gpio_isr_handle_func, void *isr_param);
 
-  /**
-   * @brief   Deinitialize the gpio isr
-   *
-   * @param   gpio_num The number of gpio to be deinitialized
-   *
-   * @return
-   *      - ESP_OK on success
-   *      - ESP_FAIL on failed
-   */
-  esp_err_t gpio_isr_deinit (int gpio_num);
+/**
+ * @brief   Deinitialize the gpio isr
+ *
+ * @param   gpio_num The number of gpio to be deinitialized
+ *
+ * @return
+ *      - ESP_OK on success
+ *      - ESP_FAIL on failed
+ */
+esp_err_t gpio_isr_deinit(int gpio_num);
 
 #ifdef __cplusplus
 }

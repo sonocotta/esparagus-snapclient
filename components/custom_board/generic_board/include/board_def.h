@@ -27,6 +27,8 @@
 #ifndef _AUDIO_BOARD_DEFINITION_H_
 #define _AUDIO_BOARD_DEFINITION_H_
 
+#define BOARD_PA_GAIN (0) /* Power amplifier gain defined by board (dB) */
+
 #define BUTTON_VOLUP_ID 0
 #define BUTTON_VOLDOWN_ID 1
 #define BUTTON_MUTE_ID 2

@@ -36,7 +36,7 @@ esp_err_t max98357_init(audio_hal_codec_config_t *codec_cfg) {
 
   gpio_config_t io_conf;
 
-  io_conf.intr_type = GPIO_PIN_INTR_DISABLE;
+  io_conf.intr_type = GPIO_INTR_DISABLE;
   io_conf.mode = GPIO_MODE_OUTPUT;
   io_conf.pin_bit_mask = (1ULL << CONFIG_MAX98357_MUTE_PIN);
   io_conf.pull_down_en = 0;
