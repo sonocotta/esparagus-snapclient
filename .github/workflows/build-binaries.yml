@@ -7,17 +7,9 @@ on:
 
 jobs:
   build:
-    # strategy:
-    #     matrix:
-    #       config: []
-
     runs-on: ubuntu-latest
     container:
         image: espressif/idf:v5.1.1
-        # volumes:
-        #   - ${{ github.workspace }}:/project
-        #   - /dev:/dev
-        # options: --workdir /project
     
     steps:
     - name: Checkout code
@@ -43,23 +35,22 @@ jobs:
 
     - run: echo $(date) > ./docs/artifacts/testfile.txt
     
-    - run: |
-        git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+    # - run: |
+    #     git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
+    #     git config user.name github-actions
+    #     git config user.email github-actions@github.com
 
     #     git status
 
-    - run: |
-          git add ./docs/artifacts
-          git commit -m "Latest binaries by github-actions"
-          git push origin HEAD:$GITHUB_REF
+    # - run: |
+    #       git add ./docs/artifacts
+    #       git commit -m "Latest binaries by github-actions"
+    #       git push origin HEAD:$GITHUB_REF
     
-    # - name: Commit changes
-    #   uses: EndBug/add-and-commit@v9
-    #   with:
-    #     author_name: github-actions
-    #     author_email: github-actions@github.com
-    #     message: 'Latest binaries by github-actions'
-    #     add: './docs/artifacts'
-    #     fetch: false
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: github-actions
+        author_email: github-actions@github.com
+        message: 'Latest binaries by github-actions'
+        add: './docs/artifacts'
