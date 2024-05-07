@@ -43,23 +43,21 @@ jobs:
     
     - run: |
         git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
-    
-    #     git config user.name github-actions
-    #     git config user.email github-actions@github.com
+        git config user.name github-actions
+        git config user.email github-actions@github.com
 
     #     git status
 
-    # - run: |
-    #       git pull
-    #       git add .
-    #       git commit -m "Commit binaries"
-    #       git push
+    - run: |
+          git add ./docs/artifacts
+          git commit -m "Latest binaries by github-actions"
+          git push origin HEAD:${{ github.ref_name }}
     
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v9
-      with:
-        author_name: github-actions
-        author_email: github-actions@github.com
-        message: 'Latest binaries by github-actions'
-        add: './docs/artifacts'
-        fetch: false
+    # - name: Commit changes
+    #   uses: EndBug/add-and-commit@v9
+    #   with:
+    #     author_name: github-actions
+    #     author_email: github-actions@github.com
+    #     message: 'Latest binaries by github-actions'
+    #     add: './docs/artifacts'
+    #     fetch: false
