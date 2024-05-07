@@ -11,7 +11,7 @@ jobs:
         volumes:
           - .:/project
           - /dev:/dev
-        options: --workdir /project
+        # options: --workdir /project
     
     steps:
     - run: echo $PWD && ls -al
