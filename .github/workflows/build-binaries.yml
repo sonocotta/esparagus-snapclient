@@ -26,7 +26,11 @@ jobs:
     - run: cp sdkconfig.${{ matrix.config }} sdkconfig
     - run: . $IDF_PATH/export.sh && idf.py build
     - run: ls -al build 
-    - run: cp build/snapclient.bin build/storage.bin build/ota_data_initial.bin build/bootloader/bootloader.bin build/partition_table/partition_table.bin ./docs/artifacts
+    - run: cp build/snapclient.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-snapclient.bin
+    - run: cp build/storage.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-storage.bin
+    - run: cp build/ota_data_initial.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-ota_data_initial.bin
+    - run: cp build/bootloader/bootloader.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-bootloader.bin
+    - run: cp build/partition_table/partition-table.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-partition-table.bin
     - run: git status
     
     
