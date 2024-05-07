@@ -1,5 +1,5 @@
 {
-    "name": "snapclient on the hifi-esparagus",
+    "name": "snapclient on the louder-esparagus",
     "version": "$datestring",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
@@ -10,27 +10,27 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "hifi-snapclient-$datestring-bootloader.bin",
+                    "path": "louder-snapclient-$datestring-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "hifi-snapclient-$datestring-partition-table.bin",
+                    "path": "louder-snapclient-$datestring-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "hifi-snapclient-$datestring-ota-data-initial.bin",
+                    "path": "louder-snapclient-$datestring-ota-data-initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "hifi-snapclient-$datestring-snapclient.bin",
+                    "path": "louder-snapclient-$datestring-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "hifi-snapclient-$datestring-storage.bin",
+                    "path": "louder-snapclient-$datestring-storage.bin",
                     "offset": "0x370000"
                 }
             ]
         }
     ],
-    "manifest_name": "manifest-hifi-esparagus-$datestring.json"
+    "manifest_name": "manifest-louder-esparagus-$datestring.json"
 }
