@@ -23,28 +23,30 @@ jobs:
       with:
         submodules: 'true'
 
-    - run: |
-        . $IDF_PATH/export.sh 
+    # - run: |
+    #     . $IDF_PATH/export.sh 
         
-        for config in 'hifi-esparagus' 'loud-esparagus' 'louder-esparagus'; do
-            echo Building $config
+    #     for config in 'hifi-esparagus' 'loud-esparagus' 'louder-esparagus'; do
+    #         echo Building $config
 
-            cp sdkconfig.$config sdkconfig
-            idf.py build
+    #         cp sdkconfig.$config sdkconfig
+    #         idf.py build
             
-            cp build/snapclient.bin ./docs/artifacts/$config-snapclient-latest-snapclient.bin
-            cp build/storage.bin ./docs/artifacts/$config-snapclient-latest-storage.bin
-            cp build/ota_data_initial.bin ./docs/artifacts/$config-snapclient-latest-ota_data_initial.bin
-            cp build/bootloader/bootloader.bin ./docs/artifacts/$config-snapclient-latest-bootloader.bin
-            cp build/partition_table/partition-table.bin ./docs/artifacts/$config-snapclient-latest-partition-table.bin
-        done 
+    #         cp build/snapclient.bin ./docs/artifacts/$config-snapclient-latest-snapclient.bin
+    #         cp build/storage.bin ./docs/artifacts/$config-snapclient-latest-storage.bin
+    #         cp build/ota_data_initial.bin ./docs/artifacts/$config-snapclient-latest-ota_data_initial.bin
+    #         cp build/bootloader/bootloader.bin ./docs/artifacts/$config-snapclient-latest-bootloader.bin
+    #         cp build/partition_table/partition-table.bin ./docs/artifacts/$config-snapclient-latest-partition-table.bin
+    #     done 
 
-    - run: |
-        git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
-        git config user.name github-actions
-        git config user.email github-actions@github.com
+    - run: echo $(date) > ./docs/artifacts/testfile.txt
+    
+    # - run: |
+    #     git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
+    #     git config user.name github-actions
+    #     git config user.email github-actions@github.com
 
-        git status
+    #     git status
 
     # - run: |
     #       git pull
@@ -52,3 +54,10 @@ jobs:
     #       git commit -m "Commit binaries"
     #       git push
     
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: github-actions
+        author_email: github-actions@github.com
+        message: 'Latest binaries by github-actions'
+        add: './docs/artifacts'
