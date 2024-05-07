@@ -2,7 +2,6 @@ name: Build snapcast
 
 on:
   pull_request:
-  push:
 
 jobs:
   build:
@@ -15,6 +14,7 @@ jobs:
         options: --workdir /project
     
     steps:
+    - run: ls -al
     - run: cp sdkconfig.hifi-esparagus sdkconfig
     - run: build
     - run: ls -al build 
