@@ -5,6 +5,10 @@ on:
 
 jobs:
   build:
+    strategy:
+        matrix:
+          config: ['hifi-esparagus', 'loud-esparagus', 'louder-esparagus']
+
     runs-on: ubuntu-latest
     container:
         image: espressif/idf:v5.1.1
@@ -19,8 +23,10 @@ jobs:
       with:
         submodules: 'true'
 
-    - run: cp sdkconfig.hifi-esparagus sdkconfig
+    - run: cp sdkconfig.${{ matrix.config }} sdkconfig
     - run: . $IDF_PATH/export.sh && idf.py build
     - run: ls -al build 
+    - run: cp build/snapclient.bin build/storage.bin build/ota_data_initial.bin build/bootloader/bootloader.bin build/partition_table/partition_table.bin ./docs/artifacts
+    - run: git status
     
     
