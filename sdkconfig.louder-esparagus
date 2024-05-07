@@ -1,6 +1,6 @@
 #
 # Automatically generated file. DO NOT EDIT.
-# Espressif IoT Development Framework (ESP-IDF) 5.1.1 Project Configuration
+# Espressif IoT Development Framework (ESP-IDF)  Project Configuration
 #
 CONFIG_SOC_BROWNOUT_RESET_SUPPORTED="Not determined"
 CONFIG_SOC_TWAI_BRP_DIV_SUPPORTED="Not determined"
@@ -349,17 +349,24 @@ CONFIG_SNAPCLIENT_NAME="louder-esparagus"
 #
 # HTTP Server Setting
 #
-CONFIG_WEB_PORT=8000
+CONFIG_WEB_PORT=80
 # end of HTTP Server Setting
+
+# CONFIG_USE_SAMPLE_INSERTION is not set
 # end of Snapclient Configuration
 
 #
-# Audio HAL
+# Audio Board
 #
 CONFIG_AUDIO_BOARD_CUSTOM=y
 # CONFIG_ESP_LYRAT_V4_3_BOARD is not set
+# CONFIG_ESP_LYRAT_V4_2_BOARD is not set
+# CONFIG_ESP_LYRATD_MSC_V2_1_BOARD is not set
+# CONFIG_ESP_LYRATD_MSC_V2_2_BOARD is not set
 # CONFIG_ESP_LYRAT_MINI_V1_1_BOARD is not set
-# end of Audio HAL
+# CONFIG_ESP32_KORVO_DU1906_BOARD is not set
+# CONFIG_ESP32_S2_KALUGA_1_V1_2_BOARD is not set
+# CONFIG_ESP_AI_THINKER_ES8388_BOARD is not set
 
 #
 # Custom Audio Board
@@ -412,6 +419,7 @@ CONFIG_SLAVE_I2S_DATAOUT_PIN=5
 # CONFIG_INVERT_BCLK_LEVEL is not set
 # end of Logic-Level-Settings
 # end of Custom Audio Board
+# end of Audio Board
 
 #
 # ESP32 DSP processor config
@@ -435,9 +443,7 @@ CONFIG_SNTP_SERVER="pool.ntp.org"
 #
 # Wifi Configuration
 #
-# CONFIG_ENABLE_WIFI_PROVISIONING is not set
-CONFIG_WIFI_SSID="wifi-12-private"
-CONFIG_WIFI_PASSWORD="9263777101"
+CONFIG_ENABLE_WIFI_PROVISIONING=y
 CONFIG_WIFI_MAXIMUM_RETRY=0
 # end of Wifi Configuration
 

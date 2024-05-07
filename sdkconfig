@@ -344,7 +344,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 # Snapclient Configuration
 #
 CONFIG_SNAPSERVER_USE_MDNS=y
-CONFIG_SNAPCLIENT_NAME="loud-esparagus"
+CONFIG_SNAPCLIENT_NAME="louder-esparagus"
 
 #
 # HTTP Server Setting
@@ -376,15 +376,15 @@ CONFIG_AUDIO_BOARD_CUSTOM=y
 # CONFIG_DAC_MA120 is not set
 # CONFIG_DAC_MA120X0 is not set
 # CONFIG_DAC_ADAU1961 is not set
-CONFIG_DAC_MAX98357=y
-# CONFIG_DAC_TAS5805M is not set
+# CONFIG_DAC_MAX98357 is not set
+CONFIG_DAC_TAS5805M=y
 
 #
 # DAC I2C control interface
 #
 CONFIG_DAC_I2C_SDA=21
-CONFIG_DAC_I2C_SCL=22
-CONFIG_DAC_I2C_ADDR=0x20
+CONFIG_DAC_I2C_SCL=27
+CONFIG_DAC_I2C_ADDR=0x2d
 # end of DAC I2C control interface
 
 #
@@ -397,6 +397,12 @@ CONFIG_MASTER_I2S_DATAOUT_PIN=22
 # end of I2S master interface
 
 #
+# DAC-Operation-Mode
+#
+# CONFIG_DAC_BRIDGE_MODE is not set
+# end of DAC-Operation-Mode
+
+#
 # I2S slave interface
 #
 CONFIG_SLAVE_I2S_BCK_PIN=26
@@ -404,12 +410,6 @@ CONFIG_SLAVE_I2S_MCLK_PIN=0
 CONFIG_SLAVE_I2S_LRCK_PIN=25
 CONFIG_SLAVE_I2S_DATAOUT_PIN=5
 # end of I2S slave interface
-
-#
-# MAX98357 interface Configuration
-#
-CONFIG_MAX98357_MUTE_PIN=255
-# end of MAX98357 interface Configuration
 
 #
 # Logic-Level-Settings
