@@ -1,5 +1,5 @@
 {
-    "name": "hifi-esparagus",
+    "name": "snapclient on the hifi-esparagus",
     "version": "20240422",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
