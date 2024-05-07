@@ -1,7 +1,9 @@
 name: Build snapcast
 
 on:
-  pull_request:
+  push:
+    branches:
+    - 'features/**'
 
 jobs:
   build:
