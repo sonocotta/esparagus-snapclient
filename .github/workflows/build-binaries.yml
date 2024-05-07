@@ -15,9 +15,10 @@ jobs:
     
     steps:
     - run: echo $PWD && ls -al
-    - run: cd /project && echo $PWD && ls -al
-    - run: cp sdkconfig.hifi-esparagus sdkconfig
+    - run: cd .. && echo $PWD && ls -al
+    - run: cd .. && echo $PWD && ls -al
+    # - run: cp sdkconfig.hifi-esparagus sdkconfig
     - run: build
-    - run: ls -al build 
+    # - run: ls -al build 
     
     
