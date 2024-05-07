@@ -1,4 +1,4 @@
-name: Build snapcast
+name: Build and commit snapcast binaries
 
 on:
   push:
