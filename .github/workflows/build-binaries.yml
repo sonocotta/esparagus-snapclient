@@ -51,7 +51,7 @@ jobs:
     - run: |
           git add ./docs/artifacts
           git commit -m "Latest binaries by github-actions"
-          git push origin HEAD:${{ github.ref_name }}
+          git push origin HEAD:$GITHUB_REF
     
     # - name: Commit changes
     #   uses: EndBug/add-and-commit@v9
