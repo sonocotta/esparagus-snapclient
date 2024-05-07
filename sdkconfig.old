@@ -349,7 +349,7 @@ CONFIG_SNAPCLIENT_NAME="louder-esparagus"
 #
 # HTTP Server Setting
 #
-CONFIG_WEB_PORT=8000
+CONFIG_WEB_PORT=80
 # end of HTTP Server Setting
 
 # CONFIG_USE_SAMPLE_INSERTION is not set
@@ -443,9 +443,7 @@ CONFIG_SNTP_SERVER="pool.ntp.org"
 #
 # Wifi Configuration
 #
-# CONFIG_ENABLE_WIFI_PROVISIONING is not set
-CONFIG_WIFI_SSID="wifi-12-private"
-CONFIG_WIFI_PASSWORD="9263777101"
+CONFIG_ENABLE_WIFI_PROVISIONING=y
 CONFIG_WIFI_MAXIMUM_RETRY=0
 # end of Wifi Configuration
 

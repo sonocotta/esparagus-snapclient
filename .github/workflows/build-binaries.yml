@@ -33,7 +33,7 @@ jobs:
             cp build/bootloader/bootloader.bin ./docs/artifacts/$config-snapclient-$datestring-bootloader.bin
             cp build/partition_table/partition-table.bin ./docs/artifacts/$config-snapclient-$datestring-partition-table.bin
 
-            sed -e "s/latest/$datestring/g" ./docs/artifacts/manifest-$config-template.json > ./docs/artifacts/manifest-$config-latest.json
+            sed -e "s/latest/$datestring/g" ./docs/artifacts/templates/manifest-$config-template.json > ./docs/artifacts/manifest-$config-latest.json
         done 
     
     - run: |
