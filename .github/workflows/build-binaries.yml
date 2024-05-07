@@ -41,8 +41,9 @@ jobs:
 
     - run: echo $(date) > ./docs/artifacts/testfile.txt
     
-    # - run: |
-    #     git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
+    - run: |
+        git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
+    
     #     git config user.name github-actions
     #     git config user.email github-actions@github.com
 
