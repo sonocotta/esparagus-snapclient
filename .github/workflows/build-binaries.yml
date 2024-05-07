@@ -23,7 +23,6 @@ jobs:
       with:
         submodules: 'true'
 
-    # - run: cp sdkconfig.${{ matrix.config }} sdkconfig
     - run: |
         . $IDF_PATH/export.sh 
         
@@ -32,23 +31,24 @@ jobs:
 
             cp sdkconfig.$config sdkconfig
             idf.py build
+            
+            cp build/snapclient.bin ./docs/artifacts/$config-snapclient-latest-snapclient.bin
+            cp build/storage.bin ./docs/artifacts/$config-snapclient-latest-storage.bin
+            cp build/ota_data_initial.bin ./docs/artifacts/$config-snapclient-latest-ota_data_initial.bin
+            cp build/bootloader/bootloader.bin ./docs/artifacts/$config-snapclient-latest-bootloader.bin
+            cp build/partition_table/partition-table.bin ./docs/artifacts/$config-snapclient-latest-partition-table.bin
         done 
 
-        
-    # - run: ls -al build 
-    # - run: cp build/snapclient.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-snapclient.bin
-    # - run: cp build/storage.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-storage.bin
-    # - run: cp build/ota_data_initial.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-ota_data_initial.bin
-    # - run: cp build/bootloader/bootloader.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-bootloader.bin
-    # - run: cp build/partition_table/partition-table.bin ./docs/artifacts/${{ matrix.config }}-snapclient-latest-partition-table.bin
+    - run: |
+        git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
+        git config user.name github-actions
+        git config user.email github-actions@github.com
 
-    # - run: git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
-    # - run: git status
+        git status
+
     # - run: |
-    #       git config user.name github-actions
-    #       git config user.email github-actions@github.com
     #       git pull
     #       git add .
-    #       git commit -m "${{ matrix.config }} binaries"
+    #       git commit -m "Commit binaries"
     #       git push
     
