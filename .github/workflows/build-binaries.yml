@@ -20,10 +20,8 @@ jobs:
         submodules: 'true'
 
     - run: echo $PWD && ls -al
-    - run: cd .. && echo $PWD && ls -al
-    - run: cd .. && echo $PWD && ls -al
-    # - run: cp sdkconfig.hifi-esparagus sdkconfig
-    - run: build
-    # - run: ls -al build 
+    - run: cp sdkconfig.hifi-esparagus sdkconfig
+    - run: idf.py build
+    - run: ls -al build 
     
     
