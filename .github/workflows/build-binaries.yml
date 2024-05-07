@@ -19,9 +19,8 @@ jobs:
       with:
         submodules: 'true'
 
-    - run: . $IDF_PATH/export.sh
     - run: cp sdkconfig.hifi-esparagus sdkconfig
-    - run: idf.py build
+    - run: . $IDF_PATH/export.sh && idf.py build
     - run: ls -al build 
     
     
