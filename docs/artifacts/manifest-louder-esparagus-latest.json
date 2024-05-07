@@ -10,23 +10,23 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "louder-snapclient-2024-05-07-bootloader.bin",
+                    "path": "louder-esparagus-snapclient-2024-05-07-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "louder-snapclient-2024-05-07-partition-table.bin",
+                    "path": "louder-esparagus-snapclient-2024-05-07-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "louder-snapclient-2024-05-07-ota-data-initial.bin",
+                    "path": "louder-esparagus-snapclient-2024-05-07-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "louder-snapclient-2024-05-07-snapclient.bin",
+                    "path": "louder-esparagus-snapclient-2024-05-07-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "louder-snapclient-2024-05-07-storage.bin",
+                    "path": "louder-esparagus-snapclient-2024-05-07-storage.bin",
                     "offset": "0x370000"
                 }
             ]
