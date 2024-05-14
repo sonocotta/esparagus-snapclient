@@ -4,6 +4,10 @@ on:
   push:
     branches:
     - 'features/**'
+    paths-ignore:
+    - 'installer/**'
+    - 'doc/**'
+    - 'docs/**'
 
 jobs:
   build:
