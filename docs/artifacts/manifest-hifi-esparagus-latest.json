@@ -1,6 +1,6 @@
 {
     "name": "snapclient on the hifi-esparagus",
-    "version": "2024-05-07",
+    "version": "2024-05-14",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
     "new_install_prompt_erase": true,
@@ -10,27 +10,27 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "hifi-esparagus-snapclient-2024-05-07-bootloader.bin",
+                    "path": "hifi-esparagus-snapclient-2024-05-14-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-2024-05-07-partition-table.bin",
+                    "path": "hifi-esparagus-snapclient-2024-05-14-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-2024-05-07-ota_data_initial.bin",
+                    "path": "hifi-esparagus-snapclient-2024-05-14-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-2024-05-07-snapclient.bin",
+                    "path": "hifi-esparagus-snapclient-2024-05-14-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-2024-05-07-storage.bin",
+                    "path": "hifi-esparagus-snapclient-2024-05-14-storage.bin",
                     "offset": "0x370000"
                 }
             ]
         }
     ],
-    "manifest_name": "manifest-hifi-esparagus-2024-05-07.json"
+    "manifest_name": "manifest-hifi-esparagus-2024-05-14.json"
 }

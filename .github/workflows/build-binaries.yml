@@ -4,6 +4,10 @@ on:
   push:
     branches:
     - 'features/**'
+    paths-ignore:
+    - 'installer/**'
+    - 'doc/**'
+    - 'docs/**'
 
 jobs:
   build:
@@ -21,7 +25,7 @@ jobs:
         datestring=$(date '+%Y-%m-%d')
         . $IDF_PATH/export.sh 
         
-        for config in 'hifi-esparagus' 'loud-esparagus' 'louder-esparagus'; do
+        for config in 'hifi-esparagus' 'loud-esparagus' 'louder-esparagus' 'lyra-t-4.2' 'lyra-t-4.3' 'lyra-t-mini' 'korvo' 'esp-ai-thinker' ; do
             echo Building $config
 
             cp sdkconfig.$config sdkconfig

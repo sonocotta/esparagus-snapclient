@@ -1,6 +1,6 @@
 {
-    "name": "snapclient in the loud-esparagus",
-    "version": "2024-05-14",
+    "name": "snapclient on the lyra-t-4.3",
+    "version": "latest",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
     "new_install_prompt_erase": true,
@@ -10,27 +10,27 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "loud-esparagus-snapclient-2024-05-14-bootloader.bin",
+                    "path": "lyra-t-4.3-snapclient-latest-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "loud-esparagus-snapclient-2024-05-14-partition-table.bin",
+                    "path": "lyra-t-4.3-snapclient-latest-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "loud-esparagus-snapclient-2024-05-14-ota_data_initial.bin",
+                    "path": "lyra-t-4.3-snapclient-latest-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "loud-esparagus-snapclient-2024-05-14-snapclient.bin",
+                    "path": "lyra-t-4.3-snapclient-latest-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "loud-esparagus-snapclient-2024-05-14-storage.bin",
+                    "path": "lyra-t-4.3-snapclient-latest-storage.bin",
                     "offset": "0x370000"
                 }
             ]
         }
     ],
-    "manifest_name": "manifest-loud-esparagus-2024-05-14.json"
+    "manifest_name": "manifest-lyra-t-4.3-latest.json"
 }

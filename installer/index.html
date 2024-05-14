@@ -14,7 +14,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Esparagus Squeezelite-ESP32 Installer</title>
+    <title>ESP32 Snapcast Installer</title>
     <script type="module" src="https://unpkg.com/esp-web-tools@8.0.1/dist/web/install-button.js?module">
     </script>
     <style>
@@ -26,7 +26,7 @@
 
     <div class="container" style="height: 100%;">
         <div class="jumbotron" style="width: 100%; height: 75% ">
-            <h5 class="display-5">Snapcast Firmware for Esparagus Media Center and Audio Docks</h5>
+            <h5 class="display-5">Snapcast Firmware flashing tool for ESP32-based audio boards</h5>
             <p class="lead">You've reached the installer page of the Snapcast firmware, where you can initialize
                 new devices. </p>
             <hr class="my-4">
@@ -35,7 +35,7 @@
         </div>
 
         <div class="mb-3">
-            <esp-web-install-button id="button_web_install" manifest="artifacts/manifest-hifi-esparagus-latest.json">
+            <esp-web-install-button id="button_web_install" manifest="artifacts/manifest-lyra-t-4.3-latest.json">
                 <button type="button" class="btn btn-primary" slot="activate">Connect to device</button>
                 <span slot="not-allowed">
                     <div class="alert alert-dismissible alert-danger"><button type="button" class="btn-close"
@@ -52,12 +52,83 @@
             </esp-web-install-button>
         </div>
 
-        <div id="device_tiles">
+        <h3>Espressif boards</h3>
+
+        <div id="device_tiles_1">
+            <div class="d-flex justify-content-between">
+
+                <div class="card border-primary mb-3" style="max-width: 20rem;" role="button">
+                    <h5 class="card-header bg-primary" role="button" id="lyra_t_4_3_header" manifest="artifacts/manifest-lyra-t-4.3-latest.json">
+                        <input id="lyra_t_4_3" type="radio" checked="">
+                        <label for="lyra_t_4_3">ESP32-LyraT v4.3</label>
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text text-muted">
+                            <a href="https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-lyrat.html">ESP32-LyraT</a>The ESP32-LyraT development board is targeted at audio applications equipped with the ESP32 dual-core chip, such as Wi-Fi speakers, Bluetooth speakers, voice remote controls, and all smart home applications that require audio functions.
+                        </p>
+                        <p class="card-text text-muted">
+                            ESP32-LyraT is a stereo audio development board
+                        </p>
+                        <img src="https://github.com/espressif/esp-adf/raw/master/docs/_static/esp32-lyrat-v4.2-side.jpg" width="100%" />
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-3" style="max-width: 20rem;" role="button">
+                    <h5 class="card-header bg-primary" role="button" id="lyra_t_mini_header" manifest="artifacts/manifest-lyra-t-mini-latest.json">
+                        <input id="lyra_t_mini" type="radio">
+                        <label for="lyra_t_mini">ESP32-LyraT-Mini</label>
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text text-muted">
+                            <a href="https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-lyrat-mini.html">ESP32-LyraT Mini</a> is a hardware platform based on the dual-core ESP32 for developing audio applications, such as Wi-Fi speakers, Bluetooth speakers, voice remote controls, and smart home applications with one or more audio functions.
+                        </p>
+                        <p class="card-text text-muted">
+                            ESP32-LyraT-Mini is a mono audio development board
+                        </p>
+                        <img src="https://github.com/espressif/esp-adf/raw/master/docs/_static/esp32-lyrat-mini-v1.2.png" width="100%" />
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-3" style="max-width: 20rem;" role="button">
+                    <h5 class="card-header bg-primary" role="button" id="korvo_header" manifest="artifacts/manifest-korvo-latest.json">
+                        <input id="korvo" type="radio">
+                        <label for="korvo">ESP32-Korvo-DU1906</label>
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text text-muted">
+                            The core components of <a href="https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-korvo-du1906.html">ESP32-Korvo-DU1906</a> include an ESP32-DU1906 Bluetooth/Wi-Fi audio module that reduces noise, eliminates echo, and implements beam forming and detection. ESP32-Korvo-DU1906 integrates power management, Bluetooth/Wi-Fi audio module, codec, power amplifier, etc
+                        </p>
+                        <img src="https://github.com/espressif/esp-adf/raw/master/docs/_static/esp32-korvo-du1906-v1.1.png" width="100%" />
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-3" style="max-width: 20rem;" role="button">
+                    <h5 class="card-header bg-primary" role="button" id="lyra_t_4_2_header" manifest="artifacts/manifest-lyra-t-4.2-latest.json">
+                        <input id="lyra_t_4_2" type="radio">
+                        <label for="lyra_t_4_2">ESP32-LyraT v4.2</label>
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text text-muted">
+                            <a href="https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-lyrat.html">ESP32-LyraT</a>The ESP32-LyraT development board is targeted at audio applications equipped with the ESP32 dual-core chip, such as Wi-Fi speakers, Bluetooth speakers, voice remote controls, and all smart home applications that require audio functions.
+                        </p>
+                        <p class="card-text text-muted">
+                            ESP32-LyraT is a stereo audio development board
+                        </p>
+                        <img src="https://github.com/espressif/esp-adf/raw/master/docs/_static/esp32-lyrat-v4.2-side.jpg" width="100%" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h3>Sonocotta boards</h3>
+
+        <div id="device_tiles_2">
             <div class="d-flex justify-content-between">
 
                 <div class="card border-primary mb-3" style="max-width: 20rem;" role="button">
                     <h5 class="card-header bg-primary" role="button" id="hifi-esparagus_header" manifest="artifacts/manifest-hifi-esparagus-latest.json">
-                        <input id="hifi-esparagus" type="radio" checked="">
+                        <input id="hifi-esparagus" type="radio">
                         <label for="hifi-esparagus">HiFi Esparagus / HiFi ESP</label>
                     </h5>
                     <div class="card-body">
@@ -103,6 +174,27 @@
                             <a href="https://www.tindie.com/products/sonocotta/louder-esp32/">Louder ESP</a> is a top-of-the-range model that uses modern highly capable TAS5805M DAC and is aimed to be paired with medium-to-large speaker systems. With 25W per channel stereo output it packs a punch and can easily enliven living quarters or dorm rooms.
                         </p>
                         <img src="https://user-images.githubusercontent.com/5459747/225272110-9433ff86-8912-47c5-a9f2-12bd7a0fe5a0.png" width="100%" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h3>AI-Thinker Boards</h3>
+
+        <div id="device_tiles_3">
+            <div class="d-flex justify-content-between">
+
+                <div class="card border-primary mb-3" style="max-width: 20rem;" role="button">
+                    <h5 class="card-header bg-primary" role="button" id="ai-thinker_header" manifest="artifacts/manifest-ai-thinker-latest.json">
+                        <input id="ai-thinker" type="radio">
+                        <label for="ai-thinker">ESP32-Audio-kit (ES8388)</label>
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text text-muted">
+                            <a href="https://docs.ai-thinker.com/en/esp32-audio-kit">ESP32-Audio-kit</a> is a small audio development board developed by Ai-Thinker based on the ESP32-A1S module. Most audio peripherals are distributed on both sides of the development board. It supports TF card, headphone output, two microphone inputs and two speaker outputs. . It is convenient for developers to develop quickly.
+                        </p>
+                        <img src="https://docs.ai-thinker.com/_media/esp32/esp32-audio-kit2.png" width="100%" />
                     </div>
                 </div>
 
