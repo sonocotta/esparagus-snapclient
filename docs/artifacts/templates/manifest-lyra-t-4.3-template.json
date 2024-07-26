@@ -10,23 +10,23 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "lyra-t-4.3-snapclient-latest-bootloader.bin",
+                    "path": "binaries/lyra-t-4.3-snapclient-latest-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "lyra-t-4.3-snapclient-latest-partition-table.bin",
+                    "path": "binaries/lyra-t-4.3-snapclient-latest-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "lyra-t-4.3-snapclient-latest-ota_data_initial.bin",
+                    "path": "binaries/lyra-t-4.3-snapclient-latest-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "lyra-t-4.3-snapclient-latest-snapclient.bin",
+                    "path": "binaries/lyra-t-4.3-snapclient-latest-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "lyra-t-4.3-snapclient-latest-storage.bin",
+                    "path": "binaries/lyra-t-4.3-snapclient-latest-storage.bin",
                     "offset": "0x370000"
                 }
             ]

@@ -10,23 +10,23 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "hifi-esparagus-snapclient-latest-bootloader.bin",
+                    "path": "binaries/hifi-esparagus-snapclient-latest-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-latest-partition-table.bin",
+                    "path": "binaries/hifi-esparagus-snapclient-latest-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-latest-ota_data_initial.bin",
+                    "path": "binaries/hifi-esparagus-snapclient-latest-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-latest-snapclient.bin",
+                    "path": "binaries/hifi-esparagus-snapclient-latest-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "hifi-esparagus-snapclient-latest-storage.bin",
+                    "path": "binaries/hifi-esparagus-snapclient-latest-storage.bin",
                     "offset": "0x370000"
                 }
             ]

@@ -22,29 +22,34 @@ jobs:
         submodules: 'true'
 
     - run: |
-        datestring=$(date '+%Y-%m-%d')
-        . $IDF_PATH/export.sh 
-        
-        for config in 'hifi-esparagus' 'loud-esparagus' 'louder-esparagus' 'lyra-t-4.2' 'lyra-t-4.3' 'lyra-t-mini' 'korvo' 'esp-ai-thinker' ; do
-            echo Building $config
-
-            cp sdkconfig.$config sdkconfig
-            idf.py build
-
-            cp build/snapclient.bin ./docs/artifacts/$config-snapclient-$datestring-snapclient.bin
-            cp build/storage.bin ./docs/artifacts/$config-snapclient-$datestring-storage.bin
-            cp build/ota_data_initial.bin ./docs/artifacts/$config-snapclient-$datestring-ota_data_initial.bin
-            cp build/bootloader/bootloader.bin ./docs/artifacts/$config-snapclient-$datestring-bootloader.bin
-            cp build/partition_table/partition-table.bin ./docs/artifacts/$config-snapclient-$datestring-partition-table.bin
-
-            sed -e "s/latest/$datestring/g" ./docs/artifacts/templates/manifest-$config-template.json > ./docs/artifacts/manifest-$config-latest.json
-        done 
-    
-    - run: |
         git config --global --add safe.directory /__w/esparagus-snapclient/esparagus-snapclient
         git config user.name github-actions
         git config user.email github-actions@github.com
 
+    - run: |
+        datestring=$(date '+%Y-%m-%d')
+        . $IDF_PATH/export.sh 
+        
+        for config_file in configs/sdkconfig.*; do
+          config=${config_file#configs/sdkconfig.}
+          if [[ "$config" == "old" ]]; then
+            continue
+          fi
+          
+          echo Building $config
+
+          cp $config_file sdkconfig
+          idf.py build
+
+          cp build/snapclient.bin ./docs/artifacts/binaries/$config-snapclient-$datestring-snapclient.bin
+          cp build/storage.bin ./docs/artifacts/binaries/$config-snapclient-$datestring-storage.bin
+          cp build/ota_data_initial.bin ./docs/artifacts/binaries/$config-snapclient-$datestring-ota_data_initial.bin
+          cp build/bootloader/bootloader.bin ./docs/artifacts/binaries/$config-snapclient-$datestring-bootloader.bin
+          cp build/partition_table/partition-table.bin ./docs/artifacts/binaries/$config-snapclient-$datestring-partition-table.bin
+
+          sed -e "s/latest/$datestring/g" ./docs/artifacts/templates/manifest-$config-template.json > ./docs/artifacts/manifest-$config-latest.json
+        done 
+    
     - run: |
           git add ./docs/artifacts
           git commit -m "Latest binaries by github-actions"

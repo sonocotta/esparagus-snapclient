@@ -10,23 +10,23 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "korvo-snapclient-latest-bootloader.bin",
+                    "path": "binaries/korvo-snapclient-latest-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "korvo-snapclient-latest-partition-table.bin",
+                    "path": "binaries/korvo-snapclient-latest-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "korvo-snapclient-latest-ota_data_initial.bin",
+                    "path": "binaries/korvo-snapclient-latest-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "korvo-snapclient-latest-snapclient.bin",
+                    "path": "binaries/korvo-snapclient-latest-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "korvo-snapclient-latest-storage.bin",
+                    "path": "binaries/korvo-snapclient-latest-storage.bin",
                     "offset": "0x370000"
                 }
             ]

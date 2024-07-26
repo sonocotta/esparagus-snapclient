@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "audio_hal.h": "c",
+        "tas5805m.h": "c",
+        "audio_volume.h": "c",
+        "i2c_bus.h": "c",
+        "esp_log.h": "c",
+        "cstdint": "c",
+        "board.h": "c",
+        "random": "c",
+        "tas5805m_2.0+agl_-12db.h": "c",
+        "tas5805m_1.0+3-band_drc+agl_-12db.h": "c",
+        "tas5805m_0.1+eq_40hz_cutoff.h": "c",
+        "tas5805m_1.1+eq_60hz_cutoff+left.h": "c",
+        "tas5805m_2.0+minimal.h": "c"
+    }
+}
