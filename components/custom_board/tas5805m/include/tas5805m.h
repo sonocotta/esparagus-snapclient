@@ -32,7 +32,9 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "board.h"
-#include "tas5805m_2.0+minimal.h"
+// #include "tas5805m_2.0+minimal.h"
+// #include "tas5805m_0.1+eq_100Hz_cutoff.h"
+#include "tas5805m_1.1+eq_60Hz_cutoff+mono.h"
 
 #ifdef __cplusplus
 extern "C"

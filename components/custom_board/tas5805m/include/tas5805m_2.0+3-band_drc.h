@@ -1,15 +1,8 @@
 typedef unsigned char cfg_u8;
-typedef union {
-    struct {
-        cfg_u8 offset;
-        cfg_u8 value;
-    };
-    struct {
-        cfg_u8 command;
-        cfg_u8 param;
-    };
+typedef struct {
+    cfg_u8 offset;
+    cfg_u8 value;
 } cfg_reg;
-
 #define CFG_META_SWITCH (255)
 #define CFG_META_DELAY  (254)
 #define CFG_META_BURST  (253)
