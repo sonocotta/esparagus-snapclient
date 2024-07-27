@@ -60,22 +60,17 @@ audio_hal_func_t AUDIO_CODEC_TAS5805M_DEFAULT_HANDLE = {
 void i2c_master_init()
 {
   int i2c_master_port = I2C_MASTER_NUM;
-  
-  
+
   ESP_ERROR_CHECK(get_i2c_pins(I2C_NUM_0, &i2c_cfg));
- 
+
   ESP_ERROR_CHECK(i2c_param_config(i2c_master_port, &i2c_cfg));
-  
- 
- 
+
   ESP_ERROR_CHECK(i2c_driver_install(i2c_master_port, i2c_cfg.mode,
-                           I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE,
-                           0));
-  
+                                     I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE,
+                                     0));
 }
 
 /* Helper Functions */
-
 
 // Reading of TAS5805M-Register
 
@@ -112,24 +107,60 @@ esp_err_t tas5805m_read_byte(uint8_t register_name, uint8_t *data)
 
 esp_err_t tas5805m_write_byte(uint8_t register_name, uint8_t value)
 {
-  int ret =0;
+  int ret = 0;
   i2c_cmd_handle_t cmd = i2c_cmd_link_create();
   i2c_master_start(cmd);
   i2c_master_write_byte(cmd, TAS5805M_ADDRESS << 1 | WRITE_BIT, ACK_CHECK_EN);
   i2c_master_write_byte(cmd, register_name, ACK_CHECK_EN);
   i2c_master_write_byte(cmd, value, ACK_CHECK_EN);
   i2c_master_stop(cmd);
-  
+
   ret = i2c_master_cmd_begin(I2C_TAS5805M_MASTER_NUM, cmd, 1000 / portTICK_RATE_MS);
 
- // Check if ret is OK
-  if (ret != ESP_OK) {
-    ESP_LOGE(TAG, "Fehler bei der I2C-Übertragung: %s", esp_err_to_name(ret));
-    
+  // Check if ret is OK
+  if (ret != ESP_OK)
+  {
+    ESP_LOGE(TAG, "Error during I2C transmission: %s", esp_err_to_name(ret));
   }
-  
+
   i2c_cmd_link_delete(cmd);
 
+  return ret;
+}
+
+esp_err_t tas5805m_transmit_registers(cfg_reg *r, int n)
+{
+  int i = 0;
+  esp_err_t ret = ESP_OK;
+  // i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+  // i2c_master_start(cmd);
+
+  while (i < n)
+  {
+    switch (r[i].offset)
+    {
+    case CFG_META_SWITCH:
+      // Used in legacy applications.  Ignored here.
+      break;
+    case CFG_META_DELAY:
+      vTaskDelay(r[i].value / portTICK_RATE_MS);
+      break;
+    // case CFG_META_BURST:
+    //   i2c_write((unsigned char *)&r[i + 1], r[i].param);
+    //   i += (r[i].param / 2) + 1;
+    //   break;
+    default:
+      ret = tas5805m_write_byte(r[i].offset, r[i].value);
+      if (ret == ESP_OK) 
+        ESP_LOGI(TAG, "Sending I2C: %#02x = %#02x", r[i].offset, r[i].value);
+      else 
+        ESP_LOGE(TAG, "Failed to send I2C: %#02x = %#02x, result = %#02x", r[i].offset, r[i].value, ret);
+      break;
+    }
+    i++;
+  }
+
+  // i2c_cmd_link_delete(cmd);
   return ret;
 }
 
@@ -137,7 +168,7 @@ esp_err_t tas5805m_write_byte(uint8_t register_name, uint8_t value)
 
 esp_err_t tas5805m_init()
 {
-  int ret =0;
+  int ret = 0;
   // Init the I2C-Driver
   i2c_master_init();
   /* Register the PDN pin as output and write 1 to enable the TAS chip */
@@ -155,38 +186,39 @@ esp_err_t tas5805m_init()
   gpio_set_level(TAS5805M_GPIO_PDN, 1);
   vTaskDelay(10 / portTICK_RATE_MS);
 
-  /* TAS5805M.Begin()*/
+  ret = tas5805m_transmit_registers(registers, sizeof(registers) / sizeof(registers[0]));
 
-  ESP_LOGW(TAG, "Setting to HI Z");
+  // /* TAS5805M.Begin()*/
 
-  ESP_ERROR_CHECK(tas5805m_write_byte(TAS5805M_DEVICE_CTRL_2_REGISTER, 0x02));
-  vTaskDelay(10 / portTICK_RATE_MS);
-  if (ret != ESP_OK){
-    ESP_LOGW(TAG, "TAS5805M_DEVICE_CTRL_2_REGISTER, 0x02 FAILED!!!");
-    return ret;
-  }
-    
-  ESP_LOGW(TAG, "Setting to PLAY");
-  
-  ret = tas5805m_write_byte(TAS5805M_DEVICE_CTRL_2_REGISTER, 0x03);
-  if (ret != ESP_OK){
-    ESP_LOGW(TAG, "TAS5805M_DEVICE_CTRL_2_REGISTER, 0x03 FAILED!!");
-     return ret;
-  }
-     
+  // ESP_LOGW(TAG, "Setting to HI Z");
 
-    // Check if Bridge-Mode is enabled
-  #ifdef CONFIG_DAC_BRIDGE_MODE
-  uint8_t value = 0;
-  ret = tas5805m_read_byte(TAS5805M_DEVICE_CTRL_1_REGISTER, &value);
-  if (ret != ESP_OK)
-    return ret;
-  value = 0b100;
-  
-  ret = tas5805m_write_byte(TAS5805M_DEVICE_CTRL_1_REGISTER, value);
-  if (ret != ESP_OK)
-    return ret;
-  #endif
+  // ESP_ERROR_CHECK(tas5805m_write_byte(TAS5805M_DEVICE_CTRL_2_REGISTER, 0x02));
+  // vTaskDelay(10 / portTICK_RATE_MS);
+  // if (ret != ESP_OK){
+  //   ESP_LOGW(TAG, "TAS5805M_DEVICE_CTRL_2_REGISTER, 0x02 FAILED!!!");
+  //   return ret;
+  // }
+
+  // ESP_LOGW(TAG, "Setting to PLAY");
+
+  // ret = tas5805m_write_byte(TAS5805M_DEVICE_CTRL_2_REGISTER, 0x03);
+  // if (ret != ESP_OK){
+  //   ESP_LOGW(TAG, "TAS5805M_DEVICE_CTRL_2_REGISTER, 0x03 FAILED!!");
+  //   return ret;
+  // }
+
+  // // Check if Bridge-Mode is enabled
+  // #ifdef CONFIG_DAC_BRIDGE_MODE
+  // uint8_t value = 0;
+  // ret = tas5805m_read_byte(TAS5805M_DEVICE_CTRL_1_REGISTER, &value);
+  // if (ret != ESP_OK)
+  //   return ret;
+  // value = 0b100;
+
+  // ret = tas5805m_write_byte(TAS5805M_DEVICE_CTRL_1_REGISTER, value);
+  // if (ret != ESP_OK)
+  //   return ret;
+  // #endif
 
   return ret;
 }
@@ -196,40 +228,40 @@ esp_err_t tas5805m_init()
 esp_err_t
 tas5805m_set_volume(int vol)
 {
-  int vol_idx = 0; // Temp-Variable 
+  int vol_idx = 0; // Temp-Variable
 
   /* Checking if Volume is bigger or smaller than the max values */
   if (vol < TAS5805M_VOLUME_MIN)
-    {
-      vol = TAS5805M_VOLUME_MIN;
-    }
+  {
+    vol = TAS5805M_VOLUME_MIN;
+  }
   if (vol > TAS5805M_VOLUME_MAX)
-    {
-      vol = TAS5805M_VOLUME_MAX;
-    }
+  {
+    vol = TAS5805M_VOLUME_MAX;
+  }
   /* Mapping the Values from 0-100 to 254-0 */
-  vol_idx = vol / 5; 
+  vol_idx = vol / 5;
   /* Updating the global volume Variable */
   currentVolume = vol_idx;
   /* Writing the Volume to the Register*/
   return tas5805m_write_byte(TAS5805M_DIG_VOL_CTRL_REGISTER, tas5805m_volume[vol_idx]);
 }
 
-esp_err_t 
+esp_err_t
 tas5805m_get_volume(int *vol)
 {
   esp_err_t ret = ESP_OK;
   uint8_t rxbuf = 0;
   ret = tas5805m_read_byte(TAS5805M_DIG_VOL_CTRL_REGISTER, &rxbuf);
   int i;
-  for (i = 0; i < sizeof (tas5805m_volume); i++)
-    {
-      if (rxbuf>= tas5805m_volume[i])
-        break;
-    }
+  for (i = 0; i < sizeof(tas5805m_volume); i++)
+  {
+    if (rxbuf >= tas5805m_volume[i])
+      break;
+  }
   /* Updating the global volume Variable */
-  currentVolume = i; 
-  ESP_LOGI (TAG, "Volume is %d", i * 5);
+  currentVolume = i;
+  ESP_LOGI(TAG, "Volume is %d", i * 5);
   *vol = 5 * i; // Converting it to percent
   return ret;
 }
@@ -240,19 +272,18 @@ esp_err_t tas5805m_deinit(void)
   return ESP_OK;
 }
 
-
-
 esp_err_t
 tas5805m_set_mute(bool enable)
 {
-  
+
   if (enable == true)
   {
     // Set the Volume to 255 to enable the MUTE
     return tas5805m_write_byte(TAS5805M_DIG_VOL_CTRL_REGISTER, TAS5805M_VOLUME_MUTE);
   }
-  else{
-    return tas5805m_write_byte(TAS5805M_DIG_VOL_CTRL_REGISTER,tas5805m_volume[currentVolume]); // Restore Volume to its old value
+  else
+  {
+    return tas5805m_write_byte(TAS5805M_DIG_VOL_CTRL_REGISTER, tas5805m_volume[currentVolume]); // Restore Volume to its old value
   }
   return ESP_OK;
 }

@@ -32,6 +32,7 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "board.h"
+#include "tas5805m_2.0+minimal.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -67,6 +68,17 @@ extern "C"
    *     - ESP_FAIL
    */
   esp_err_t tas5805m_init ();
+
+   /** 
+    * @brief Send sequence of I2C intialisation commands
+    * 
+    * @param r array of offsets and values to send
+    * 
+    * @return 
+    *     - ESP_OK
+    *     - ESP_FAIL
+    */
+  esp_err_t tas5805m_transmit_registers(cfg_reg *r, int n);
 
   /**
    * @brief Deinitialize TAS5805 codec chip

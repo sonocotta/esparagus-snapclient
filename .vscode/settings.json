@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "audio_hal.h": "c",
+        "tas5805m.h": "c"
+    }
+}
