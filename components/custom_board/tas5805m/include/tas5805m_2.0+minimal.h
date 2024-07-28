@@ -1,15 +1,22 @@
-typedef unsigned char cfg_u8;
+#pragma once
 
-typedef struct {
-    cfg_u8 offset;
-    cfg_u8 value;
-} cfg_reg;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define CFG_META_SWITCH (255)
-#define CFG_META_DELAY  (254)
-#define CFG_META_BURST  (253)
+#define CFG_META_DELAY (254)
+#define CFG_META_BURST (253)
+#define CFG_END_1 (0Xaa)
+#define CFG_END_2 (0Xcc)
+#define CFG_END_3 (0Xee)
 
-cfg_reg registers[] = {
+typedef struct {
+  uint8_t offset;
+  uint8_t value;
+} tas5805m_cfg_reg_t;
+
+static const tas5805m_cfg_reg_t tas5805m_registers[] = {
 // RESET
     { 0x00, 0x00 },
     { 0x7f, 0x00 },
@@ -37,3 +44,7 @@ cfg_reg registers[] = {
     { 0x03, 0x03 },
     { 0x78, 0x80 },
 };
+
+#ifdef __cplusplus
+}
+#endif

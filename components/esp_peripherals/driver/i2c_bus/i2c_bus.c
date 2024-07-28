@@ -110,6 +110,7 @@ esp_err_t i2c_bus_write_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg,
   I2C_BUS_CHECK(data != NULL, "Not initialized input data pointer", ESP_FAIL);
   esp_err_t ret = ESP_OK;
   mutex_lock(p_bus->bus_lock);
+
   i2c_cmd_handle_t cmd = i2c_cmd_link_create();
   ret |= i2c_master_start(cmd);
   ret |= i2c_master_write_byte(cmd, addr, 1);
@@ -118,6 +119,7 @@ esp_err_t i2c_bus_write_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg,
   ret |= i2c_master_stop(cmd);
   ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_RATE_MS);
   i2c_cmd_link_delete(cmd);
+  
   mutex_unlock(p_bus->bus_lock);
   I2C_BUS_CHECK(ret == 0, "I2C Bus WriteReg Error", ESP_FAIL);
   return ret;

@@ -33,8 +33,10 @@
 #include "esp_log.h"
 #include "board.h"
 // #include "tas5805m_2.0+minimal.h"
-#include "tas5805m_2.0+3-band_drc.h"
+// #include "tas5805m_2.0+3-band_drc.h"
 // #include "tas5805m_2.0+3-band_drc+agl_-12db.h"
+// #include "tas5805m_0.1+eq_60Hz_cutoff.h"
+// #include "tas5805m_0.1+eq_100Hz_cutoff+drc.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -70,17 +72,6 @@ extern "C"
    *     - ESP_FAIL
    */
   esp_err_t tas5805m_init ();
-
-   /** 
-    * @brief Send sequence of I2C intialisation commands
-    * 
-    * @param r array of offsets and values to send
-    * 
-    * @return 
-    *     - ESP_OK
-    *     - ESP_FAIL
-    */
-  esp_err_t tas5805m_transmit_registers(cfg_reg *r, int n);
 
   /**
    * @brief Deinitialize TAS5805 codec chip

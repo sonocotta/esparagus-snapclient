@@ -150,7 +150,7 @@ esp_err_t tas5805m_init(audio_hal_codec_config_t *codec_cfg) {
       tas5805m_registers,
       sizeof(tas5805m_registers) / sizeof(tas5805m_registers[0]));
 
-  TAS5805M_ASSERT(ret, "Fail to iniitialize tas5805m PA", ESP_FAIL);
+  TAS5805M_ASSERT(ret, "Fail to initialize tas5805m PA", ESP_FAIL);
 
   codec_dac_volume_config_t vol_cfg = TAS5805M_DAC_VOL_CFG_DEFAULT();
   dac_vol_handle = audio_codec_volume_init(&vol_cfg);

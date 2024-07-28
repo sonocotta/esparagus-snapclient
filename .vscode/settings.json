@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "audio_hal.h": "c",
-        "tas5805m.h": "c"
+        "tas5805m.h": "c",
+        "audio_volume.h": "c",
+        "i2c_bus.h": "c",
+        "esp_log.h": "c"
     }
 }

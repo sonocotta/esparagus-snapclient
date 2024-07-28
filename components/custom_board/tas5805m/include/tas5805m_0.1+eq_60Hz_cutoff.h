@@ -1,49 +1,23 @@
-typedef unsigned char cfg_u8;
-typedef struct {
-    cfg_u8 offset;
-    cfg_u8 value;
-} cfg_reg;
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define CFG_META_SWITCH (255)
-#define CFG_META_DELAY  (254)
-#define CFG_META_BURST  (253)
+#define CFG_META_DELAY (254)
+#define CFG_META_BURST (253)
+#define CFG_END_1 (0Xaa)
+#define CFG_END_2 (0Xcc)
+#define CFG_END_3 (0Xee)
 
-/* Example C code */
-/*
-    // Externally implemented function that can write n-bytes to the device
-    // PCM51xx and TAS5766 targets require the high bit (0x80) of the I2C register to be set on multiple writes.
-    // Refer to the device data sheet for more information.
-    extern int i2c_write(unsigned char *data, int n);
-    // Externally implemented function that delays execution by n milliseconds
-    extern int delay(int n);
-    // Example implementation.  Call like:
-    //     transmit_registers(registers, sizeof(registers)/sizeof(registers[0]));
-    void transmit_registers(cfg_reg *r, int n)
-    {
-        int i = 0;
-        while (i < n) {
-            switch (r[i].command) {
-            case CFG_META_SWITCH:
-                // Used in legacy applications.  Ignored here.
-                break;
-            case CFG_META_DELAY:
-                delay(r[i].param);
-                break;
-            case CFG_META_BURST:
-                i2c_write((unsigned char *)&r[i+1], r[i].param);
-                i +=  (r[i].param / 2) + 1;
-                break;
-            default:
-                i2c_write((unsigned char *)&r[i], 2);
-                break;
-            }
-            i++;
-        }
-    }
- */
+typedef struct {
+  uint8_t offset;
+  uint8_t value;
+} tas5805m_cfg_reg_t;
 
-cfg_reg registers[] = {
-//RESET
+static const tas5805m_cfg_reg_t tas5805m_registers[] = {
+// RESET
     { 0x00, 0x00 },
     { 0x7f, 0x00 },
     { 0x03, 0x02 },
@@ -1182,3 +1156,7 @@ cfg_reg registers[] = {
     { 0x78, 0x80 },
 
 };
+
+#ifdef __cplusplus
+}
+#endif

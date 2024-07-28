@@ -27,9 +27,18 @@
 #include "tas5805m.h"
 #include "esp_log.h"
 #include "i2c_bus.h"
-#include "tas5805m_reg_cfg.h"
+#include "tas5805m_cfg.h"
+// #include "tas5805m_reg_cfg.h"
+// #include "tas5805m_2.0+minimal.h"
+#include "tas5805m_0.1+eq_100Hz_cutoff.h"
 
-static const char *TAG = "TAS5805M";
+static const char *TAG = "TAS5805";
+
+#define TAS5805M_ASSERT(a, format, b, ...) \
+  if ((a) != 0) {                          \
+    ESP_LOGE(TAG, format, ##__VA_ARGS__);  \
+    return b;                              \
+  }
 
 /* Default I2C config */
 
@@ -128,44 +137,69 @@ esp_err_t tas5805m_write_byte(uint8_t register_name, uint8_t value)
   return ret;
 }
 
-esp_err_t tas5805m_transmit_registers(cfg_reg *r, int n)
+esp_err_t tas5805m_write_bytes(uint8_t *reg,
+                              int regLen, uint8_t *data, int datalen)
 {
-  int i = 0;
-  esp_err_t ret = ESP_OK;
-  // i2c_cmd_handle_t cmd = i2c_cmd_link_create();
-  // i2c_master_start(cmd);
+  int ret = 0;
 
-  while (i < n)
+  i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+  ret |= i2c_master_start(cmd);
+  ret |= i2c_master_write_byte(cmd, TAS5805M_ADDRESS << 1 | WRITE_BIT, ACK_CHECK_EN);
+  ret |= i2c_master_write(cmd, reg, regLen, ACK_CHECK_EN);
+  ret |= i2c_master_write(cmd, data, datalen, ACK_CHECK_EN);
+  ret |= i2c_master_stop(cmd);
+  ret = i2c_master_cmd_begin(I2C_TAS5805M_MASTER_NUM, cmd, 1000 / portTICK_RATE_MS);
+
+  // Check if ret is OK
+  if (ret != ESP_OK)
   {
-    switch (r[i].offset)
-    {
-    case CFG_META_SWITCH:
-      // Used in legacy applications.  Ignored here.
-      break;
-    case CFG_META_DELAY:
-      vTaskDelay(r[i].value / portTICK_RATE_MS);
-      break;
-    // case CFG_META_BURST:
-    //   i2c_write((unsigned char *)&r[i + 1], r[i].param);
-    //   i += (r[i].param / 2) + 1;
-    //   break;
-    default:
-      ret = tas5805m_write_byte(r[i].offset, r[i].value);
-      if (ret == ESP_OK) 
-        ESP_LOGI(TAG, "Sending I2C: %#02x = %#02x", r[i].offset, r[i].value);
-      else 
-        ESP_LOGE(TAG, "Failed to send I2C: %#02x = %#02x, result = %#02x", r[i].offset, r[i].value, ret);
-      break;
-    }
-    i++;
+    ESP_LOGE(TAG, "Error during I2C transmission: %s", esp_err_to_name(ret));
   }
 
-  // i2c_cmd_link_delete(cmd);
+  i2c_cmd_link_delete(cmd);
+
   return ret;
 }
 
-// Inits the TAS5805M change Settings in Menuconfig to enable Bridge-Mode
+static esp_err_t tas5805m_transmit_registers(const tas5805m_cfg_reg_t *conf_buf, int size) {
+  int i = 0;
+  esp_err_t ret = ESP_OK;
+  while (i < size) {
+    switch (conf_buf[i].offset) {
+      case CFG_META_SWITCH:
+        // Used in legacy applications.  Ignored here.
+        break;
+      case CFG_META_DELAY:
+        vTaskDelay(conf_buf[i].value / portTICK_RATE_MS);
+        break;
+      case CFG_META_BURST:
+        ret = tas5805m_write_bytes((unsigned char *)(&conf_buf[i + 1].offset), 1,
+                                   (unsigned char *)(&conf_buf[i + 1].value), conf_buf[i].value);
+        i += (conf_buf[i].value / 2) + 1;
+        break;
+      case CFG_END_1:
+        if (CFG_END_2 == conf_buf[i + 1].offset &&
+            CFG_END_3 == conf_buf[i + 2].offset) {
+          ESP_LOGI(TAG, "End of tas5805m reg: %d\n", i);
+        }
+        break;
+      default:
+        ret = tas5805m_write_bytes((unsigned char *)(&conf_buf[i].offset), 1,
+                                   (unsigned char *)(&conf_buf[i].value), 1);
+        break;
+    }
+    i++;
+  }
+  if (ret != ESP_OK) {
+    ESP_LOGE(TAG, "Fail to load configuration to tas5805m");
+    return ESP_FAIL;
+  }
+  ESP_LOGI(TAG, "%s:  write %d reg done", __FUNCTION__, i);
+  return ret;
+}
 
+// Inits the TAS5805M 
+// change Settings in Menuconfig to enable Bridge-Mode
 esp_err_t tas5805m_init()
 {
   int ret = 0;
@@ -179,14 +213,18 @@ esp_err_t tas5805m_init()
   io_conf.pin_bit_mask = TAS5805M_GPIO_PDN_MASK;
   io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
   io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-  ESP_LOGW(TAG, "Power down pin: %d", TAS5805M_GPIO_PDN);
+  ESP_LOGI(TAG, "Power down pin: %d", TAS5805M_GPIO_PDN);
   gpio_config(&io_conf);
   gpio_set_level(TAS5805M_GPIO_PDN, 0);
-  vTaskDelay(10 / portTICK_RATE_MS);
+  vTaskDelay(20 / portTICK_RATE_MS);
   gpio_set_level(TAS5805M_GPIO_PDN, 1);
-  vTaskDelay(10 / portTICK_RATE_MS);
+  vTaskDelay(200 / portTICK_RATE_MS);
 
-  ret = tas5805m_transmit_registers(registers, sizeof(registers) / sizeof(registers[0]));
+  ret |= tas5805m_transmit_registers(
+      tas5805m_registers,
+      sizeof(tas5805m_registers) / sizeof(tas5805m_registers[0]));
+
+  TAS5805M_ASSERT(ret, "Fail to initialize tas5805m PA", ESP_FAIL);
 
   // /* TAS5805M.Begin()*/
 
