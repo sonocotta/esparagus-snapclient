@@ -840,9 +840,10 @@ static void http_get_task(void *pvParameters) {
       }
     }
 
-    if (r->addr) {
-      ip_addr_copy(remote_ip, (r->addr->addr));
-      remote_ip.type = IPADDR_TYPE_V4;
+    mdns_ip_addr_t * a = r->addr;
+    if (a) {
+      ip_addr_copy(remote_ip, (a->addr));
+      remote_ip.type = a->addr.type;
       remotePort = r->port;
       ESP_LOGI(TAG, "Found %s:%d", ipaddr_ntoa(&remote_ip), remotePort);
 
@@ -892,6 +893,7 @@ static void http_get_task(void *pvParameters) {
       ESP_LOGE(TAG, "can't connect to remote %s:%d, err %d",
                ipaddr_ntoa(&remote_ip), remotePort, rc2);
     }
+
     if (rc1 != ERR_OK || rc2 != ERR_OK) {
       netconn_close(lwipNetconn);
       netconn_delete(lwipNetconn);
