@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "mdns.h": "c",
+        "compare": "c",
+        "cstdint": "c"
+    }
+}

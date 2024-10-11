@@ -252,7 +252,12 @@ static esp_err_t player_setup_i2s(i2s_port_t i2sNum,
 
   i2s_std_clk_config_t i2s_clkcfg = {
       .sample_rate_hz = setting->sr,
-      .clk_src = I2S_CLK_SRC_APLL,
+      .clk_src =
+      #ifdef CONFIG_IDF_TARGET_ESP32S3
+          I2S_CLK_SRC_DEFAULT,
+      #else
+          I2S_CLK_SRC_APLL,
+      #endif
       .mclk_multiple = I2S_MCLK_MULTIPLE_256,
   };
   i2s_std_config_t tx_std_cfg = {
@@ -817,9 +822,11 @@ void adjust_apll(int8_t direction) {
     direction = 0;
   }
 
+  #ifdef CONFIG_IDF_TARGET_ESP32
   //  periph_rtc_apll_acquire();
   rtc_clk_apll_coeff_set(o_div, sdm0, sdm1, sdm2);
   // rtc_clk_apll_enable(1, sdm0, sdm1, sdm2, o_div);
+  #endif
 
   currentDir = direction;
 }
