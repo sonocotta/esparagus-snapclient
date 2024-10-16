@@ -1,10 +1,10 @@
 dependencies:
   espressif/esp-dsp:
-    component_hash: 3e7bbd487f1357a1d4944d0c85966d049501ea281b8a4c7f93f7cfedd5b7f23d
+    component_hash: fa7fe74305df6da25867437ebcd4213e047cbfc0556cf92067ab657fce537c6e
     source:
       service_url: https://api.components.espressif.com/
       type: service
-    version: 1.4.12
+    version: 1.5.2
   espressif/mdns:
     component_hash: 31117d76cae83a6d83ffd7f035f6fdae5bd05b914fc30b641afeb208b84de19a
     source:
