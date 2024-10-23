@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../include/tas5805m_cfg.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,10 +35,8 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x7e, 0xff },
     { 0x00, 0x01 },
     { 0x51, 0x05 },
-// Book 0x00
     { 0x00, 0x00 },
     { 0x66, 0x86 }, //   EQReg
-// Book 0x8c
     { 0x7f, 0x8c },
     { 0x00, 0x29 },
     { 0x18, 0x00 }, //  Input Mixer Left to left = -6 dB

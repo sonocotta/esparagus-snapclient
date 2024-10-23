@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../include/tas5805m_cfg.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

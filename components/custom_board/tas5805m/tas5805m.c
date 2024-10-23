@@ -26,11 +26,58 @@
 
 #include "tas5805m.h"
 #include "esp_log.h"
+#include "driver/i2s.h"
 #include "i2c_bus.h"
-#include "tas5805m_cfg.h"
-// #include "tas5805m_reg_cfg.h"
-// #include "tas5805m_2.0+minimal.h"
-#include "tas5805m_0.1+eq_100Hz_cutoff.h"
+
+#if defined(CONFIG_DAC_TAS5805M_DSP_STEREO)
+    #pragma message("tas5805m_2.0+basic config is used")
+    #include "startup/tas5805m_2.0+basic.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_STEREO_DRC_AGL)
+    #pragma message("tas5805m_2.0+3-band_drc+agl_-12db config is used")
+    #include "startup/tas5805m_2.0+3-band_drc+agl_-12db.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_STEREO_DRC)
+    #pragma message("tas5805m_2.0+3-band_drc config is used")
+    #include "startup/tas5805m_2.0+3-band_drc.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_STEREO_AGL)
+    #pragma message("tas5805m_2.0+agl_-12db config is used")
+    #include "startup/tas5805m_2.0+agl_-12db.h"
+#elif defined(CONFIG_DAC_TAS5805M_DSP_MONO)
+    #pragma message("tas5805m_1.0+basic config is used")
+    #include "startup/tas5805m_1.0+basic.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_MONO_DRC_AGL)
+    #pragma message("tas5805m_1.0+3-band_drc+agl_-12db config is used")
+    #include "startup/tas5805m_1.0+3-band_drc+agl_-12db.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_MONO_DRC)
+    #pragma message("tas5805m_1.0+3-band_drc config is used")
+    #include "startup/tas5805m_1.0+3-band_drc.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_MONO_AGL)
+    #pragma message("tas5805m_1.0+agl_-12db config is used")
+    #include "startup/tas5805m_1.0+agl_-12db.h"
+#elif defined(CONFIG_DAC_TAS5805M_DSP_SUBWOOFER_100_AGL)
+    #pragma message("tas5805m_0.1+eq_100Hz_cutoff+drc config is used")
+    #include "startup/tas5805m_0.1+eq_100Hz_cutoff+drc.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_SUBWOOFER_40)
+    #pragma message("tas5805m_0.1+eq_40Hz_cutoff config is used")
+    #include "startup/tas5805m_0.1+eq_40Hz_cutoff.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_SUBWOOFER_60)
+    #pragma message("tas5805m_0.1+eq_60Hz_cutoff config is used")
+    #include "startup/tas5805m_0.1+eq_60Hz_cutoff.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_SUBWOOFER_100)
+    #pragma message("tas5805m_0.1+eq_100Hz_cutoff config is used")
+    #include "startup/tas5805m_0.1+eq_100Hz_cutoff.h"
+#elif defined(CONFIG_DAC_TAS5805M_DSP_BIAMP)
+    #pragma message("tas5805m_1.1+eq_60Hz_cutoff+mono config is used")
+    #include "startup/tas5805m_1.1+eq_60Hz_cutoff+mono.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_BIAMP_60_LEFT)
+    #pragma message("tas5805m_1.1+eq_60Hz_cutoff+left config is used")
+    #include "startup/tas5805m_1.1+eq_60Hz_cutoff+left.h"
+    #elif defined(CONFIG_DAC_TAS5805M_DSP_BIAMP_60_RIGHT)
+    #pragma message("tas5805m_1.1+eq_60Hz_cutoff+right config is used") 
+    #include "startup/tas5805m_1.1+eq_60Hz_cutoff+right.h"
+#else
+    #pragma message("tas5805m_2.0+minimal config is used")
+    #include "startup/tas5805m_2.0+minimal.h"
+#endif
 
 static const char *TAG = "TAS5805";
 
@@ -202,9 +249,9 @@ static esp_err_t tas5805m_transmit_registers(const tas5805m_cfg_reg_t *conf_buf,
 // change Settings in Menuconfig to enable Bridge-Mode
 esp_err_t tas5805m_init()
 {
-  int ret = 0;
   // Init the I2C-Driver
   i2c_master_init();
+
   /* Register the PDN pin as output and write 1 to enable the TAS chip */
   /* TAS5805M.INIT() */
   gpio_config_t io_conf;
@@ -213,52 +260,28 @@ esp_err_t tas5805m_init()
   io_conf.pin_bit_mask = TAS5805M_GPIO_PDN_MASK;
   io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
   io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-  ESP_LOGI(TAG, "Power down pin: %d", TAS5805M_GPIO_PDN);
+  ESP_LOGI(TAG, "Running PWR ON sequence on pin: %d", TAS5805M_GPIO_PDN);
   gpio_config(&io_conf);
   gpio_set_level(TAS5805M_GPIO_PDN, 0);
   vTaskDelay(20 / portTICK_RATE_MS);
   gpio_set_level(TAS5805M_GPIO_PDN, 1);
-  vTaskDelay(200 / portTICK_RATE_MS);
+  vTaskDelay(100 / portTICK_RATE_MS);
 
-  ret |= tas5805m_transmit_registers(
+  // return ESP_OK;
+
+  //
+  // I2S needs to be initialized before this happens
+  //
+  int ret = tas5805m_transmit_registers(
       tas5805m_registers,
       sizeof(tas5805m_registers) / sizeof(tas5805m_registers[0]));
 
+  // tas5805m_is_initialized = true;
+  
   TAS5805M_ASSERT(ret, "Fail to initialize tas5805m PA", ESP_FAIL);
 
-  // /* TAS5805M.Begin()*/
-
-  // ESP_LOGW(TAG, "Setting to HI Z");
-
-  // ESP_ERROR_CHECK(tas5805m_write_byte(TAS5805M_DEVICE_CTRL_2_REGISTER, 0x02));
-  // vTaskDelay(10 / portTICK_RATE_MS);
-  // if (ret != ESP_OK){
-  //   ESP_LOGW(TAG, "TAS5805M_DEVICE_CTRL_2_REGISTER, 0x02 FAILED!!!");
-  //   return ret;
-  // }
-
-  // ESP_LOGW(TAG, "Setting to PLAY");
-
-  // ret = tas5805m_write_byte(TAS5805M_DEVICE_CTRL_2_REGISTER, 0x03);
-  // if (ret != ESP_OK){
-  //   ESP_LOGW(TAG, "TAS5805M_DEVICE_CTRL_2_REGISTER, 0x03 FAILED!!");
-  //   return ret;
-  // }
-
-  // // Check if Bridge-Mode is enabled
-  // #ifdef CONFIG_DAC_BRIDGE_MODE
-  // uint8_t value = 0;
-  // ret = tas5805m_read_byte(TAS5805M_DEVICE_CTRL_1_REGISTER, &value);
-  // if (ret != ESP_OK)
-  //   return ret;
-  // value = 0b100;
-
-  // ret = tas5805m_write_byte(TAS5805M_DEVICE_CTRL_1_REGISTER, value);
-  // if (ret != ESP_OK)
-  //   return ret;
-  // #endif
-
   return ret;
+  
 }
 
 // Setting the Volume
@@ -345,10 +368,27 @@ tas5805m_get_mute(bool *enabled)
   return ESP_OK;
 }
 
+// static bool tas5805m_is_initialized = false;
+
+
 esp_err_t tas5805m_ctrl(audio_hal_codec_mode_t mode,
                         audio_hal_ctrl_t ctrl_state)
 {
-  // TODO
+  // if (!tas5805m_is_initialized) {
+  //   //
+  //   // I2S needs to be initialized before this happens
+  //   //
+  //   int ret = tas5805m_transmit_registers(
+  //       tas5805m_registers,
+  //       sizeof(tas5805m_registers) / sizeof(tas5805m_registers[0]));
+
+  //   tas5805m_is_initialized = true;
+    
+  //   TAS5805M_ASSERT(ret, "Fail to initialize tas5805m PA", ESP_FAIL);
+
+  //   return ret;
+  // } 
+
   return ESP_OK;
 }
 

@@ -1,49 +1,25 @@
-typedef unsigned char cfg_u8;
-typedef struct {
-    cfg_u8 offset;
-    cfg_u8 value;
-} cfg_reg;
+#pragma once
+
+#include "../include/tas5805m_cfg.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define CFG_META_SWITCH (255)
-#define CFG_META_DELAY  (254)
-#define CFG_META_BURST  (253)
+#define CFG_META_DELAY (254)
+#define CFG_META_BURST (253)
+#define CFG_END_1 (0Xaa)
+#define CFG_END_2 (0Xcc)
+#define CFG_END_3 (0Xee)
 
-/* Example C code */
-/*
-    // Externally implemented function that can write n-bytes to the device
-    // PCM51xx and TAS5766 targets require the high bit (0x80) of the I2C register to be set on multiple writes.
-    // Refer to the device data sheet for more information.
-    extern int i2c_write(unsigned char *data, int n);
-    // Externally implemented function that delays execution by n milliseconds
-    extern int delay(int n);
-    // Example implementation.  Call like:
-    //     transmit_registers(registers, sizeof(registers)/sizeof(registers[0]));
-    void transmit_registers(cfg_reg *r, int n)
-    {
-        int i = 0;
-        while (i < n) {
-            switch (r[i].command) {
-            case CFG_META_SWITCH:
-                // Used in legacy applications.  Ignored here.
-                break;
-            case CFG_META_DELAY:
-                delay(r[i].param);
-                break;
-            case CFG_META_BURST:
-                i2c_write((unsigned char *)&r[i+1], r[i].param);
-                i +=  (r[i].param / 2) + 1;
-                break;
-            default:
-                i2c_write((unsigned char *)&r[i], 2);
-                break;
-            }
-            i++;
-        }
-    }
- */
+typedef struct {
+  uint8_t offset;
+  uint8_t value;
+} tas5805m_cfg_reg_t;
 
-cfg_reg registers[] = {
-//RESET
+static const tas5805m_cfg_reg_t tas5805m_registers[] = {
+// RESET
     { 0x00, 0x00 },
     { 0x7f, 0x00 },
     { 0x03, 0x02 },
@@ -60,7 +36,7 @@ cfg_reg registers[] = {
     { 0x00, 0x01 },
     { 0x51, 0x05 },
     { 0x00, 0x00 },
-    { 0x66, 0x87 }, //   EQReg
+    { 0x66, 0x85 }, //   EQReg
     { 0x7f, 0x8c },
     { 0x00, 0x29 },
     { 0x18, 0x00 }, //  Input Mixer Left to left = -6 dB
@@ -869,7 +845,7 @@ cfg_reg registers[] = {
     { 0x00, 0x00 },
     { 0x7f, 0x8c },
     { 0x00, 0x2b },
-    { 0x34, 0x00 }, //   DRC Settings of band1:   attack: 25 ms, release: 50 ms, energy: 25 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 100   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 100   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
+    { 0x34, 0x00 }, //   DRC Settings of band1:   attack: 25 ms, release: 50 ms, energy: 25 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 1   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 1   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
     { 0x35, 0x0d },
     { 0x36, 0xa6 },
     { 0x37, 0x86 },
@@ -910,7 +886,7 @@ cfg_reg registers[] = {
     { 0x5a, 0x00 },
     { 0x5b, 0x00 },
     { 0x00, 0x2d },
-    { 0x58, 0x01 }, //   DRC Settings of band3:   attack: 1 ms, release: 10 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 100   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 100   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
+    { 0x58, 0x01 }, //   DRC Settings of band3:   attack: 1 ms, release: 10 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 1   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 1   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
     { 0x59, 0x53 },
     { 0x5a, 0x8f },
     { 0x5b, 0xcc },
@@ -1038,7 +1014,7 @@ cfg_reg registers[] = {
     { 0x00, 0x00 },
     { 0x7f, 0x8c },
     { 0x00, 0x2d },
-    { 0x30, 0x01 }, //   DRC Settings of band2:   attack: 1 ms, release: 100 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 100   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 100   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
+    { 0x30, 0x01 }, //   DRC Settings of band2:   attack: 1 ms, release: 100 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 1   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 1   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
     { 0x31, 0x53 },
     { 0x32, 0x8f },
     { 0x33, 0xcc },
@@ -1182,3 +1158,7 @@ cfg_reg registers[] = {
     { 0x78, 0x80 },
 
 };
+
+#ifdef __cplusplus
+}
+#endif

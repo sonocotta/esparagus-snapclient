@@ -1,49 +1,25 @@
-typedef unsigned char cfg_u8;
-typedef struct {
-    cfg_u8 offset;
-    cfg_u8 value;
-} cfg_reg;
+#pragma once
+
+#include "../include/tas5805m_cfg.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define CFG_META_SWITCH (255)
-#define CFG_META_DELAY  (254)
-#define CFG_META_BURST  (253)
+#define CFG_META_DELAY (254)
+#define CFG_META_BURST (253)
+#define CFG_END_1 (0Xaa)
+#define CFG_END_2 (0Xcc)
+#define CFG_END_3 (0Xee)
 
-/* Example C code */
-/*
-    // Externally implemented function that can write n-bytes to the device
-    // PCM51xx and TAS5766 targets require the high bit (0x80) of the I2C register to be set on multiple writes.
-    // Refer to the device data sheet for more information.
-    extern int i2c_write(unsigned char *data, int n);
-    // Externally implemented function that delays execution by n milliseconds
-    extern int delay(int n);
-    // Example implementation.  Call like:
-    //     transmit_registers(registers, sizeof(registers)/sizeof(registers[0]));
-    void transmit_registers(cfg_reg *r, int n)
-    {
-        int i = 0;
-        while (i < n) {
-            switch (r[i].command) {
-            case CFG_META_SWITCH:
-                // Used in legacy applications.  Ignored here.
-                break;
-            case CFG_META_DELAY:
-                delay(r[i].param);
-                break;
-            case CFG_META_BURST:
-                i2c_write((unsigned char *)&r[i+1], r[i].param);
-                i +=  (r[i].param / 2) + 1;
-                break;
-            default:
-                i2c_write((unsigned char *)&r[i], 2);
-                break;
-            }
-            i++;
-        }
-    }
- */
+typedef struct {
+  uint8_t offset;
+  uint8_t value;
+} tas5805m_cfg_reg_t;
 
-cfg_reg registers[] = {
-//RESET
+static const tas5805m_cfg_reg_t tas5805m_registers[] = {
+// RESET
     { 0x00, 0x00 },
     { 0x7f, 0x00 },
     { 0x03, 0x02 },
@@ -63,20 +39,20 @@ cfg_reg registers[] = {
     { 0x66, 0x87 }, //   EQReg
     { 0x7f, 0x8c },
     { 0x00, 0x29 },
-    { 0x18, 0x00 }, //  Input Mixer Left to left = -6 dB
-    { 0x19, 0x40 },
-    { 0x1a, 0x26 },
-    { 0x1b, 0xe7 },
-    { 0x1c, 0x00 }, //  Input Mixer Right to left = -6 dB
-    { 0x1d, 0x40 },
-    { 0x1e, 0x26 },
-    { 0x1f, 0xe7 },
+    { 0x18, 0x00 }, //  Input Mixer Left to left = 0 dB
+    { 0x19, 0x80 },
+    { 0x1a, 0x00 },
+    { 0x1b, 0x00 },
+    { 0x1c, 0x00 }, //  Input Mixer Right to left = -110 dB
+    { 0x1d, 0x00 },
+    { 0x1e, 0x00 },
+    { 0x1f, 0x00 },
     { 0x20, 0x00 }, //  Input Mixer Left to right = -110 dB
     { 0x21, 0x00 },
     { 0x22, 0x00 },
     { 0x23, 0x00 },
-    { 0x24, 0x00 }, //  Input Mixer Right to right = -110 dB
-    { 0x25, 0x00 },
+    { 0x24, 0x00 }, //  Input Mixer Right to right = 0 dB
+    { 0x25, 0x80 },
     { 0x26, 0x00 },
     { 0x27, 0x00 },
     { 0x00, 0x2a },
@@ -117,12 +93,12 @@ cfg_reg registers[] = {
     { 0x21, 0x00 },
     { 0x22, 0x00 },
     { 0x23, 0x00 },
-    { 0x28, 0x00 }, //  Output Crossbar Left to Amp Right = 0 dB
-    { 0x29, 0x80 },
+    { 0x28, 0x00 }, //  Output Crossbar Left to Amp Right = -110 dB
+    { 0x29, 0x00 },
     { 0x2a, 0x00 },
     { 0x2b, 0x00 },
-    { 0x2c, 0x00 }, //  Output Crossbar Right to Amp Right = -110 dB
-    { 0x2d, 0x00 },
+    { 0x2c, 0x00 }, //  Output Crossbar Right to Amp Right = 0 dB
+    { 0x2d, 0x80 },
     { 0x2e, 0x00 },
     { 0x2f, 0x00 },
     { 0x34, 0x00 }, //  Output Crossbar Left to I2S Left = 0 dB
@@ -133,12 +109,12 @@ cfg_reg registers[] = {
     { 0x39, 0x00 },
     { 0x3a, 0x00 },
     { 0x3b, 0x00 },
-    { 0x48, 0x00 }, //  Output Crossbar Left to I2S Right = 0 dB
-    { 0x49, 0x80 },
+    { 0x48, 0x00 }, //  Output Crossbar Left to I2S Right = -110 dB
+    { 0x49, 0x00 },
     { 0x4a, 0x00 },
     { 0x4b, 0x00 },
-    { 0x4c, 0x00 }, //  Output Crossbar Right to I2S Right = -110 dB
-    { 0x4d, 0x00 },
+    { 0x4c, 0x00 }, //  Output Crossbar Right to I2S Right = 0 dB
+    { 0x4d, 0x80 },
     { 0x4e, 0x00 },
     { 0x4f, 0x00 },
     { 0x5c, 0x00 }, //  AGL Release Rate: 0.001
@@ -1173,7 +1149,7 @@ cfg_reg registers[] = {
 //Register Tuning
     { 0x00, 0x00 },
     { 0x7f, 0x00 },
-    { 0x02, 0x04 },
+    { 0x02, 0x00 },
     { 0x30, 0x00 },
     { 0x4c, 0x30 },
     { 0x53, 0x00 },
@@ -1182,3 +1158,7 @@ cfg_reg registers[] = {
     { 0x78, 0x80 },
 
 };
+
+#ifdef __cplusplus
+}
+#endif

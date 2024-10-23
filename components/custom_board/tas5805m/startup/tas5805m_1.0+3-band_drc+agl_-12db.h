@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../include/tas5805m_cfg.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -34,7 +36,7 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x00, 0x01 },
     { 0x51, 0x05 },
     { 0x00, 0x00 },
-    { 0x66, 0x86 }, //   EQReg
+    { 0x66, 0x85 }, //   EQReg
     { 0x7f, 0x8c },
     { 0x00, 0x29 },
     { 0x18, 0x00 }, //  Input Mixer Left to left = -6 dB
@@ -123,11 +125,11 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x61, 0x89 },
     { 0x62, 0x37 },
     { 0x63, 0x4c },
-    { 0x64, 0x08 }, //  AGL Threshold: 0 dB
-    { 0x65, 0x00 },
-    { 0x66, 0x00 },
-    { 0x67, 0x00 },
-    { 0x68, 0x40 }, //  AGL OnOff: 0
+    { 0x64, 0x02 }, //  AGL Threshold: -12 dB
+    { 0x65, 0x02 },
+    { 0x66, 0x6f },
+    { 0x67, 0x31 },
+    { 0x68, 0xc0 }, //  AGL OnOff: 1
     { 0x69, 0x00 },
     { 0x6a, 0x00 },
     { 0x6b, 0x00 },
@@ -172,27 +174,27 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x00, 0x00 },
     { 0x7f, 0xaa },
     { 0x00, 0x24 },
-    { 0x18, 0x00 }, //  Biquad -  BQ1 Left   -     Filter: Low Pass-Chebyshev  Frequency: 60 Hz  QVal: 3  Bandwidth: 1000 Hz
+    { 0x18, 0x08 }, //  Biquad -  BQ1 Left   -     Filter: All Pass  Frequency: 1000 Hz  QVal: 0.71  Bandwidth: 1000 Hz
     { 0x19, 0x00 },
-    { 0x1a, 0x01 },
-    { 0x1b, 0xfb },
+    { 0x1a, 0x00 },
+    { 0x1b, 0x00 },
     { 0x1c, 0x00 },
     { 0x1d, 0x00 },
-    { 0x1e, 0x03 },
-    { 0x1f, 0xf7 },
+    { 0x1e, 0x00 },
+    { 0x1f, 0x00 },
     { 0x20, 0x00 },
     { 0x21, 0x00 },
-    { 0x22, 0x01 },
-    { 0x23, 0xfb },
-    { 0x24, 0x0f },
-    { 0x25, 0xf7 },
-    { 0x26, 0x27 },
-    { 0x27, 0xe0 },
-    { 0x28, 0xf8 },
-    { 0x29, 0x08 },
-    { 0x2a, 0xcf },
-    { 0x2b, 0x3b },
-    { 0x2c, 0x08 }, //  Biquad -  BQ2 Left   -     Filter: All Pass  Frequency: 1000 Hz  Gain: -12dB  QVal: 3  Bandwidth: 1000 Hz
+    { 0x22, 0x00 },
+    { 0x23, 0x00 },
+    { 0x24, 0x00 },
+    { 0x25, 0x00 },
+    { 0x26, 0x00 },
+    { 0x27, 0x00 },
+    { 0x28, 0x00 },
+    { 0x29, 0x00 },
+    { 0x2a, 0x00 },
+    { 0x2b, 0x00 },
+    { 0x2c, 0x08 }, //  Biquad -  BQ2 Left   -     Filter: All Pass  Frequency: 1000 Hz  QVal: 0.71  Bandwidth: 1000 Hz
     { 0x2d, 0x00 },
     { 0x2e, 0x00 },
     { 0x2f, 0x00 },
@@ -843,7 +845,7 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x00, 0x00 },
     { 0x7f, 0x8c },
     { 0x00, 0x2b },
-    { 0x34, 0x00 }, //   DRC Settings of band1:   attack: 25 ms, release: 50 ms, energy: 25 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 100   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 100   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
+    { 0x34, 0x00 }, //   DRC Settings of band1:   attack: 25 ms, release: 50 ms, energy: 25 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 1   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 1   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
     { 0x35, 0x0d },
     { 0x36, 0xa6 },
     { 0x37, 0x86 },
@@ -884,7 +886,7 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x5a, 0x00 },
     { 0x5b, 0x00 },
     { 0x00, 0x2d },
-    { 0x58, 0x01 }, //   DRC Settings of band3:   attack: 1 ms, release: 10 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 100   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 100   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
+    { 0x58, 0x01 }, //   DRC Settings of band3:   attack: 1 ms, release: 10 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 1   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 1   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
     { 0x59, 0x53 },
     { 0x5a, 0x8f },
     { 0x5b, 0xcc },
@@ -1012,7 +1014,7 @@ static const tas5805m_cfg_reg_t tas5805m_registers[] = {
     { 0x00, 0x00 },
     { 0x7f, 0x8c },
     { 0x00, 0x2d },
-    { 0x30, 0x01 }, //   DRC Settings of band2:   attack: 1 ms, release: 100 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 100   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 100   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
+    { 0x30, 0x01 }, //   DRC Settings of band2:   attack: 1 ms, release: 100 ms, energy: 1 ms, Region1 - Threshold: -124 dB, Offset: 0 dB, Ratio: 1   Region2 - Threshold: -60 dB, Offset: 0 dB, Ratio: 1   Region3 - Threshold: 0 dB, Offset: 0 dB, Ratio: 100
     { 0x31, 0x53 },
     { 0x32, 0x8f },
     { 0x33, 0xcc },
