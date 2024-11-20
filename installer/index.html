@@ -21,7 +21,6 @@
         /* Add this CSS to your existing styles */
         body,
         html {
-            height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -33,7 +32,7 @@
         }
 
         .footer {
-            position: sticky;
+            position: relative;
             bottom: 0;
             width: 100%;
         }
@@ -82,15 +81,44 @@
         .carousel-control.active {
             background-color: #333;
         }
+
+        #toc {
+            position: fixed; /* Keeps it in place on scroll */
+            top: 0; /* Adjust vertical position */
+            right: 0; /* Sticks to the left */
+            width: 300px; /* Set a fixed width */
+            overflow-y: auto; /* Add vertical scrollbar if content overflows */
+            height: 100vh; /* Makes TOC fill viewport height */
+            padding: 10px;
+            background-color: #f0f0f0; /* Optional: add background color */
+            border-right: 1px solid #ddd; /* Optional: add border */
+        }
+
+        #toc a {
+            display: block;  /* Makes each <a> a block element */
+        }
+
+        #main-content { /* Prevents content from being hidden behind the TOC */
+            margin-left: 210px; /* Adjust to accommodate TOC width + padding + border */
+        }
     </style>
 </head>
 
 <body>
-    <div class="container" style="height: 100%;" x-data="{ groups: [] }"
-        x-init="fetch('artifacts/devices.json')
+    <div class="container" id="main-content" style="height: 100%;" x-data="{ groups: [] }"
+    x-init="
+            fetch('artifacts/devices.json')
             .then(response => response.json())
             .then(data => groups = data)
-            .catch(error => console.error('Error loading devices:', error));">
+            .catch(error => console.error('Error loading devices:', error));
+        ">
+
+        <div id="toc" class="d-none d-xxl-block">
+            <h3>Table of Contents</h3>
+            <template x-for="item in groups" :key="item.id">
+                <a :href="'#' + item.id" x-text="item.title"></a>
+            </template>
+        </div>
 
         <div class="jumbotron">
             <h5 class="display-5">Snapcast Firmware flashing tool for ESP32-based audio boards</h5>
@@ -105,7 +133,7 @@
 
         <template x-for="group in groups" :key="group.title">
             <div>
-                <h3 x-text="group.title"></h3>
+                <h3 :id="group.id" x-text="group.title"></h3>
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                     <template x-for="(device, deviceIndex) in group.devices" :key="device.title">

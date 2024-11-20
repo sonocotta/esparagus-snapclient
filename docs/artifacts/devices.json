@@ -1,5 +1,6 @@
 [
   {
+    "id": "group-01",
     "title": "Espressif boards",
     "devices": [
       {
@@ -37,6 +38,40 @@
     ]
   },
   {
+    "id": "group-07",
+    "title": "Sonocotta ESP-Audio boards",
+    "devices": [
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/d025ef42-daa3-4ad0-aeec-6ddf309c267b",
+          "https://user-images.githubusercontent.com/5459747/225272052-c36d5b87-1b9a-439c-be69-94077135e72a.png"
+        ],
+        "title": "HiFi ESP / HiFi-ESP32",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esp-audio-dock/\">HiFi ESP</a> is a handy low cost media device that uses the legendary PCM5100 series DAC with supreme audio quality.",
+        "manifest": "artifacts/manifest-hifi-esp-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/7d351d02-7e7f-4974-9a12-ee353c239654",
+          "https://user-images.githubusercontent.com/5459747/225271977-fd333283-66f0-448f-b748-e0ac94e25680.png"
+        ],
+        "title": "ESP Audio Duo/ Loud-ESP32",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esp-audio-dock/\">ESP Audio Duo</a> is aimed to be paired with small-to-medium sized speakers in a small room. It uses a dual MAX98357 Hi-Fi DAC that will output 3W per speaker.",
+        "manifest": "artifacts/manifest-loud-esp-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "https://user-images.githubusercontent.com/5459747/225272110-9433ff86-8912-47c5-a9f2-12bd7a0fe5a0.png"
+        ],
+        "title": "Louder-ESP / Louder-ESP32",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32/\">Louder ESP</a> is a top-of-the-range model that uses modern highly capable TAS5805M DAC and is aimed to be paired with medium-to-large speaker systems. With 25W per channel stereo output it packs a punch and can easily enliven living quarters or dorm rooms.",
+        "manifest": "artifacts/manifest-louder-esp-latest.json"
+      }
+    ]
+  },
+  {
+    "id": "group-02",
     "title": "Sonocotta Esparagus boards",
     "devices": [
       {
@@ -60,12 +95,14 @@
     ]
   },
   {
-    "title": "Sonocotta boards: Louder-ESP32 (2.0)",
+    "id": "group-03",
+    "title": "Sonocotta boards with DSP: Louder-ESP32 (2.0)",
     "devices": [
       {
         "images": [
           "https://github.com/user-attachments/assets/7c6f6b64-39c4-486e-8c84-56f20c7a0f16",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Stereo 2.0",
         "description": "Flat STEREO mode with no processing",
@@ -74,7 +111,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/7c6f6b64-39c4-486e-8c84-56f20c7a0f16",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Stereo 2.0 + DRC",
         "description": "Flat STEREO mode with Dynamic Range Compression",
@@ -83,7 +121,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/7c6f6b64-39c4-486e-8c84-56f20c7a0f16",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Stereo 2.0 + AGL",
         "description": "Flat STEREO mode with Automatic Gain Limiter",
@@ -92,7 +131,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/7c6f6b64-39c4-486e-8c84-56f20c7a0f16",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Stereo 2.0 + DRC + AGL",
         "description": "Flat STEREO mode with both Dynamic Range Compression and Automatic Gain Limiter",
@@ -101,12 +141,14 @@
     ]
   },
   {
-    "title": "Sonocotta boards: Louder-ESP32 (1.0)",
+    "id": "group-04",
+    "title": "Sonocotta boards with DSP: Louder-ESP32 (1.0)",
     "devices": [
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Mono 1.0",
         "description": "Flat BRIDGED MONO mode with (L+R)/2 routing",
@@ -115,7 +157,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Mono 1.0 + DRC",
         "description": "Flat BRIDGED MONO mode with (L+R)/2 routing and Dynamic Range Compression",
@@ -124,7 +167,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Mono 1.0 + AGL",
         "description": "Flat BRIDGED MONO mode with (L+R)/2 routing and Automatic Gain Limiter",
@@ -133,7 +177,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Mono 1.0 + DRC + AGL",
         "description": "Flat BRIDGED MONO mode with (L+R)/2 routing, Dynamic Range Compression and Automatic Gain Limiter",
@@ -142,12 +187,14 @@
     ]
   },
   {
-    "title": "Sonocotta boards: Louder-ESP32 (0.1)",
+    "id": "group-05",
+    "title": "Sonocotta boards with DSP: Louder-ESP32 (0.1)",
     "devices": [
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Subwoofer 40 Hz",
         "description": "Subwoofer BRIDGED MONO mode with (L+R)/2 routing and 40 Hz cutout",
@@ -156,7 +203,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Subwoofer 60 Hz",
         "description": "Subwoofer BRIDGED MONO mode with (L+R)/2 routing and 60 Hz cutout",
@@ -165,7 +213,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Subwoofer 100 Hz",
         "description": "Subwoofer BRIDGED MONO mode with (L+R)/2 routing and 100 Hz cutout",
@@ -174,7 +223,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/0e489c93-c6b4-4c98-b0f8-5e1d46522d2c",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Subwoofer 100 Hz + AGL",
         "description": "Subwoofer BRIDGED MONO mode with (L+R)/2 routing, 100 Hz cutout and Automatic Gain Limiter",
@@ -183,12 +233,14 @@
     ]
   },
   {
-    "title": "Sonocotta boards: Louder-ESP32 (1.1)",
+    "id": "group-06",
+    "title": "Sonocotta boards with DSP: Louder-ESP32 (1.1)",
     "devices": [
       {
         "images": [
           "https://github.com/user-attachments/assets/3f2efb09-60c6-4ef2-9726-f131ebd2f34d",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Bi-Amp (M) 60Hz crossover",
         "description": "Bi-Amp MONO mode with (L+R)/2 routing and 60Hz crossover",
@@ -197,7 +249,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/3f2efb09-60c6-4ef2-9726-f131ebd2f34d",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Bi-Amp (L) 60Hz crossover",
         "description": "Bi-Amp MONO mode with LEFT channel only and 60Hz crossover",
@@ -206,7 +259,8 @@
       {
         "images": [
           "https://github.com/user-attachments/assets/3f2efb09-60c6-4ef2-9726-f131ebd2f34d",
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983"
+          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
+          "images/louder-esparagus.jpg"
         ],
         "title": "Bi-Amp (R) 60Hz crossover",
         "description": "Bi-Amp MONO mode with RIGHT channel only and 60Hz crossover",
@@ -215,37 +269,7 @@
     ]
   },
   {
-    "title": "Sonocotta ESP-Audio boards",
-    "devices": [
-      {
-        "images": [
-          "https://github.com/user-attachments/assets/d025ef42-daa3-4ad0-aeec-6ddf309c267b",
-          "https://user-images.githubusercontent.com/5459747/225272052-c36d5b87-1b9a-439c-be69-94077135e72a.png"
-        ],
-        "title": "HiFi ESP",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esp-audio-dock/\">HiFi ESP</a> is a handy low cost media device that uses the legendary PCM5100 series DAC with supreme audio quality.",
-        "manifest": "artifacts/manifest-hifi-esp-latest.json"
-      },
-      {
-        "images": [
-          "https://user-images.githubusercontent.com/5459747/225271977-fd333283-66f0-448f-b748-e0ac94e25680.png"
-        ],
-        "title": "ESP Audio Duo",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esp-audio-dock/\">ESP Audio Duo</a> is aimed to be paired with small-to-medium sized speakers in a small room. It uses a dual MAX98357 Hi-Fi DAC that will output 3W per speaker.",
-        "manifest": "artifacts/manifest-loud-esp-latest.json"
-      },
-      {
-        "images": [
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/46ea4f10-c363-4623-b5d6-29e1135e5983",
-          "https://user-images.githubusercontent.com/5459747/225272110-9433ff86-8912-47c5-a9f2-12bd7a0fe5a0.png"
-        ],
-        "title": "Louder-ESP",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32/\">Louder ESP</a> is a top-of-the-range model that uses modern highly capable TAS5805M DAC and is aimed to be paired with medium-to-large speaker systems. With 25W per channel stereo output it packs a punch and can easily enliven living quarters or dorm rooms.",
-        "manifest": "artifacts/manifest-louder-esp-latest.json"
-      }
-    ]
-  },
-  {
+    "id": "group-08",
     "title": "AI-Thinker Boards",
     "devices": [
       {
@@ -253,7 +277,7 @@
           "https://docs.ai-thinker.com/_media/esp32/esp32-audio-kit2.png"
         ],
         "title": "ESP32-Audio-kit (ES8388)",
-        "description": "<a href=\"https://docs.ai-thinker.com/en/esp32-audio-kit\">ESP32-Audio-kit</a> is a small audio development board developed by Ai-Thinker based on the ESP32-A1S module. Most audio peripherals are distributed on both sides of the development board. It supports TF card, headphone output, two microphone inputs and two speaker outputs. . It is convenient for developers to develop quickly.",
+        "description": "<a href=\"https://docs.ai-thinker.com/en/esp32-audio-kit\">ESP32-Audio-kit</a> is a small audio development board developed by Ai-Thinker based on the ESP32-A1S module. Most audio peripherals are distributed on both sides of the development board. It supports TF card, headphone output, two microphone inputs and two speaker outputs. It is convenient for developers to develop quickly.",
         "manifest": "artifacts/manifest-esp-ai-thinker-latest.json"
       }
     ]
