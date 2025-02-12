@@ -1,6 +1,6 @@
 {
     "name": "snapclient on the esp-ai-thinker",
-    "version": "2024-10-11",
+    "version": "2025-02-12",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
     "new_install_prompt_erase": true,
@@ -10,27 +10,27 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "esp-ai-thinker-snapclient-2024-10-11-bootloader.bin",
+                    "path": "esp-ai-thinker-snapclient-2025-02-12-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "esp-ai-thinker-snapclient-2024-10-11-partition-table.bin",
+                    "path": "esp-ai-thinker-snapclient-2025-02-12-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "esp-ai-thinker-snapclient-2024-10-11-ota_data_initial.bin",
+                    "path": "esp-ai-thinker-snapclient-2025-02-12-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "esp-ai-thinker-snapclient-2024-10-11-snapclient.bin",
+                    "path": "esp-ai-thinker-snapclient-2025-02-12-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "esp-ai-thinker-snapclient-2024-10-11-storage.bin",
+                    "path": "esp-ai-thinker-snapclient-2025-02-12-storage.bin",
                     "offset": "0x370000"
                 }
             ]
         }
     ],
-    "manifest_name": "manifest-esp-ai-thinker-2024-10-11.json"
+    "manifest_name": "manifest-esp-ai-thinker-2025-02-12.json"
 }
