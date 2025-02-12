@@ -49,6 +49,10 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config) {
     ESP_LOGE(TAG, "i2c port %d is not supported", port);
     return ESP_FAIL;
   }
+
+  ESP_LOGI(TAG, "I2C pins: sda=%d, scl=%d", 
+    i2c_config->sda_io_num, i2c_config->scl_io_num
+  );
   return ESP_OK;
 }
 
@@ -71,6 +75,10 @@ esp_err_t get_i2s_pins(i2s_port_t port, board_i2s_pin_t *i2s_config) {
     ESP_LOGE(TAG, "i2s port %d is not supported", port);
     return ESP_FAIL;
   }
+
+  ESP_LOGI(TAG, "I2S pins: mck=%d, bck=%d, ws=%d, dout=%d, din=%d", 
+    i2s_config->mck_io_num, i2s_config->bck_io_num, i2s_config->ws_io_num, i2s_config->data_out_num, i2s_config->data_in_num 
+  );
 
   return ESP_OK;
 }

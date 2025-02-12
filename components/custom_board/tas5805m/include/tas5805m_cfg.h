@@ -24,8 +24,7 @@
  *
  */
 
-#ifndef _TAS5805M_REG_CFG_
-#define _TAS5805M_REG_CFG_
+#pragma once
 
 #ifdef __cplusplus
 extern "C"
@@ -43,6 +42,7 @@ extern "C"
 #define I2C_TAS5805M_MASTER_NUM I2C_MASTER_NUM /*!< I2C port number for master dev */
 
 #define TAS5805M_ADDRESS 0x2D      /*!< 7-bit address with a 15k pull up resistor */
+
 
 /*!< GPIO used for !PDN pin */
 #ifdef CONFIG_IDF_TARGET_ESP32S3
@@ -97,4 +97,4 @@ extern "C"
 #define TAS5805M_PIN_CONTROL2_REGISTER 0x75
 #define TAS5805M_MISC_CONTROL_REGISTER 0x76
 #define TAS5805M_FAULT_CLEAR_REGISTER 0x78
-#endif
+
