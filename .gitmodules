@@ -10,3 +10,6 @@
 [submodule "components/improv_wifi/Improv-WiFi-Library"]
 	path = components/improv_wifi/Improv-WiFi-Library
 	url = https://github.com/jnthas/Improv-WiFi-Library.git
+[submodule "components/custom_board/tas5805m"]
+	path = components/custom_board/tas5805m
+	url = https://github.com/sonocotta/esp32-tas5805m-dac
