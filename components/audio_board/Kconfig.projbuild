@@ -176,54 +176,41 @@ menu "Audio Board"
 
 			choice DAC_TAS5805M_DSP
 				prompt "TAS5805M DSP configuration"
-				default DAC_TAS5805M_DSP_STEREO
+				default TAS5805M_DSP_STEREO
 				help
 					Select a DAC DSP settings, including mixer configuration, output mode, EQ, Loudness and AGL settings
 			 
-			config DAC_TAS5805M_DSP_STEREO
+			config TAS5805M_DSP_STEREO
 			 	bool "Flat STEREO mode with no processing"
-	                
-			config DAC_TAS5805M_DSP_STEREO_AGL
-				bool "Flat STEREO mode with Automatic Gain Limiter"
-				
-			config DAC_TAS5805M_DSP_STEREO_DRC
-				bool "Flat STEREO mode with Dynamic Range Compression"
-				
-			config DAC_TAS5805M_DSP_STEREO_DRC_AGL
-				bool "Flat STEREO mode with both Dynamic Range Compression and Automatic Gain Limiter"
-				
 
-			config DAC_TAS5805M_DSP_MONO
+			config TAS5805M_DSP_STEREO_LOUDNESS_1
+			 	bool "STEREO mode with following EQ settings: (+9db_20Hz)(-1Db_500Hz)(+3Db_8kHz)(+3Db_15kHz)"
+
+			config TAS5805M_DSP_STEREO_LOUDNESS_2
+			 	bool "STEREO mode with following EQ settings: (+9db_20Hz)(-3Db_500Hz)(+3Db_8kHz)(+3Db_15kHz)"
+
+			config TAS5805M_DSP_STEREO_LOUDNESS_3
+			 	bool "STEREO mode with following EQ settings: (+12db_30Hz)(-3Db_500Hz)(+3Db_8kHz)(+3Db_15kHz)"
+
+			config TAS5805M_DSP_MONO
 				bool "Flat BRIDGED MONO mode with (L+R)/2 routing"
 
-			config DAC_TAS5805M_DSP_MONO_AGL
-				bool "Flat BRIDGED MONO mode with (L+R)/2 routing and Automatic Gain Limiter"
-
-			config DAC_TAS5805M_DSP_MONO_DRC
-				bool "Flat BRIDGED MONO mode with (L+R)/2 routing and Dynamic Range Compression"
-
-			config DAC_TAS5805M_DSP_MONO_DRC_AGL
-				bool "Flat BRIDGED MONO mode with (L+R)/2 routing, Dynamic Range Compression and Automatic Gain Limiter"
-
-			config DAC_TAS5805M_DSP_SUBWOOFER_40
+			config TAS5805M_DSP_SUBWOOFER_40
 				bool "Subwoofer BRIDGED MONO mode with (L+R)/2 routing and 40 Hz cutout"
 
-			config DAC_TAS5805M_DSP_SUBWOOFER_60
+			config TAS5805M_DSP_SUBWOOFER_60
 				bool "Subwoofer BRIDGED MONO mode with (L+R)/2 routing and 60 Hz cutout"
 
-			config DAC_TAS5805M_DSP_SUBWOOFER_100
+			config TAS5805M_DSP_SUBWOOFER_100
 				bool "Subwoofer BRIDGED MONO mode with (L+R)/2 routing and 100 Hz cutout"
 
-			config DAC_TAS5805M_DSP_SUBWOOFER_100_AGL
-				bool "Subwoofer BRIDGED MONO mode with (L+R)/2 routing, 100 Hz cutout and Automatic Gain Limiter"
-			
-			config DAC_TAS5805M_DSP_BIAMP
+			config TAS5805M_DSP_BIAMP
 				bool "Bi-Amp MONO mode with (L+R)/2 routing and 60Hz crossover"
 
-			config DAC_TAS5805M_DSP_BIAMP_60_LEFT
+			config TAS5805M_DSP_BIAMP_60_LEFT
 				bool "Bi-Amp MONO mode with LEFT channel only and 60Hz crossover"
 
-			config DAC_TAS5805M_DSP_BIAMP_60_RIGHT
+			config TAS5805M_DSP_BIAMP_60_RIGHT
 				bool "Bi-Amp MONO mode with RIGHT channel only and 60Hz crossover"
 			
 			endchoice
