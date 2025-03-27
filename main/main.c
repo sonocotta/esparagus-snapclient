@@ -3038,9 +3038,8 @@ void app_main(void)
   // esp_log_level_set("i2s_common", ESP_LOG_DEBUG);
   esp_log_level_set("wifi", ESP_LOG_WARN);
   esp_log_level_set("wifi_init", ESP_LOG_WARN);
-  esp_log_level_set("wifi", ESP_LOG_WARN);
-  esp_log_level_set("wifi_init", ESP_LOG_WARN);
-
+  esp_log_level_set("TAS5805", ESP_LOG_DEBUG);
+  
 #if CONFIG_SNAPCLIENT_USE_INTERNAL_ETHERNET || \
     CONFIG_SNAPCLIENT_USE_SPI_ETHERNET
   // clang-format off

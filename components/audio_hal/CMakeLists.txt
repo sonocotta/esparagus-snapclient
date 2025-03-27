@@ -7,7 +7,7 @@ set(COMPONENT_ADD_INCLUDEDIRS ./include
                             ./driver/es7148
                             ./driver/es7210
                             ./driver/es7243e
-                            ./driver/tas5805m
+                            # ./driver/tas5805m
                             ./driver/include)
 IF (NOT ((CONFIG_IDF_TARGET STREQUAL "esp32c3") OR (CONFIG_IDF_TARGET STREQUAL "esp32c6")))
     list(APPEND COMPONENT_ADD_INCLUDEDIRS
@@ -32,7 +32,7 @@ set(COMPONENT_SRCS ./audio_hal.c
                     ./driver/es7148/es7148.c
                     ./driver/es7210/es7210.c
                     ./driver/es7243e/es7243e.c
-                    ./driver/tas5805m/tas5805m.c
+                    # ./driver/tas5805m/tas5805m.c
                     )
 
 IF (NOT ((CONFIG_IDF_TARGET STREQUAL "esp32c3") OR (CONFIG_IDF_TARGET STREQUAL "esp32c6")))

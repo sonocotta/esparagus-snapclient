@@ -45,10 +45,11 @@ if(CONFIG_AUDIO_BOARD_CUSTOM)
 	list(APPEND COMPONENT_ADD_INCLUDEDIRS ./max98357/include)
 	list(APPEND COMPONENT_SRCS ./max98357/max98357.c)
   endif()
+
   if(CONFIG_DAC_TAS5805M)
 	message(STATUS "Selected DAC is " CONFIG_DAC_TAS5805M)
-	list(APPEND COMPONENT_ADD_INCLUDEDIRS ./tas5805m/include)
-	list(APPEND COMPONENT_SRCS ./tas5805m/tas5805m.c)
+	list(APPEND COMPONENT_ADD_INCLUDEDIRS ./tas5805m/include ./tas5805m/adf)
+	list(APPEND COMPONENT_SRCS ./tas5805m/adf/tas5805m-adf.c ./tas5805m/src/tas5805m.c)
   endif()
 
   if(CONFIG_DAC_PT8211)

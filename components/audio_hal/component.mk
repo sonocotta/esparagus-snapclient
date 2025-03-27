@@ -17,8 +17,8 @@ COMPONENT_ADD_INCLUDEDIRS += ./driver/zl38063 ./driver/zl38063/api_lib ./driver/
 COMPONENT_SRCDIRS += ./driver/zl38063 ./driver/zl38063/api_lib ./driver/zl38063/example_apps ./driver/zl38063/firmware
 COMPONENT_ADD_LDFLAGS += -L$(COMPONENT_PATH)/driver/zl38063/firmware -lfirmware
 
-COMPONENT_ADD_INCLUDEDIRS += ./driver/tas5805m ./driver/es7148
-COMPONENT_SRCDIRS += ./driver/tas5805m ./driver/es7148
+# COMPONENT_ADD_INCLUDEDIRS += ./driver/tas5805m ./driver/es7148
+# COMPONENT_SRCDIRS += ./driver/tas5805m ./driver/es7148
 
 COMPONENT_ADD_INCLUDEDIRS += ./driver/es7210 ./driver/es8156 ./driver/es7243e
 COMPONENT_SRCDIRS += ./driver/es7210 ./driver/es8156 ./driver/es7243e
