@@ -1,6 +1,6 @@
 #
 # Automatically generated file. DO NOT EDIT.
-# Espressif IoT Development Framework (ESP-IDF) 5.1.1 Project Configuration
+# Espressif IoT Development Framework (ESP-IDF)  Project Configuration
 #
 CONFIG_SOC_BROWNOUT_RESET_SUPPORTED="Not determined"
 CONFIG_SOC_TWAI_BRP_DIV_SUPPORTED="Not determined"
@@ -344,7 +344,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 # Snapclient Configuration
 #
 CONFIG_SNAPSERVER_USE_MDNS=y
-CONFIG_SNAPCLIENT_NAME="louder-esp"
+CONFIG_SNAPCLIENT_NAME="loud-esp32"
 
 #
 # HTTP Server Setting
@@ -376,16 +376,16 @@ CONFIG_AUDIO_BOARD_CUSTOM=y
 # CONFIG_DAC_MA120 is not set
 # CONFIG_DAC_MA120X0 is not set
 # CONFIG_DAC_ADAU1961 is not set
-# CONFIG_DAC_MAX98357 is not set
-CONFIG_DAC_TAS5805M=y
+CONFIG_DAC_MAX98357=y
+# CONFIG_DAC_TAS5805M is not set
 # CONFIG_DAC_PT8211 is not set
 
 #
 # DAC I2C control interface
 #
 CONFIG_DAC_I2C_SDA=21
-CONFIG_DAC_I2C_SCL=27
-CONFIG_DAC_I2C_ADDR=0x2d
+CONFIG_DAC_I2C_SCL=22
+CONFIG_DAC_I2C_ADDR=0x20
 # end of DAC I2C control interface
 
 #
@@ -398,22 +398,6 @@ CONFIG_MASTER_I2S_DATAOUT_PIN=22
 # end of I2S master interface
 
 #
-# DAC DSP Mode
-#
-# CONFIG_TAS5805M_DSP_STEREO is not set
-# CONFIG_TAS5805M_DSP_STEREO_LOUDNESS_1 is not set
-# CONFIG_TAS5805M_DSP_STEREO_LOUDNESS_2 is not set
-# CONFIG_TAS5805M_DSP_STEREO_LOUDNESS_3 is not set
-# CONFIG_TAS5805M_DSP_MONO is not set
-# CONFIG_TAS5805M_DSP_SUBWOOFER_40 is not set
-# CONFIG_TAS5805M_DSP_SUBWOOFER_60 is not set
-# CONFIG_TAS5805M_DSP_SUBWOOFER_100 is not set
-# CONFIG_TAS5805M_DSP_BIAMP is not set
-# CONFIG_TAS5805M_DSP_BIAMP_60_LEFT is not set
-# CONFIG_TAS5805M_DSP_BIAMP_60_RIGHT is not set
-# end of DAC DSP Mode
-
-#
 # I2S slave interface
 #
 CONFIG_SLAVE_I2S_BCK_PIN=26
@@ -421,6 +405,12 @@ CONFIG_SLAVE_I2S_MCLK_PIN=0
 CONFIG_SLAVE_I2S_LRCK_PIN=25
 CONFIG_SLAVE_I2S_DATAOUT_PIN=5
 # end of I2S slave interface
+
+#
+# MAX98357 interface Configuration
+#
+CONFIG_MAX98357_MUTE_PIN=13
+# end of MAX98357 interface Configuration
 
 #
 # Logic-Level-Settings
@@ -435,7 +425,13 @@ CONFIG_SLAVE_I2S_DATAOUT_PIN=5
 #
 # ESP32 DSP processor config
 #
-# CONFIG_USE_DSP_PROCESSOR is not set
+CONFIG_USE_DSP_PROCESSOR=y
+# CONFIG_SNAPCLIENT_DSP_FLOW_STEREO is not set
+# CONFIG_SNAPCLIENT_DSP_FLOW_BASSBOOST is not set
+# CONFIG_SNAPCLIENT_DSP_FLOW_BIAMP is not set
+CONFIG_SNAPCLIENT_DSP_FLOW_BASS_TREBLE_EQ=y
+# CONFIG_USE_BIQUAD_ASM is not set
+CONFIG_SNAPCLIENT_USE_SOFT_VOL=y
 # end of ESP32 DSP processor config
 
 #
