@@ -38,6 +38,7 @@ jobs:
           
           echo Building $config
 
+          idf.py fullclean
           cp $config_file sdkconfig
           idf.py build
 
