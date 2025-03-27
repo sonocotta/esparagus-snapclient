@@ -211,14 +211,6 @@
       },
       {
         "images": [
-          "https://github.com/espressif/esp-adf/raw/master/docs/_static/esp32-korvo-du1906-v1.1.png"
-        ],
-        "title": "ESP32-Korvo-DU1906",
-        "description": "The core components of <a href=\"https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-korvo-du1906.html\">ESP32-Korvo-DU1906</a> include an ESP32-DU1906 Bluetooth/Wi-Fi audio module that reduces noise, eliminates echo, and implements beam forming and detection. ESP32-Korvo-DU1906 integrates power management, Bluetooth/Wi-Fi audio module, codec, power amplifier, etc",
-        "manifest": "artifacts/manifest-korvo-latest.json"
-      },
-      {
-        "images": [
           "https://github.com/espressif/esp-adf/raw/master/docs/_static/esp32-lyrat-v4.2-side.jpg"
         ],
         "title": "ESP32-LyraT v4.2",
