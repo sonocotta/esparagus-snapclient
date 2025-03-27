@@ -55,5 +55,3 @@ jobs:
           git add ./docs/artifacts
           git commit -m "Latest binaries by github-actions"
           git push origin HEAD:$GITHUB_REF
-
-          
