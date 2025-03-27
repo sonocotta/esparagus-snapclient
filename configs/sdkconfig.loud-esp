@@ -344,7 +344,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 # Snapclient Configuration
 #
 CONFIG_SNAPSERVER_USE_MDNS=y
-CONFIG_SNAPCLIENT_NAME="loud-esp32"
+CONFIG_SNAPCLIENT_NAME="loud-esp"
 
 #
 # HTTP Server Setting
