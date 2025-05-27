@@ -1010,7 +1010,7 @@ static void http_get_task(void *pvParameters)
 
     // init hello message
     hello_message.mac = mac_address;
-    hello_message.hostname = SNAPCAST_CLIENT_NAME;
+    sprinf(hello_message.hostname,"%s-%02X%02X%02X",SNAPCAST_CLIENT_NAME,base_mac[3],base_mac[4],base_mac[5])
     hello_message.version = (char *)VERSION_STRING;
     hello_message.client_name = "libsnapcast";
     hello_message.os = "esp32";
