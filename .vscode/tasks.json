@@ -8,6 +8,69 @@
             "type": "shell",
             "command": "docker run --rm -it -v ./snapclient:/project -v ./configs:/project/configs -w /project -v /dev:/dev --privileged espressif/idf:v5.1.1",
             "problemMatcher": []
+        },
+        {
+            "label": "Build All Configurations (Local)",
+            "type": "shell",
+            "command": "${workspaceFolder}/build-local.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}/snapclient"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "Build Single Configuration (Local)",
+            "type": "shell",
+            "command": "docker run --rm -v ${workspaceFolder}/snapclient:/project -v ${workspaceFolder}/configs:/project/configs -v ${workspaceFolder}/docs/artifacts:/project/artifacts -w /project espressif/idf:v5.1.1 /bin/bash -c '. /opt/esp/idf/export.sh && cp configs/sdkconfig.${input:configName} sdkconfig && idf.py build'",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}/snapclient"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "configName",
+            "type": "promptString",
+            "description": "Enter config name (e.g., louder-esp-2.0)",
+            "default": "louder-esp-2.0"
         }
     ]
 }
