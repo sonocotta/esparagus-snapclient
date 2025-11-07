@@ -1,0 +1,3 @@
+[submodule "snapclient"]
+	path = snapclient
+	url = https://github.com/CarlosDerSeher/snapclient
