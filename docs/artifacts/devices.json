@@ -184,7 +184,7 @@
           "https://user-images.githubusercontent.com/5459747/225272052-c36d5b87-1b9a-439c-be69-94077135e72a.png"
         ],
         "title": "HiFi ESP",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esp-audio-dock/\">HiFi ESP</a> is a handy low cost media device that uses the legendary PCM5100 series DAC with supreme audio quality.",
+        "description": "HiFi ESP is a handy low cost media device that uses the legendary PCM5100 series DAC with supreme audio quality.",
         "manifest": "artifacts/manifest-hifi-esp-latest.json"
       },
       {
@@ -192,7 +192,7 @@
           "https://user-images.githubusercontent.com/5459747/225271977-fd333283-66f0-448f-b748-e0ac94e25680.png"
         ],
         "title": "ESP Audio Duo",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esp-audio-dock/\">ESP Audio Duo</a> is aimed to be paired with small-to-medium sized speakers in a small room. It uses a dual MAX98357 Hi-Fi DAC that will output 3W per speaker.",
+        "description": "ESP Audio Duo is aimed to be paired with small-to-medium sized speakers in a small room. It uses a dual MAX98357 Hi-Fi DAC that will output 3W per speaker.",
         "manifest": "artifacts/manifest-loud-esp-latest.json"
       },
       {
@@ -200,8 +200,16 @@
           "https://user-images.githubusercontent.com/5459747/225272110-9433ff86-8912-47c5-a9f2-12bd7a0fe5a0.png"
         ],
         "title": "Louder-ESP",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32/\">Louder ESP</a> is a top-of-the-range model that uses modern highly capable TAS5805M DAC and is aimed to be paired with medium-to-large speaker systems. With 25W per channel stereo output it packs a punch and can easily enliven living quarters or dorm rooms.",
+        "description": "Louder ESP is a top-of-the-range model that uses modern highly capable TAS5805M DAC and is aimed to be paired with medium-to-large speaker systems. With 25W per channel stereo output it packs a punch and can easily enliven living quarters or dorm rooms.",
         "manifest": "artifacts/manifest-louder-esp-latest.json"
+      },     
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/fb6cd736-475e-430b-b656-0f7bd52e3ca6"
+        ],
+        "title": "Loud-ESP and Loud-ESP Mini",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/loud-esp\">Loud-ESP Kits</a> is a set of development boards designed to make audio development for the ESP platform easy and feature-rich.",
+        "manifest": "artifacts/manifest-loud-esp-latest.json"
       }
     ]
   },
