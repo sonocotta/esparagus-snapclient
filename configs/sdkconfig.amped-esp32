@@ -409,7 +409,7 @@ CONFIG_SLAVE_I2S_DATAOUT_PIN=5
 #
 # TI PCM5102A interface Configuration
 #
-CONFIG_PCM5102A_MUTE_PIN=255
+CONFIG_PCM5102A_MUTE_PIN=13
 # end of TI PCM5102A interface Configuration
 
 #

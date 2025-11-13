@@ -57,8 +57,10 @@ docker run --rm \
             echo \"Building: \$config\"
             echo '=========================================='
             
-            # Clean previous build
-            idf.py fullclean
+            # Clean previous build (remove build directory if it exists)
+            if [ -d \"build\" ]; then
+                rm -rf build
+            fi
             
             # Copy config
             cp \$config_file sdkconfig
