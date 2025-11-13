@@ -1,6 +1,6 @@
 {
     "name": "snapclient on the hifi-esp32",
-    "version": "2025-11-07",
+    "version": "2025-11-13",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
     "new_install_prompt_erase": true,
@@ -10,27 +10,27 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "binaries/hifi-esp32-snapclient-2025-11-07-bootloader.bin",
+                    "path": "binaries/hifi-esp32-snapclient-2025-11-13-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "binaries/hifi-esp32-snapclient-2025-11-07-partition-table.bin",
+                    "path": "binaries/hifi-esp32-snapclient-2025-11-13-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "binaries/hifi-esp32-snapclient-2025-11-07-ota_data_initial.bin",
+                    "path": "binaries/hifi-esp32-snapclient-2025-11-13-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "binaries/hifi-esp32-snapclient-2025-11-07-snapclient.bin",
+                    "path": "binaries/hifi-esp32-snapclient-2025-11-13-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "binaries/hifi-esp32-snapclient-2025-11-07-storage.bin",
+                    "path": "binaries/hifi-esp32-snapclient-2025-11-13-storage.bin",
                     "offset": "0x370000"
                 }
             ]
         }
     ],
-    "manifest_name": "manifest-hifi-esp32-2025-11-07.json"
+    "manifest_name": "manifest-hifi-esp32-2025-11-13.json"
 }
