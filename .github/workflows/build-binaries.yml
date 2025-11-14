@@ -1,0 +1,62 @@
+name: Build and commit snapcast binaries
+
+on:
+  push:
+    branches:
+    - 'features/**'
+    paths-ignore:
+    - 'installer/**'
+    - 'doc/**'
+    - 'docs/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+        image: espressif/idf:v5.1.1
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - run: |
+        git config --global --add safe.directory $GITHUB_WORKSPACE
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+    - run: |
+        datestring=$(date '+%Y-%m-%d')
+        . $IDF_PATH/export.sh 
+        
+        cd snapclient
+        
+        for config_file in ../configs/sdkconfig.*; do
+          config=${config_file#../configs/sdkconfig.}
+          if [[ "$config" == "old" ]]; then
+            continue
+          fi
+          
+          echo Building $config
+
+          idf.py fullclean
+          cp $config_file sdkconfig
+          idf.py build
+
+          cp build/snapclient.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-snapclient.bin
+          cp build/storage.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-storage.bin
+          cp build/ota_data_initial.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-ota_data_initial.bin
+          cp build/bootloader/bootloader.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-bootloader.bin
+          cp build/partition_table/partition-table.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-partition-table.bin
+
+          sed -e "s/latest/$datestring/g" ../docs/artifacts/templates/manifest-$config-template.json > ../docs/artifacts/manifest-$config-latest.json
+        done 
+    
+    - run: |
+          git add ./docs/artifacts
+          git commit -m "Latest binaries by github-actions"
+          git push origin HEAD:$GITHUB_REF

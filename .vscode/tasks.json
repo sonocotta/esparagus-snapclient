@@ -1,0 +1,163 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start docker container for build",
+            "type": "shell",
+            "command": "docker run --rm -it -v ./snapclient:/project -v ./configs:/project/configs -w /project -v /dev:/dev --privileged espressif/idf:v5.1.1",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build All Configurations (Local)",
+            "type": "shell",
+            "command": "${workspaceFolder}/build-local.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/snapclient"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "Build Single Configuration (Local)",
+            "type": "shell",
+            "command": "docker run --rm -v ${workspaceFolder}/snapclient:/project -v ${workspaceFolder}/configs:/project/configs -v ${workspaceFolder}/docs/artifacts:/project/artifacts -w /project espressif/idf:v5.1.1 /bin/bash -c '. /opt/esp/idf/export.sh && cp configs/sdkconfig.${input:configName} sdkconfig && idf.py build'",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/snapclient"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "Serve HTML (Local)",
+            "type": "shell",
+            "command": "python3 -m http.server 8000 --directory \"${workspaceFolder}/snapclient/html\"",
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": [
+                    {
+                        "regexp": ".*"
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Serving HTTP"
+                }
+            }
+        },
+        {
+            "label": "Open HTML in Browser",
+            "type": "shell",
+            "command": "open http://localhost:8000",
+            "problemMatcher": []
+        },
+        {
+            "label": "Serve HTML and Open",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Serve HTML (Local)",
+                "Open HTML in Browser"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Serve Installer (Local)",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/installer"
+            },
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": [
+                    {
+                        "regexp": ".*"
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "(webpack compiled|Local:|ready)"
+                }
+            }
+        },
+        {
+            "label": "Open Installer in Browser",
+            "type": "shell",
+            "command": "open http://localhost:8001",
+            "problemMatcher": []
+        },
+        {
+            "label": "Serve Installer and Open",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Serve Installer (Local)",
+                "Open Installer in Browser"
+            ],
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "configName",
+            "type": "promptString",
+            "description": "Enter config name (e.g., louder-esp-2.0)",
+            "default": "louder-esp-2.0"
+        }
+    ]
+}
