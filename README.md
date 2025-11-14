@@ -95,8 +95,8 @@ A synchronous multiroom audio streaming client for [Snapcast](https://github.com
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/sonocotta/esparagus-snapclient-new.git
-   cd esparagus-snapclient-new
+   git clone https://github.com/sonocotta/esparagus-snapclient.git
+   cd esparagus-snapclient
    git submodule update --init --recursive
    ```
 
