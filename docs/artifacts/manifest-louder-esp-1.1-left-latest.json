@@ -1,6 +1,6 @@
 {
     "name": "snapclient on the louder-esp-1.1-left",
-    "version": "2025-11-14",
+    "version": "2025-11-16",
     "home_assistant_domain": "media_player",
     "funding_url": "https://esphome.io/guides/supporters.html",
     "new_install_prompt_erase": true,
@@ -10,27 +10,27 @@
             "chipFamily": "ESP32",
             "parts": [
                 {
-                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-14-bootloader.bin",
+                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-16-bootloader.bin",
                     "offset": "0x1000"
                 },
                 {
-                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-14-partition-table.bin",
+                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-16-partition-table.bin",
                     "offset": "0x8000"
                 },
                 {
-                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-14-ota_data_initial.bin",
+                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-16-ota_data_initial.bin",
                     "offset": "0xd000"
                 },
                 {
-                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-14-snapclient.bin",
+                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-16-snapclient.bin",
                     "offset": "0x10000"
                 },
                 {
-                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-14-storage.bin",
+                    "path": "binaries/louder-esp-1.1-left-snapclient-2025-11-16-storage.bin",
                     "offset": "0x370000"
                 }
             ]
         }
     ],
-    "manifest_name": "manifest-louder-esp-1.1-left-2025-11-14.json"
+    "manifest_name": "manifest-louder-esp-1.1-left-2025-11-16.json"
 }

@@ -115,7 +115,7 @@
 
         <div id="toc" class="d-none d-xxl-block">
             <h3>Table of Contents</h3>
-            <template x-for="item in groups" :key="item.id">
+            <template x-for="item in groups.filter(g => g.display === true)" :key="item.id">
                 <a :href="'#' + item.id" x-text="item.title"></a>
             </template>
         </div>
@@ -131,7 +131,7 @@
                 support for improv-wifi-serial</p>
         </div>
 
-        <template x-for="group in groups" :key="group.title">
+        <template x-for="group in groups.filter(g => g.display === true)" :key="group.title">
             <div>
                 <h3 :id="group.id" x-text="group.title"></h3>
 

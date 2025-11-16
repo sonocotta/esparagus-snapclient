@@ -1,6 +1,7 @@
 [
   {
     "id": "group-02",
+    "display": true,
     "title": "Sonocotta Esparagus boards",
     "devices": [
       {
@@ -33,6 +34,7 @@
   },
   {
     "id": "group-04",
+    "display": true,
     "title": "Sonocotta ESP32 Audio boards",
     "devices": [
       {
@@ -61,7 +63,7 @@
       },
       {
         "images": [
-          "https://github.com/sonocotta/esp32-audio-dock/assets/5459747/e60cadb6-ace1-4141-92a5-171c640dc8ac"
+          "https://github.com/user-attachments/assets/1bca97a9-0cc7-4658-8ecc-b73894c7579e"
         ],
         "title": "Louder-ESP32",
         "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32\">Louder-ESP32</a> is a reviewed design on the Louder-ESP model, that includes onboard WROVER module with external Wifi antenna. It dramatically improved WiFi perception while usage of the WROVER module maintains lower device cost.",
@@ -70,7 +72,47 @@
     ]
   },
   {
+    "id": "group-09",
+    "display": true,
+    "title": "Sonocotta ESP32-S3 Audio boards",
+    "devices": [
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/6f0482a2-7e08-475c-b6f0-0fe631a8e2f4"
+        ],
+          "title": "HiFi-ESP32-S3",
+          "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32\">HiFi-ESP32-S3</a> is an ESP32-S3 version of the HiFi-ESP32. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+          "manifest": "artifacts/manifest-hifi-esp32s3-latest.json"
+        },
+        {
+          "images": [
+            "https://github.com/user-attachments/assets/84f3732c-cb69-4689-89ab-f31cbbc4554e"
+          ],
+          "title": "Esparagus Echo",
+          "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-echo\">Esparagus Echo</a> is a series of two ESP32-S3-based voice control edge devices",
+          "manifest": "artifacts/manifest-esparagus-echo-s3-latest.json"
+        },
+        {
+          "images": [
+              "https://github.com/user-attachments/assets/447a628c-9225-4beb-b8cc-054cc1d1a20d"
+          ],
+          "title": "Amped-ESP32-S3",
+          "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32\">Amped-ESP32-S3</a> is an ESP32-S3 version of the Amped-ESP32. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+          "manifest": "artifacts/manifest-amped-esp32s3-latest.json"
+        },
+        {
+          "images": [
+            "https://github.com/user-attachments/assets/0b143999-959b-4a2a-af37-deddfa07670d"
+          ],
+          "title": "Louder-ESP32-S3",
+          "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32\">Louder-ESP32-S3</a> is an ESP32-S3 version of the Louder-ESP32. It is a top-of-the-range model that uses modern highly capable TAS5805M DAC. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+          "manifest": "artifacts/manifest-louder-esp32s3-latest.json"
+        }
+    ]
+  },
+  {
     "id": "group-03",
+    "display": false,
     "title": "Sonocotta TAS5805M boards (Louder-ESP32 / Louder-Esparagus): Stereo Mode",
     "devices": [
       {
@@ -109,6 +151,7 @@
   },
   {
     "id": "group-05",
+    "display": false,
     "title": "Sonocotta TAS5805M boards (Louder-ESP32 / Louder-Esparagus): Bridged Mode",
     "devices": [
       {
@@ -147,6 +190,7 @@
   },
   {
     "id": "group-06",
+    "display": false,
     "title": "Sonocotta TAS5805M boards (Louder-ESP32 / Louder-Esparagus): Bi-Amp Mode",
     "devices": [
       {
@@ -177,6 +221,7 @@
   },
   {
     "id": "group-07",
+    "display": true,
     "title": "Sonocotta ESP-Audio legacy boards",
     "devices": [
       {
@@ -215,6 +260,7 @@
   },
   {
     "id": "group-01",
+    "display": true,
     "title": "Espressif boards",
     "devices": [
       {
@@ -245,11 +291,12 @@
   },
   {
     "id": "group-08",
+    "display": true,
     "title": "AI-Thinker Boards",
     "devices": [
       {
         "images": [
-          "https://docs.ai-thinker.com/_media/esp32/esp32-audio-kit2.png"
+          "https://vdoc.ai-thinker.com/_media/esp32/esp32-audio-kit2.png"
         ],
         "title": "ESP32-Audio-kit (ES8388)",
         "description": "<a href=\"https://docs.ai-thinker.com/en/esp32-audio-kit\">ESP32-Audio-kit</a> is a small audio development board developed by Ai-Thinker based on the ESP32-A1S module. Most audio peripherals are distributed on both sides of the development board. It supports TF card, headphone output, two microphone inputs and two speaker outputs. It is convenient for developers to develop quickly.",

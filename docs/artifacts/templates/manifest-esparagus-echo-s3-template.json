@@ -1,0 +1,36 @@
+{
+    "name": "snapclient on the esparagus-echo",
+    "version": "latest",
+    "home_assistant_domain": "media_player",
+    "funding_url": "https://esphome.io/guides/supporters.html",
+    "new_install_prompt_erase": true,
+    "new_install_improv_wait_time": 20,
+    "builds": [
+        {
+            "chipFamily": "ESP32-S3",
+            "parts": [
+                {
+                    "path": "binaries/esparagus-echo-s3-snapclient-latest-bootloader.bin",
+                    "offset": "0x0"
+                },
+                {
+                    "path": "binaries/esparagus-echo-s3-snapclient-latest-partition-table.bin",
+                    "offset": "0x8000"
+                },
+                {
+                    "path": "binaries/esparagus-echo-s3-snapclient-latest-ota_data_initial.bin",
+                    "offset": "0xd000"
+                },
+                {
+                    "path": "binaries/esparagus-echo-s3-snapclient-latest-snapclient.bin",
+                    "offset": "0x10000"
+                },
+                {
+                    "path": "binaries/esparagus-echo-s3-snapclient-latest-storage.bin",
+                    "offset": "0x370000"
+                }
+            ]
+        }
+    ],
+    "manifest_name": "manifest-esparagus-echo-s3-latest.json"
+}

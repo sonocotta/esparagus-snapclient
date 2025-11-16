@@ -57,23 +57,21 @@ docker run --rm \
             echo \"Building: \$config\"
             echo '=========================================='
             
-            # Clean previous build (remove build directory if it exists)
-            if [ -d \"build\" ]; then
-                rm -rf build
-            fi
+            # Use separate build directory for each config
+            build_dir=\"build-\$config\"
             
             # Copy config
             cp \$config_file sdkconfig
             
-            # Build
-            idf.py build
+            # Build with custom build directory
+            idf.py -B \$build_dir build
             
             # Copy binaries to artifacts
-            cp build/snapclient.bin artifacts/binaries/\$config-snapclient-$datestring-snapclient.bin
-            cp build/storage.bin artifacts/binaries/\$config-snapclient-$datestring-storage.bin
-            cp build/ota_data_initial.bin artifacts/binaries/\$config-snapclient-$datestring-ota_data_initial.bin
-            cp build/bootloader/bootloader.bin artifacts/binaries/\$config-snapclient-$datestring-bootloader.bin
-            cp build/partition_table/partition-table.bin artifacts/binaries/\$config-snapclient-$datestring-partition-table.bin
+            cp \$build_dir/snapclient.bin artifacts/binaries/\$config-snapclient-$datestring-snapclient.bin
+            cp \$build_dir/storage.bin artifacts/binaries/\$config-snapclient-$datestring-storage.bin
+            cp \$build_dir/ota_data_initial.bin artifacts/binaries/\$config-snapclient-$datestring-ota_data_initial.bin
+            cp \$build_dir/bootloader/bootloader.bin artifacts/binaries/\$config-snapclient-$datestring-bootloader.bin
+            cp \$build_dir/partition_table/partition-table.bin artifacts/binaries/\$config-snapclient-$datestring-partition-table.bin
             
             echo \"✓ Build completed for \$config\"
             echo ''
