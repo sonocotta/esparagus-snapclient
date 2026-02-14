@@ -6,14 +6,93 @@ on:
     - 'features/**'
     paths-ignore:
     - 'installer/**'
-    - 'doc/**'
     - 'docs/**'
+    - '.github/**'
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      datestring: ${{ steps.date.outputs.datestring }}
+      configs: ${{ steps.configs.outputs.matrix }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Get datestring
+      id: date
+      run: echo "datestring=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+      
+    - name: Generate config matrix
+      id: configs
+      run: |
+        CONFIGS=$(ls configs/sdkconfig.* | grep -v sdkconfig.old | xargs -n1 basename | sed 's/sdkconfig\.//' | jq -R -s -c 'split("\n")[:-1]')
+        echo "matrix=$CONFIGS" >> $GITHUB_OUTPUT
+
   build:
+    needs: prepare
     runs-on: ubuntu-latest
     container:
-        image: espressif/idf:v5.1.1
+      image: espressif/idf:v5.1.1
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [
+          "amped-esp32",
+          "amped-esp32s3",
+          "amped-esparagus",
+          "esp-ai-thinker",
+          "esparagus-echo-s3",
+          "hifi-esp",
+          "hifi-esp32",
+          "hifi-esp32s3",
+          "hifi-esparagus",
+          "loud-esp",
+          "loud-esp32",
+          "loud-esparagus",
+          "louder-esp",
+          "louder-esp32",
+          "louder-esp32s3",
+          "louder-esparagus",
+          "lyra-t-4.2",
+          "lyra-t-4.3",
+          "lyra-t-mini"
+        ]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Build ${{ matrix.config }}
+      run: |
+        . $IDF_PATH/export.sh 
+        
+        cd snapclient
+        
+        echo "Building ${{ matrix.config }}"
+        
+        cp ../configs/sdkconfig.${{ matrix.config }} sdkconfig
+        idf.py build
+        
+        # Prepare artifact directory
+        mkdir -p artifacts
+        cp build/snapclient.bin artifacts/snapclient.bin
+        cp build/storage.bin artifacts/storage.bin
+        cp build/ota_data_initial.bin artifacts/ota_data_initial.bin
+        cp build/bootloader/bootloader.bin artifacts/bootloader.bin
+        cp build/partition_table/partition-table.bin artifacts/partition-table.bin
+    
+    - name: Upload artifacts for ${{ matrix.config }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: binaries-${{ matrix.config }}
+        path: snapclient/artifacts/
+
+  finalize:
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     
@@ -21,42 +100,58 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        submodules: 'recursive'
         token: ${{ secrets.GITHUB_TOKEN }}
-
-    - run: |
+        
+    - name: Configure git
+      run: |
         git config --global --add safe.directory $GITHUB_WORKSPACE
         git config user.name github-actions
         git config user.email github-actions@github.com
-
-    - run: |
-        datestring=$(date '+%Y-%m-%d')
-        . $IDF_PATH/export.sh 
+    
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: downloaded-artifacts
+    
+    - name: Organize binaries and generate manifests
+      env:
+        DATESTRING: ${{ needs.prepare.outputs.datestring }}
+      run: |
+        echo "Organizing binaries with datestring: $DATESTRING"
         
-        cd snapclient
-        
-        for config_file in ../configs/sdkconfig.*; do
-          config=${config_file#../configs/sdkconfig.}
-          if [[ "$config" == "old" ]]; then
+        # Process each config's artifacts
+        for artifact_dir in downloaded-artifacts/binaries-*; do
+          if [ ! -d "$artifact_dir" ]; then
             continue
           fi
           
-          echo Building $config
-
-          idf.py fullclean
-          cp $config_file sdkconfig
-          idf.py build
-
-          cp build/snapclient.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-snapclient.bin
-          cp build/storage.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-storage.bin
-          cp build/ota_data_initial.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-ota_data_initial.bin
-          cp build/bootloader/bootloader.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-bootloader.bin
-          cp build/partition_table/partition-table.bin ../docs/artifacts/binaries/$config-snapclient-$datestring-partition-table.bin
-
-          sed -e "s/latest/$datestring/g" ../docs/artifacts/templates/manifest-$config-template.json > ../docs/artifacts/manifest-$config-latest.json
-        done 
+          config=$(basename "$artifact_dir" | sed 's/binaries-//')
+          echo "Processing $config"
+          
+          # Copy binaries with datestring naming
+          cp "$artifact_dir/snapclient.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-snapclient.bin"
+          cp "$artifact_dir/ota_data_initial.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-ota_data_initial.bin"
+          cp "$artifact_dir/bootloader.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-bootloader.bin"
+          cp "$artifact_dir/partition-table.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-partition-table.bin"
+          cp "$artifact_dir/storage.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-storage.bin"
+          
+          # Generate manifest from template
+          if [ -f "docs/artifacts/templates/manifest-${config}-template.json" ]; then
+            sed -e "s/latest/$DATESTRING/g" "docs/artifacts/templates/manifest-${config}-template.json" > "docs/artifacts/manifest-${config}-latest.json"
+            echo "Generated manifest for $config"
+          else
+            echo "Warning: Template not found for $config"
+          fi
+        done
+        
+        echo "All binaries organized and manifests generated"
     
-    - run: |
-          git add ./docs/artifacts
-          git commit -m "Latest binaries by github-actions"
+    - name: Commit and push
+      run: |
+        git add ./docs/artifacts
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Latest binaries by github-actions (${{ needs.prepare.outputs.datestring }})"
           git push origin HEAD:$GITHUB_REF
+        fi

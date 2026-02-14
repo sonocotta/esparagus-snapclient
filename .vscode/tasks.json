@@ -4,19 +4,41 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "start docker container for build",
+            "label": "Start Docker Container for Build",
             "type": "shell",
-            "command": "docker run --rm -it -v ./snapclient:/project -v ./configs:/project/configs -w /project -v /dev:/dev --privileged espressif/idf:v5.1.1",
+            "command": "docker run --rm -it -v ${workspaceFolder}/snapclient:${workspaceFolder}/snapclient -v ${workspaceFolder}/configs:${workspaceFolder}/snapclient/configs -w ${workspaceFolder}/snapclient -v /dev:/dev --privileged espressif/idf:v5.1.1",
             "problemMatcher": []
+        },
+        {
+            "label": "Build, Flash and Monitor (Docker)",
+            "type": "shell",
+            "command": "docker run --rm -it -v ${workspaceFolder}/snapclient:${workspaceFolder}/snapclient -w ${workspaceFolder}/snapclient -v ${workspaceFolder}/configs:${workspaceFolder}/snapclient/configs -v /dev:/dev --privileged espressif/idf:v5.1.1 /bin/bash -c '. $IDF_PATH/export.sh && idf.py build flash monitor'",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
         },
         {
             "label": "Build All Configurations (Local)",
             "type": "shell",
             "command": "${workspaceFolder}/build-local.sh",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -71,46 +93,7 @@
             }
         },
         {
-            "label": "Serve HTML (Local)",
-            "type": "shell",
-            "command": "python3 -m http.server 8000 --directory \"${workspaceFolder}/snapclient/html\"",
-            "isBackground": true,
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "panel": "shared"
-            },
-            "problemMatcher": {
-                "owner": "custom",
-                "pattern": [
-                    {
-                        "regexp": ".*"
-                    }
-                ],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".*",
-                    "endsPattern": "Serving HTTP"
-                }
-            }
-        },
-        {
-            "label": "Open HTML in Browser",
-            "type": "shell",
-            "command": "open http://localhost:8000",
-            "problemMatcher": []
-        },
-        {
-            "label": "Serve HTML and Open",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "Serve HTML (Local)",
-                "Open HTML in Browser"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "label": "Serve Installer (Local)",
+            "label": "Run Installer (Debug)",
             "type": "shell",
             "command": "npm run dev",
             "options": {
@@ -121,36 +104,15 @@
                 "echo": true,
                 "reveal": "always",
                 "panel": "shared"
-            },
-            "problemMatcher": {
-                "owner": "custom",
-                "pattern": [
-                    {
-                        "regexp": ".*"
-                    }
-                ],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": ".*",
-                    "endsPattern": "(webpack compiled|Local:|ready)"
-                }
             }
         },
         {
-            "label": "Open Installer in Browser",
-            "type": "shell",
-            "command": "open http://localhost:8001",
-            "problemMatcher": []
-        },
-        {
-            "label": "Serve Installer and Open",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "Serve Installer (Local)",
-                "Open Installer in Browser"
-            ],
-            "problemMatcher": []
-        }
+			"label": "Serve Web Installer (Prod)",
+			"type": "shell",
+			"command": "python3 -m http.server 8008 -d docs",
+			"isBackground": true,
+			"problemMatcher": []
+		},
     ],
     "inputs": [
         {
