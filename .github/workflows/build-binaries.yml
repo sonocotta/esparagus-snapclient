@@ -132,6 +132,7 @@ jobs:
           cp "$artifact_dir/ota_data_initial.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-ota_data_initial.bin"
           cp "$artifact_dir/bootloader.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-bootloader.bin"
           cp "$artifact_dir/partition-table.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-partition-table.bin"
+          cp "$artifact_dir/storage.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-storage.bin"
           
           # Generate manifest from template
           if [ -f "docs/artifacts/templates/manifest-${config}-template.json" ]; then
