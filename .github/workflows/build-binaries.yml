@@ -79,6 +79,7 @@ jobs:
         # Prepare artifact directory
         mkdir -p artifacts
         cp build/snapclient.bin artifacts/snapclient.bin
+        cp build/storage.bin artifacts/storage.bin
         cp build/ota_data_initial.bin artifacts/ota_data_initial.bin
         cp build/bootloader/bootloader.bin artifacts/bootloader.bin
         cp build/partition_table/partition-table.bin artifacts/partition-table.bin
