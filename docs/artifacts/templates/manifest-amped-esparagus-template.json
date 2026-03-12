@@ -19,15 +19,11 @@
                 },
                 {
                     "path": "binaries/amped-esparagus-snapclient-latest-ota_data_initial.bin",
-                    "offset": "0xd000"
+                    "offset": "0x11000"
                 },
                 {
                     "path": "binaries/amped-esparagus-snapclient-latest-snapclient.bin",
-                    "offset": "0x10000"
-                },
-                {
-                    "path": "binaries/amped-esparagus-snapclient-latest-storage.bin",
-                    "offset": "0x370000"
+                    "offset": "0x20000"
                 }
             ]
         }
