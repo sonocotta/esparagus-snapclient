@@ -33,7 +33,7 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     container:
-      image: espressif/idf:v5.1.1
+      image: espressif/idf:v5.5.1
     strategy:
       fail-fast: false
       matrix:
