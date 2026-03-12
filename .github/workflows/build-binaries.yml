@@ -6,7 +6,7 @@ on:
     - 'features/**'
     paths-ignore:
     - 'installer/**'
-    - 'docs/**'
+    - 'doc/**'
     - '.github/**'
 
 jobs:
@@ -45,7 +45,11 @@ jobs:
           "esparagus-echo-s3",
           "hifi-esp",
           "hifi-esp32",
+          "hifi-esp32-plus-j0",
+          "hifi-esp32-plus-j1",
           "hifi-esp32s3",
+          "hifi-esp32s3-plus-h0",
+          "hifi-esp32s3-plus-h1",
           "hifi-esparagus",
           "loud-esp",
           "loud-esp32",
@@ -79,7 +83,6 @@ jobs:
         # Prepare artifact directory
         mkdir -p artifacts
         cp build/snapclient.bin artifacts/snapclient.bin
-        cp build/storage.bin artifacts/storage.bin
         cp build/ota_data_initial.bin artifacts/ota_data_initial.bin
         cp build/bootloader/bootloader.bin artifacts/bootloader.bin
         cp build/partition_table/partition-table.bin artifacts/partition-table.bin
@@ -133,7 +136,6 @@ jobs:
           cp "$artifact_dir/ota_data_initial.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-ota_data_initial.bin"
           cp "$artifact_dir/bootloader.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-bootloader.bin"
           cp "$artifact_dir/partition-table.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-partition-table.bin"
-          cp "$artifact_dir/storage.bin" "docs/artifacts/binaries/${config}-snapclient-${DATESTRING}-storage.bin"
           
           # Generate manifest from template
           if [ -f "docs/artifacts/templates/manifest-${config}-template.json" ]; then
