@@ -51,6 +51,7 @@ jobs:
           "hifi-esp32s3-plus-h0",
           "hifi-esp32s3-plus-h1",
           "hifi-esparagus",
+          "hifi-esparagus-s3",
           "loud-esp",
           "loud-esp32",
           "loud-esparagus",

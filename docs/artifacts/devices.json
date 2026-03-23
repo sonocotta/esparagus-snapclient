@@ -7,8 +7,14 @@
       {
         "images": ["images/hifi-esparagus.jpg"],
         "title": "HiFi Esparagus",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-hifi-medialink/\">Esparagus HiFi MediaLink</a> is a handy low cost media device that will upgrade your legacy audio system with cutting-edge internet streaming capabilities and enhance your audio experience. It exposes line level output that you can plug into a stereo amplifier. It uses the legendary PCM5100 series DAC with supreme audio quality.",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-hifi-medialink/\">HiFi Esparagus</a> is a handy, low-cost media devices that will upgrade your legacy audio system with internet streaming capabilities. It exposes line-level output that you can plug into active speakers, a stereo amplifier, or headphones. It uses the legendary PCM5100 series DAC with supreme audio quality",
         "manifest": "artifacts/manifest-hifi-esparagus-latest.json"
+      },
+      {
+        "images": ["https://github.com/user-attachments/assets/6bdf15d3-b4ed-4b35-9f51-b142dab5c45a"],
+        "title": "HiFi Esparagus S3",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-hifi-medialink/\">HiFi Esparagus S3</a> Recent addition - ESP32-S3 version - adds more capable CPU and more PSRAM for more headroom in streaming tasks",
+        "manifest": "artifacts/manifest-hifi-esparagus-s3-latest.json"
       },
       {
         "images": ["images/loud-esparagus.jpg"],
