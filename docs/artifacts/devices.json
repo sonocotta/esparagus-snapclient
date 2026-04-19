@@ -1,6 +1,6 @@
 [
   {
-    "id": "group-02",
+    "id": "group-01",
     "display": true,
     "title": "Sonocotta Esparagus boards",
     "devices": [
@@ -11,7 +11,9 @@
         "manifest": "artifacts/manifest-hifi-esparagus-latest.json"
       },
       {
-        "images": ["https://github.com/user-attachments/assets/6bdf15d3-b4ed-4b35-9f51-b142dab5c45a"],
+        "images": [
+          "https://github.com/user-attachments/assets/6bdf15d3-b4ed-4b35-9f51-b142dab5c45a"
+        ],
         "title": "HiFi Esparagus S3",
         "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-hifi-medialink/\">HiFi Esparagus S3</a> Recent addition - ESP32-S3 version - adds more capable CPU and more PSRAM for more headroom in streaming tasks",
         "manifest": "artifacts/manifest-hifi-esparagus-s3-latest.json"
@@ -30,18 +32,42 @@
       },
       {
         "images": [
-            "https://github.com/user-attachments/assets/e9481545-e98d-4d6a-b0eb-a993ab151dc8"
+          "https://github.com/user-attachments/assets/e9481545-e98d-4d6a-b0eb-a993ab151dc8"
         ],
         "title": "Amped-Esparagus",
         "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esparagus-media-center\">Amped Esparagus</a>, is a device based on PCM5100 HiFi DAC (just like HiFi Esparagus) but adds a powerful and efficient D-class amp (TPA3110D2) so it can drive speakers directly. It has similar power capabilities to the Louder Esparagus, but it is much simpler to set up and use, since this DAC doesn't need any configuration steps to get going, just a valid I2S audio stream.",
         "manifest": "artifacts/manifest-amped-esparagus-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/f6cafdb7-f3ef-4cc7-a60f-299406c5ee2e"
+        ],
+        "title": "Esparagus Audio Brick (ESP32)",
+        "description": "<a href=\"https://www.crowdsupply.com/sonocotta/esparagus-audio-brick\">Esparagus Audio Brick</a> is a compact, Hi-Fi-grade DAC with built-in amplifier. Designed for seamless integration with Home Assistant, it transforms any speaker into a smart, synchronized, and fully customizable audio system. With a built-in powerful DSP (15-band EQ, fault management, precise gain control to match given speaker, and more), and sustainable hardware built to last, the Esparagus Audio Brick grows with your smart home instead of becoming obsolete.",
+        "manifest": "artifacts/manifest-esparagus-audio-brick-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/f6cafdb7-f3ef-4cc7-a60f-299406c5ee2e"
+        ],
+        "title": "Esparagus Audio Brick (ESP32-S3)",
+        "description": "<a href=\"https://www.crowdsupply.com/sonocotta/esparagus-audio-brick\">Esparagus Audio Brick (ESP32-S3)</a> is ESP32-S3 version of the board. It has the same features and capabilities as the ESP32 version, but with a more powerful processor and more RAM. This gives little more headroom in audio streaming tasks.",
+        "manifest": "artifacts/manifest-esparagus-audio-brick-s3-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/84f3732c-cb69-4689-89ab-f31cbbc4554e"
+        ],
+        "title": "Esparagus Echo",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-echo\">Esparagus Echo</a> is a series of two ESP32-S3-based voice control edge devices",
+        "manifest": "artifacts/manifest-esparagus-echo-s3-latest.json"
       }
     ]
   },
   {
-    "id": "group-04",
+    "id": "group-02",
     "display": true,
-    "title": "Sonocotta ESP32 Audio boards",
+    "title": "HiFi-ESP32 boards",
     "devices": [
       {
         "images": [
@@ -69,12 +95,58 @@
       },
       {
         "images": [
+          "https://github.com/user-attachments/assets/6f0482a2-7e08-475c-b6f0-0fe631a8e2f4"
+        ],
+        "title": "HiFi-ESP32-S3",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32\">HiFi-ESP32-S3</a> is an ESP32-S3 version of the HiFi-ESP32. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+        "manifest": "artifacts/manifest-hifi-esp32s3-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/fefa3c37-62dd-4ffb-a6fa-cab602e6b5fb"
+        ],
+        "title": "HiFi-ESP32-S3-Plus (Rev H0)",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32-plus\">HiFi-ESP32-S3-Plus</a> is an ESP32-S3 version of the HiFi-ESP32-Plus. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+        "manifest": "artifacts/manifest-hifi-esp32s3-plus-h0-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/fefa3c37-62dd-4ffb-a6fa-cab602e6b5fb"
+        ],
+        "title": "HiFi-ESP32-S3-Plus (Rev H1+)",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32-plus\">HiFi-ESP32-S3-Plus</a> is an ESP32-S3 version of the HiFi-ESP32-Plus. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+        "manifest": "artifacts/manifest-hifi-esp32s3-plus-h1-latest.json"
+      }
+    ]
+  },
+  {
+    "id": "group-02",
+    "display": true,
+    "title": "Loud-ESP32 boards",
+    "devices": [
+      {
+        "images": [
           "https://github.com/user-attachments/assets/7d351d02-7e7f-4974-9a12-ee353c239654"
         ],
         "title": "Loud-ESP32",
         "description": "<a href=\"https://www.tindie.com/products/sonocotta/loud-esp32\">Loud-ESP32</a> is a reviewed design of the ESP Audio Duo model, that includes onboard WROVER module with external Wifi antenna. It dramatically improved WiFi perception while usage of the WROVER module maintains lower device cost.",
         "manifest": "artifacts/manifest-loud-esp32-latest.json"
       },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/e732f7a9-77e5-4182-b808-bf12ff35a8b7"
+        ],
+        "title": "Loud-ESP32-S3 Rev G+",
+        "description": "Latest revision of the <a href=\"https://www.tindie.com/products/sonocotta/loud-esp32/\">Loud-ESP32S3</a> boards use slightly different pinout to be aligned with other boards in the ESP32-S3 family.",
+        "manifest": "artifacts/manifest-loud-esp32s3-latest.json"
+      }
+    ]
+  },
+  {
+    "id": "group-03",
+    "display": true,
+    "title": "Louder-ESP32 boards",
+    "devices": [
       {
         "images": [
           "https://github.com/user-attachments/assets/1bca97a9-0cc7-4658-8ecc-b73894c7579e"
@@ -85,67 +157,67 @@
       },
       {
         "images": [
-            "https://github.com/user-attachments/assets/447a628c-9225-4beb-b8cc-054cc1d1a20d"
+          "https://github.com/user-attachments/assets/06745d0b-ee1d-48fb-9883-347d742ff5f1"
         ],
-        "title": "Amped-ESP32",
-        "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32\">Amped-ESP32</a> is an extension of the HiFi-ESP32 board, it adds a high quality D-class amp to the PCM5100 DAC. You can use either 3.5mm jack for line output (amp will be muted) or screw terminals to connect speakers.",
-        "manifest": "artifacts/manifest-amped-esp32-latest.json"
+        "title": "Louder-ESP32-Plus",
+        "description": "Reviewed design on the <a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-plus/\">Louder-ESP32-Plus</a> model includes newer and more capable TAS5825M DAC with more efiicient and more powerful output stage.",
+        "manifest": "artifacts/manifest-louder-esp32-plus-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/0b143999-959b-4a2a-af37-deddfa07670d"
+        ],
+        "title": "Louder-ESP32-S3",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32\">Louder-ESP32-S3</a> is an ESP32-S3 version of the Louder-ESP32. It is a top-of-the-range model that uses modern highly capable TAS5805M DAC. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+        "manifest": "artifacts/manifest-louder-esp32s3-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/06745d0b-ee1d-48fb-9883-347d742ff5f1"
+        ],
+        "title": "Louder-ESP32-S3-Plus",
+        "description": "Reviewed design on the <a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-plus/\">Louder-ESP32-Plus</a> model includes newer and more capable TAS5825M DAC with more efiicient and more powerful output stage.",
+        "manifest": "artifacts/manifest-louder-esp32s3-plus-latest.json"
       }
     ]
   },
   {
-    "id": "group-09",
+    "id": "group-05",
     "display": true,
-    "title": "Sonocotta ESP32-S3 Audio boards",
+    "title": "Amped-ESP32 boards",
     "devices": [
-        {
-          "images": [
-            "https://github.com/user-attachments/assets/6f0482a2-7e08-475c-b6f0-0fe631a8e2f4"
-          ],
-          "title": "HiFi-ESP32-S3",
-          "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32\">HiFi-ESP32-S3</a> is an ESP32-S3 version of the HiFi-ESP32. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
-          "manifest": "artifacts/manifest-hifi-esp32s3-latest.json"
-        },
-        {
-          "images": [
-            "https://github.com/user-attachments/assets/fefa3c37-62dd-4ffb-a6fa-cab602e6b5fb"
-          ],
-          "title": "HiFi-ESP32-S3-Plus (Rev H0)",
-          "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32-plus\">HiFi-ESP32-S3-Plus</a> is an ESP32-S3 version of the HiFi-ESP32-Plus. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
-          "manifest": "artifacts/manifest-hifi-esp32s3-plus-h0-latest.json"
-        },
-        {
-          "images": [
-            "https://github.com/user-attachments/assets/fefa3c37-62dd-4ffb-a6fa-cab602e6b5fb"
-          ],
-          "title": "HiFi-ESP32-S3-Plus (Rev H1+)",
-          "description": "<a href=\"https://www.tindie.com/products/sonocotta/hifi-esp32-plus\">HiFi-ESP32-S3-Plus</a> is an ESP32-S3 version of the HiFi-ESP32-Plus. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
-          "manifest": "artifacts/manifest-hifi-esp32s3-plus-h1-latest.json"
-        },
-        {
-          "images": [
-            "https://github.com/user-attachments/assets/84f3732c-cb69-4689-89ab-f31cbbc4554e"
-          ],
-          "title": "Esparagus Echo",
-          "description": "<a href=\"https://www.tindie.com/products/sonocotta/esparagus-echo\">Esparagus Echo</a> is a series of two ESP32-S3-based voice control edge devices",
-          "manifest": "artifacts/manifest-esparagus-echo-s3-latest.json"
-        },
-        {
-          "images": [
-            "https://github.com/user-attachments/assets/0b143999-959b-4a2a-af37-deddfa07670d"
-          ],
-          "title": "Louder-ESP32-S3",
-          "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32\">Louder-ESP32-S3</a> is an ESP32-S3 version of the Louder-ESP32. It is a top-of-the-range model that uses modern highly capable TAS5805M DAC. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
-          "manifest": "artifacts/manifest-louder-esp32s3-latest.json"
-        },
-        {
-          "images": [
-              "https://github.com/user-attachments/assets/72a99b07-283e-4d83-9f4a-e61bcd9a1a28"
-          ],
-          "title": "Amped-ESP32-S3",
-          "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32\">Amped-ESP32-S3</a> is an ESP32-S3 version of the Amped-ESP32. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
-          "manifest": "artifacts/manifest-amped-esp32s3-latest.json"
-        }
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/447a628c-9225-4beb-b8cc-054cc1d1a20d"
+        ],
+        "title": "Amped-ESP32",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32\">Amped-ESP32</a> is an extension of the HiFi-ESP32 board, it adds a high quality D-class amp to the PCM5100 DAC. You can use either 3.5mm jack for line output (amp will be muted) or screw terminals to connect speakers.",
+        "manifest": "artifacts/manifest-amped-esp32-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/7335b7cb-ccfe-45f8-bd14-0b8db077ff10"
+        ],
+        "title": "Amped-ESP32-Plus",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32-plus/\">Amped-ESP32-Plus</a> is an extension of the HiFi-ESP32-Plus board, it adds a high quality D-class TPA3128 amp to the PCM5122 DAC. You can use either 3.5mm jack for line output (amp will be muted) or screw terminals to connect speakers.",
+        "manifest": "artifacts/manifest-amped-esp32-plus-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/72a99b07-283e-4d83-9f4a-e61bcd9a1a28"
+        ],
+        "title": "Amped-ESP32-S3",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32\">Amped-ESP32-S3</a> is an ESP32-S3 version of the Amped-ESP32. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
+        "manifest": "artifacts/manifest-amped-esp32s3-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/2c334973-66e3-47f7-860d-f835607408c0"
+        ],
+        "title": "Amped-ESP32-S3-Plus",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/amped-esp32-plus/\">Amped-ESP32-Plus</a> is an extension of the HiFi-ESP32-Plus board, it adds a high quality D-class TPA3128 amp to the PCM5122 DAC. You can use either 3.5mm jack for line output (amp will be muted) or screw terminals to connect speakers.",
+        "manifest": "artifacts/manifest-amped-esp32s3-plus-latest.json"
+      }
     ]
   },
   {
@@ -176,7 +248,7 @@
         "title": "Louder-ESP",
         "description": "Louder ESP is a top-of-the-range model that uses modern highly capable TAS5805M DAC and is aimed to be paired with medium-to-large speaker systems. With 25W per channel stereo output it packs a punch and can easily enliven living quarters or dorm rooms.",
         "manifest": "artifacts/manifest-louder-esp-latest.json"
-      },     
+      },
       {
         "images": [
           "https://github.com/user-attachments/assets/fb6cd736-475e-430b-b656-0f7bd52e3ca6"
@@ -188,7 +260,7 @@
     ]
   },
   {
-    "id": "group-01",
+    "id": "group-00",
     "display": true,
     "title": "Espressif boards",
     "devices": [
