@@ -6,13 +6,13 @@
         {
             "label": "Start Docker Container for Build",
             "type": "shell",
-            "command": "docker run --rm -it -v ${workspaceFolder}/snapclient:${workspaceFolder}/snapclient -v ${workspaceFolder}/configs:${workspaceFolder}/snapclient/configs -w ${workspaceFolder}/snapclient -v /dev:/dev --privileged espressif/idf:v5.1.1",
+            "command": "docker run --rm -it -v ${workspaceFolder}/snapclient:${workspaceFolder}/snapclient -v ${workspaceFolder}/configs:${workspaceFolder}/snapclient/configs -w ${workspaceFolder}/snapclient -v /dev:/dev --privileged espressif/idf:v5.5.1",
             "problemMatcher": []
         },
         {
             "label": "Build, Flash and Monitor (Docker)",
             "type": "shell",
-            "command": "docker run --rm -it -v ${workspaceFolder}/snapclient:${workspaceFolder}/snapclient -w ${workspaceFolder}/snapclient -v ${workspaceFolder}/configs:${workspaceFolder}/snapclient/configs -v /dev:/dev --privileged espressif/idf:v5.1.1 /bin/bash -c '. $IDF_PATH/export.sh && idf.py build flash monitor'",
+            "command": "docker run --rm -it -v ${workspaceFolder}/snapclient:${workspaceFolder}/snapclient -w ${workspaceFolder}/snapclient -v ${workspaceFolder}/configs:${workspaceFolder}/snapclient/configs -v /dev:/dev --privileged espressif/idf:v5.5.1 /bin/bash -c '. $IDF_PATH/export.sh && idf.py build flash monitor'",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -66,7 +66,7 @@
         {
             "label": "Build Single Configuration (Local)",
             "type": "shell",
-            "command": "docker run --rm -v ${workspaceFolder}/snapclient:/project -v ${workspaceFolder}/configs:/project/configs -v ${workspaceFolder}/docs/artifacts:/project/artifacts -w /project espressif/idf:v5.1.1 /bin/bash -c '. /opt/esp/idf/export.sh && cp configs/sdkconfig.${input:configName} sdkconfig && idf.py build'",
+            "command": "docker run --rm -v ${workspaceFolder}/snapclient:/project -v ${workspaceFolder}/configs:/project/configs -v ${workspaceFolder}/docs/artifacts:/project/artifacts -w /project espressif/idf:v5.5.1 /bin/bash -c '. /opt/esp/idf/export.sh && cp configs/sdkconfig.${input:configName} sdkconfig && idf.py build'",
             "group": "build",
             "presentation": {
                 "echo": true,
