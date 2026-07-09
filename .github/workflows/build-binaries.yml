@@ -86,6 +86,10 @@ jobs:
         echo "Building ${{ matrix.config }}"
         
         cp ../configs/sdkconfig.${{ matrix.config }} sdkconfig
+        
+        # TEMPORARY FIX: Increase TAS5805M fault monitor task stack size from 2048 to 3072
+        sed -i 's/^    2048,$/    3072,/' components/custom_board/tas5805m/tas5805m.c
+        
         idf.py build
         
         # Prepare artifact directory
