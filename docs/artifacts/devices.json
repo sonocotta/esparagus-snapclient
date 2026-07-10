@@ -149,6 +149,14 @@
     "devices": [
       {
         "images": [
+          "https://github.com/user-attachments/assets/bf0bdc60-7698-44f8-8f30-2a007b1d85d6"
+        ],
+        "title": "Louder-ESP32-mini",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-mini\">Louder-ESP32-mini</a> is a compact version of the Louder-ESP32, which would replace the standard speaker terminal on your old speakers, turning them into a hi-fi audio solution for your smart home.",
+        "manifest": "artifacts/manifest-louder-esp32s3-mini-latest.json"
+      },
+      {
+        "images": [
           "https://github.com/user-attachments/assets/1bca97a9-0cc7-4658-8ecc-b73894c7579e"
         ],
         "title": "Louder-ESP32",
@@ -178,7 +186,16 @@
         "title": "Louder-ESP32-S3-Plus",
         "description": "Reviewed design on the <a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-plus/\">Louder-ESP32-Plus</a> model includes newer and more capable TAS5825M DAC with more efiicient and more powerful output stage.",
         "manifest": "artifacts/manifest-louder-esp32s3-plus-latest.json"
+      },
+      {
+        "images": [
+          "https://github.com/user-attachments/assets/7366dac2-5ac5-4e68-a655-c06f550b26c5"
+        ],
+        "title": "Louder-ESP32-Pro",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-pro/\">Louder-ESP32-Pro</a> is a feature-packed version of the Louder-ESP32-Plus, which hosts most of the optional extras as standard, adds support for color TFT screens, and, perhaps most importantly, adds an industrial-grade heat release solution for reliable heavy-duty operation",
+        "manifest": "artifacts/manifest-louder-esp32s3-pro-latest.json"
       }
+      
     ]
   },
   {

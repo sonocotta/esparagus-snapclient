@@ -65,6 +65,8 @@ jobs:
           "louder-esp32-plus",
           "louder-esp32s3",
           "louder-esp32s3-plus",
+          "louder-esp32s3-mini",
+          "louder-esp32s3-pro",
           "louder-esparagus",
           "lyra-t-4.2",
           "lyra-t-4.3",
