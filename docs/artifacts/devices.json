@@ -40,22 +40,6 @@
       },
       {
         "images": [
-          "https://github.com/user-attachments/assets/f6cafdb7-f3ef-4cc7-a60f-299406c5ee2e"
-        ],
-        "title": "Esparagus Audio Brick (ESP32)",
-        "description": "<a href=\"https://www.crowdsupply.com/sonocotta/esparagus-audio-brick\">Esparagus Audio Brick</a> is a compact, Hi-Fi-grade DAC with built-in amplifier. Designed for seamless integration with Home Assistant, it transforms any speaker into a smart, synchronized, and fully customizable audio system. With a built-in powerful DSP (15-band EQ, fault management, precise gain control to match given speaker, and more), and sustainable hardware built to last, the Esparagus Audio Brick grows with your smart home instead of becoming obsolete.",
-        "manifest": "artifacts/manifest-esparagus-audio-brick-latest.json"
-      },
-      {
-        "images": [
-          "https://github.com/user-attachments/assets/f6cafdb7-f3ef-4cc7-a60f-299406c5ee2e"
-        ],
-        "title": "Esparagus Audio Brick (ESP32-S3)",
-        "description": "<a href=\"https://www.crowdsupply.com/sonocotta/esparagus-audio-brick\">Esparagus Audio Brick (ESP32-S3)</a> is ESP32-S3 version of the board. It has the same features and capabilities as the ESP32 version, but with a more powerful processor and more RAM. This gives little more headroom in audio streaming tasks.",
-        "manifest": "artifacts/manifest-esparagus-audio-brick-s3-latest.json"
-      },
-      {
-        "images": [
           "https://github.com/user-attachments/assets/84f3732c-cb69-4689-89ab-f31cbbc4554e"
         ],
         "title": "Esparagus Echo",
@@ -149,6 +133,14 @@
     "devices": [
       {
         "images": [
+          "https://github.com/user-attachments/assets/bf0bdc60-7698-44f8-8f30-2a007b1d85d6"
+        ],
+        "title": "Louder-ESP32-mini",
+        "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-mini\">Louder-ESP32-mini</a> is a compact version of the Louder-ESP32, which would replace the standard speaker terminal on your old speakers, turning them into a hi-fi audio solution for your smart home.",
+        "manifest": "artifacts/manifest-louder-esp32s3-mini-latest.json"
+      },
+      {
+        "images": [
           "https://github.com/user-attachments/assets/1bca97a9-0cc7-4658-8ecc-b73894c7579e"
         ],
         "title": "Louder-ESP32",
@@ -157,27 +149,11 @@
       },
       {
         "images": [
-          "https://github.com/user-attachments/assets/06745d0b-ee1d-48fb-9883-347d742ff5f1"
-        ],
-        "title": "Louder-ESP32-Plus",
-        "description": "Reviewed design on the <a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-plus/\">Louder-ESP32-Plus</a> model includes newer and more capable TAS5825M DAC with more efiicient and more powerful output stage.",
-        "manifest": "artifacts/manifest-louder-esp32-plus-latest.json"
-      },
-      {
-        "images": [
           "https://github.com/user-attachments/assets/0b143999-959b-4a2a-af37-deddfa07670d"
         ],
         "title": "Louder-ESP32-S3",
         "description": "<a href=\"https://www.tindie.com/products/sonocotta/louder-esp32\">Louder-ESP32-S3</a> is an ESP32-S3 version of the Louder-ESP32. It is a top-of-the-range model that uses modern highly capable TAS5805M DAC. It does not support Bluetooth, but have more accessible PSRAM running at higher speed.",
         "manifest": "artifacts/manifest-louder-esp32s3-latest.json"
-      },
-      {
-        "images": [
-          "https://github.com/user-attachments/assets/06745d0b-ee1d-48fb-9883-347d742ff5f1"
-        ],
-        "title": "Louder-ESP32-S3-Plus",
-        "description": "Reviewed design on the <a href=\"https://www.tindie.com/products/sonocotta/louder-esp32-plus/\">Louder-ESP32-Plus</a> model includes newer and more capable TAS5825M DAC with more efiicient and more powerful output stage.",
-        "manifest": "artifacts/manifest-louder-esp32s3-plus-latest.json"
       }
     ]
   },
